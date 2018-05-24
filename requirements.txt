@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+click==6.7
+Flask==1.0.2
+itsdangerous==0.24
+Jinja2==2.10
+lxml==4.2.1
+MarkupSafe==1.0
+unoconv==0.8.2
+Werkzeug==0.14.1
+=======
+click==6.7
+Flask==1.0.2
+itsdangerous==0.24
+Jinja2==2.10
+lxml==4.2.1
+MarkupSafe==1.0
+unoconv==0.8.2
+Werkzeug==0.14.1
+>>>>>>> 92375e7451533e9368f1451da296d47dbce151c6
