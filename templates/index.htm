@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Конфигуратор ТКП АСУ ТП</title>
+    <link rel="stylesheet" href="static/styles.css"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="static/user.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="wrapper box fixed">
+			<select name="type">
+				<option disabled selected value> -- select an option -- </option>
+				<option value="sau_ga">САУ ГА</option>
+				<option value="sau_ga2">САУ ГА2</option>
+			</select>
+			<form id="config">
+			</form>
+			<button type="button" id="get-preview">Preview</button>
+			<button type="button" id="get-docx">Get .docx</button>
+			<button type="button" id="get-pdf">Get PDF</button>
+			<button type="button" id="print-preview">Print preview</button>
+		</div>
+		<div id="preview" class="wrapper flex-item"></div>
+	</div>
+		<footer>
+				Vlad Voytenok &mdash; <a href="mailto:voytenok@rakurs.com?Subject=[ткп]">E-mail me</a>
+		</footer>
+</body>
+</html>
