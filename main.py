@@ -4,6 +4,7 @@ from lxml import html, etree
 
 
 
+
 server=Flask(__name__)
 server.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -31,6 +32,7 @@ def show_result(type):
     if type=="preview":
         return render_template('result.htm',set=set)
     if type == "pdf" or type == "docx":
+        return "Reasonably disabled function"
         output_from_parsed_template = render_template('result.htm',set=set)
         with open("print.htm",'w',encoding='utf-8') as f:
             f.write(output_from_parsed_template)
