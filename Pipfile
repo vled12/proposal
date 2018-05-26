@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 flask = "*"
-unoconv = "*"
 lxml = "*"
 
 [dev-packages]
