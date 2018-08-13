@@ -25,6 +25,9 @@ def htm2x(f, type):
     subprocess.run(['python', 'unoconv', '-f', type, f])
 
 
+def add_glossary(html, dict):
+
+
 @server.route('/')
 def static_page():
     return render_template('index.htm')
@@ -35,11 +38,14 @@ def show_result(type):
     set = request.values.to_dict()
     if DEV: print(set)
     print(type)
-    articles = ["text/" + x for x in os.listdir("text") if x[0] != '.']
+    articles = ["text/" + x for x in os.listdir("text") if (x[0] != '.') and (x[:2] == 'ru')]
     with open("templates/result.htm", 'wb') as f:
         f.write(put_in_body(*articles).read())
+    with open("static/print.htm", 'w', encoding='utf-8') as f:
+        f.write(render_template('result.htm', set=set))
+    add_glossary('static/print.htm', 'static/dict.csv')
     if type == "preview":
-        return render_template('result.htm', set=set)
+        return server.send_static_file('print.htm')  # render_template('result.htm', set=set)
     if type == "pdf" or type == "docx":
         with open("print.htm", 'w', encoding='utf-8') as f:
             f.write(render_template('result.htm', set=set))
