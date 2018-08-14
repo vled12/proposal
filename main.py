@@ -26,7 +26,7 @@ def htm2x(f, type):
 
 
 def add_glossary(html, dict):
-
+    pass
 
 @server.route('/')
 def static_page():

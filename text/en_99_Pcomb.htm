@@ -3,9 +3,9 @@
     <h1>Kaplan Turbine cam relationship based on use of electric power ouput value (<i>P</i>-cam relation)</h1>
     <h2>Abstract (summary)</h2>
     <p>Turbine net head and discharge measurement for powerful (higher than 50 MWt) low-head (at absolute values up to
-        20 meteres) Kaplan turbines without penstock during usual operation period is a problem nowadays. There is no
+        20 meters) Kaplan turbines without penstock during usual operation period is a problem nowadays. There is no
         place for placing sensors for valid laminar water flow to measure discharge. Winter-Kennedy method is unstable
-        and suitable only for special tests, held by proffessionals. During operation, sensors and Winter-Kennedy
+        and suitable only for special tests, held by professionals. During operation, sensors and Winter-Kennedy
         measure pipes are spoiling.
     <p>At this moment in Russia, due to experience with serious doubts, all IEC 60041-1991 methods for described
         hydroturbine are declined as suitable. As for turbine net head, that is calculated through many hard measured
@@ -16,14 +16,16 @@
         </li>
         <li>Head loosing before runner is unmeasurable and uncalculated.</li>
     </ul>
-    <p>All that is strickly critical for Kaplan turbine perfomance, because it's governor use turbine net head value for
+    <p>All that is strictly critical for Kaplan turbine performance, because it's governor use turbine net head value
+        for
         cam relationship. It is well known that wrong cam relationship lead to problems with efficiency loss and
         equipment run-out, what is directly correlated with economic point.</p>
 
     <h2>Problems</h2>
-    <p>Due to definition of head, it is a difference between rated ernergies of water at input of hydrotubine and draft
-        tube output. Though can't be measured directly, different calculating techinques are used: from water levels to
-        pressure difference. Anyway, it will cause hard maintance and inaccuracy, especially for large hydroturbines</p>
+    <p>Due to definition of head, it is a difference between energies of water at input of hydrotubine and draft
+        tube output. Though can't be measured directly, different calculating techniques are used: from water levels to
+        pressure difference. Anyway, it will cause hard maintenance and inaccuracy, especially for large
+        hydroturbines</p>
     <div class="image right">
         <img src="static/sau_ga/h_cam.png"/>
         <div class="image-title">Classic cam relationship curves</div>
@@ -33,64 +35,92 @@
     {% endif %}
     <p>Some held researches through most of largest low-head HPP at CIS showed, that using difference between water
         levels as head could bring to measurement error from +3.8% to -11.6%.</p>
-    <p>More than that, head measurement in turbine IEC 60041-1991 field acception tests could not be suitable too,
-        though it held by proffessionals with special measure instruments, because this value is used to rate parameters
+    <p>More than that, head measurement in turbine IEC 60041-1991 field acceptation tests could not be suitable too,
+        though it held by professionals with special measure instruments, because this value is used to rate parameters
         under single head value. So, in classic case of cam relation, wrong cams are used, even if maximums of CoE were
-        found correctly to build cam curves, parametrised with head values. Hence, there definetely would be an error
-        between head measure durings field test and default exploitation.</p>
+        found correctly to build cam curves, parametrized with head values. Hence, there definitely would be an error
+        between head measure during field test and default exploitation.</p>
     <p>If, with classic cam relationship, one can not measure head accurately, there would be efficiency loss. Loss
         depends on various parameters and conditions: trash rack spoil level, side wind, ejection effect due to
-        neighboorg hydroturbines and so on. For some turbines, especially at lowest heads and for old ones, loss could
+        neighbor hydroturbines and so on. For some turbines, especially at lowest heads and for old ones, loss could
         rise up to 4% (according to researches of turbine characteristics). You can try to measure head more accurately,
-        set up dozens of individual sensors, but that is not cheap and requires serious maintance.</p>
+        set up dozens of individual sensors, but that is not cheap and requires serious maintenance.</p>
     <p><i>Classic cam relationship has been invented in early 20th century, but still being used in same form even for
         digital governor systems in spite of mentioned problem.</i></p>
     <h2>Use of power output value</h2>
     <p>Commonly used classic cam relationship do not use power output value at all, though turbine power, easily
-        calculated from generator active power in most cases of operation, includes integral information. Turbine power
+        calculated from generator active power in most cases of operation, includes integral information about it.
+        Turbine power
         is a complex operation mark and should be used at the top of the agenda. It depends on:</p>
     <ul>
-        <li>tubine head;</li>
-        <li>turbine waste, that in it's case depends on head, guide vanes opening and runner blade angle.</li>
+        <li>turbine head;</li>
+        <li>turbine discharge, that in it's case depends on head, guide vanes opening and runner blade angle.</li>
     </ul>
     <p>You can't just use turbine power instead of head - you need to change cam mechanism and modern digital systems
         are able to find a solution.</p>
     <h2>Power cam relation mechanism</h2>
-    <p>Well known, that cam relation curves basicly are sets of points (a<sub>0</sub>,Ψ,H) for different head, where
+    <p>Well known, that cam relation curves basically are sets of points (A<sub>0</sub>,Ψ,H) for different head, where
         mode would be most efficient &mdash; "cam related". If we add to every point information about turbine power at
-        that moment, so it would be sets of (a<sub>0</sub>, Ψ, H, N), we achieve a new interpolation function N=f(a<sub>0</sub>,
+        that moment, so it would be sets of (A<sub>0</sub>, Ψ, H, N), we achieve a new interpolation function N=f(A<sub>0</sub>,
         Ψ), that can be called power cam function. It is graphically shown by equal power curves on the drawing (black
-        lines). Classic head curves are showned too for comparing (red stroked lines).</p>
-    <p>Important, that power cam function is strickly monotone, therefore it can be used in control loops.</p>
+        lines). Classic head curves are showed too for comparing (red stroked lines).</p>
+    <p>Important, that power cam function is strictly monotone, therefore it can be used in control loops.</p>
+    {% if set['scientific']%}
+    <p>To continue an explanation, some basic turbine governor terms are to be told:</p>
+    <ul>
+        <li>&mdash; per-unit turbine speed (relative speed deviation)</li>
+        <li>&mdash; per-unit head (relative head deviation)</li>
+        <li>&mdash; per-unit turbine power</li>
+        <li>&mdash; per-unit turbine torque</li>
+    </ul>
+    <p>It is a common practice in turbine design to use so-called unit quantities: unit speed, unit discharge and unit
+        power. The unit values are defined respectively as the speed, discharge, and power of a turbine having a runner
+        diameter of 1 m, for a head of 1 m[1]. Due to well-known turbine design formulas:</p>
+    <p>And now one can define per-unit unit quantities values formulas:</p>
+    <p>Using hydro turbine universal characteristics, per-unit quantity torque curves for different guide vanes opening
+        and different runner blades angle can be built (as a function of per-unit quantity speed , that is equivalent to
+        head change). Example of curve for is shown on the drawing.</p>
+    <div class="image left">
+        <img src="static/sau_ga/per-unit_m.png"/>
+        <div class="image-title">Per-unit quantity torque quantity curves for 20 degrees runner blades angle</div>
+    </div>
+    <p>Now, if we define differential of per-unit torque as a function of head , it can be assured to be always
+        positive:</p>
+    <p>due to shape of curves (this us fundamental, not just single turbine characteristics):</p>
+    <p>All this confirm that cam relation points (A<sub>0</sub>, Ψ, H) are unique same as A<sub>0</sub>, Ψ, N).
+        Developments, based on these thoughts allow to build workable and stable control system</p>
+    {% endif %}
     <div class="image left">
         <img src="static/sau_ga/p_cam.png"/>
         <div class="image-title">Used cam relations</div>
     </div>
-    <p>It can be prooved, that anytime during field tests or default operation in synchronous generator mode just one
+    <p>It can be proved, that anytime during field tests or default operation in synchronous generator mode just one
         pair of guide vanes and runner blade can be found, where current turbine power would be equal to calculated
         power cam function, and more than that &mdash; <b>this point would be cam related</b> and most efficient for
         current conditions and power reference. Such cam relation mechanism should be called power cam: it doesn't need
         a head value at all, only turbine power required.</p>
     <p>Turbine power can be easily calculated by dividing on generator CoE electric active power, that nowadays is
-        measured very precisely thanks to high-quality digital transforming and transformes with accuracy class up to
-        0.1S.
-    <p>
-    <p>It is important for cam mechanism not to spoil dynamic perfomance of governor, because it is a part of it and
+        measured very precisely thanks to high-quality digital converters and instrument transformers with accuracy
+        class up to
+        0.1.
+    <p>It is important for cam mechanism not to spoil dynamic performance of a governor, because it is a part of it and
         could seriously affect. The way it was integrated with governor (power output loop) allowed to operate with the
-        same perfomance.{% if set['AutoSecondary'] %} That matters especially for HPP, those take part in secondary
+        same performance.{% if set['AutoSecondary'] %} That matters especially for HPP, those take part in secondary
         control with fast and spread reference change.{% endif %} Solution also integrated with "feed-forward" control
-        type, that bring high-quility control in all control range.</p>
-    <p>Proposed mechanism doesn't requires measering anything but servomotors positions and electric parameters to
-        operate. It's obviosly necessary measering for every governor (and it is very accurate), so method require just
+        type, that bring high-quality control in all control range.</p>
+    <p>Proposed mechanism doesn't requires measuring anything but servomotors positions and electric parameters to
+        operate. It's obviously necessary measuring for every governor (and it is very accurate), so method require just
         a mathematical software slight changes for modern digital governor.</p>
     <h2>Cam curves</h2>
     <p>As much as classic cam relation, power cam mechanism requires curves data to set it up. One can also use IEC
-        60041-1991 field test methods, where power output value at cam points is also measured (to ocalculate CoE). But
-        in some cases (especially mentioned above) existing field test methods are not suitable due to inaccurate waste
-        measure or it requires too strong financing: hire external organisations, install special equipment, stop
+        60041-1991 field test methods, where power output value at cam points is also measured (to calculate CoE). But
+        in some cases (especially mentioned above) existing field test methods are not suitable due to inaccurate
+        discharge
+        measure or it requires too strong financing: hire external organizations, install special equipment, stop
         electric grid control and so on. And it should be repeated a least at 3 different heads during the year. More
         than that, tests have to take place again after some continuous operation.</p>
-    <p>By default, turbine manufactor can provides cam relation curve based on model tests (with precise waste and head
+    <p>By default, turbine manufactory can provides cam relation curve based on model tests (with precise discharge and
+        head
         measure), that could be enough accurate at least for new runner. But to replace IEC 60041-1991 methods with
         another way without mentioned weaknesses, research was held.</p>
     <div class="image right">
@@ -99,16 +129,27 @@
     </div>
     <p>New method was developed specially for use by power cam mechanism. It is based on existed experimental equal
         power methods, that use fundamental feature Kaplan turbine (and others with changeable wheel angle) of keeping
-        same power with different guide vanes and runner blade relations (showen at drawing). It's obvious that only one
+        same power with different guide vanes and runner blade relations (shown at drawing). It's obvious that only one
         point at equal curve for referenced power is cam related.</p>
-    <p>In simplificated terms, developed method extract information from curve shape (in a<sub>0</sub>, Ψ coordinates)
+    <p>In simplified terms, developed method extract information from curve shape (in A<sub>0</sub>, Ψ coordinates)
         and based on physical laws and common turbine properties. Requires only default governor measurements, same as
         power cam mechanism, servomotors position and electric power.</p>
     <p>It was tested on significant number of digital hydroturbine models (that uses hill chart curves for different
         runner blade angles) and was confirmed with accuracy of CoE <b>lesser than 0.1%</b>, though part of it is
-        definetely an interplation error.
-        Significat advantage of equal power methods in comparison with classic field tests is a capability to schedule
-        power reference of turbine in advance before runings any tests. Thanks to good measuring, in theory, method can
+        definitely an interpolation error.</p>
+    {% if set['scientific']%}
+    <p>Following turbine models were tested:</p>
+    <ul>
+        <li>Novosibirsk HPP &mdash; TurboAtom manufacturer (hill charts for 7 runner blades angles) &mdash; max Δη ≤
+            0.1%
+        </li>
+        <li>Utanen HPP &mdash; Power Machines manufacturer (5 angles) &mdash; max Δη ≤ 0.2%</li>
+        <li>Sobradinho HPP &mdash; Power Machines manufacturer (3 angles) &mdash; max Δη ≤ 0.2%</li>
+        <li>Svetogorsk HPP &mdash; Power Machines manufacturer (7 angles) &mdash; max Δη ≤ 0.2%</li>
+    </ul>
+    {% endif %}
+    Significant advantage of equal power methods in comparison with classic field tests is a capability to schedule
+    power reference of turbine in advance before running any tests. Thanks to good measuring, in theory, method can
         be fully automated. At current state it can be run by local stuff without specially contracted engineers anytime
         during exploitation for different heads.</p>
     <h2>Advantages list</h2>
@@ -116,25 +157,33 @@
     <ul>
         <li>high accuracy cam relation due to accurate measuring;</li>
         <li>easy to integrate into existing systems;</li>
-        <li>keeping dynamic and static perfomance on top level;</li>
+        <li>keeping dynamic and static performance on top level;</li>
         <li>integrated with 'feed-forward' type power output loop;</li>
         <li>slight enabling and disabling;</li>
-        <li>automated method of ajusting power cam curves (*expiremental)</li>
+        <li>automated method of adjusting power cam curves (*experimental)</li>
     </ul>
-    <p><b>Power cam mechanism and experimental equal power methods actually were tested at Novosibirsk HPP and Shulbinsk
-        HPP: Syberian low head stations with giant water flow through hydroturbines. While tests, methods and mechanism
+    <p><b>Power cam mechanism and experimental equal power method actually were tested at Novosibirsk HPP and Shulbinsk
+        HPP: Siberian low head stations with giant water flow through hydroturbines. While tests, methods and mechanism
         were finalized and adjusted to enable it permanently (unit 3 and 7 and Novosibirsk HPP). For new equal power
-        method a new search algorithm was invented and integrated.</b></p>
+        method a redesigned search algorithm was invented and integrated.</b></p>
     <div class="image left">
         <img src="static/sau_ga/step.png"/>
         <div class="image-title">Power output step response with power cam mechanism</div>
     </div>
+    <p>At Novosibirsk HPP, also, joint tests of Winter-Kennedy method and experimental equal power method were held at
+        three different heads. Though the measurement can't be completely reliable, results are significant and grant
+        reasons to continue a research. At the drawing, power cam curves comparison is shown.</p>
+    <h2>Continuing the work</h2>
+    <p>At this moment our science group is improving software with new possibilities like fully automation for equal
+        power method, increasing reference at different HPP. Unfortunately, we still hadn't opportunity to test in
+        parallel with precise field test measuring (though the method was invented for places without possibility of
+        measuring, to prove it, a test unit would be greate and confirmative).</p>
     <h2>Significant awards</h2>
     <ul>
         <li>Best study work in hydroenergy 2016 ПАО "РусГидро" ("RusHydro" is a largest Russian hydroelectricity
             company)
         </li>
-        <li>Most potencial scientific work AES Kazakhstan 2017</li>
+        <li>Most potential scientific work AES Kazakhstan 2017</li>
     </ul>
     <div class="image left">
         <img src="static/sau_ga/rushydro.jpg"/>
