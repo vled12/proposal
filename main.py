@@ -8,7 +8,7 @@ server = Flask(__name__)
 server.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-def put_in_body(*args):
+def put_in_body(args):
     tree = html.parse("wrappers/main.htm", parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
     body = tree.xpath(".//body")[0]
 
@@ -38,9 +38,9 @@ def show_result(type):
     set = request.values.to_dict()
     if DEV: print(set)
     print(type)
-    articles = ["text/" + x for x in os.listdir("text").sort() if (x[0] != '.') and (x[:2] == 'ru')]
+    articles = ["text/" + x for x in sorted(os.listdir("text")) if (x[0] != '.') and (x[:2] == 'ru')]
     with open("templates/result.htm", 'wb') as f:
-        f.write(put_in_body(*articles).read())
+        f.write(put_in_body(articles).read())
     with open("static/print.htm", 'w', encoding='utf-8') as f:
         f.write(render_template('result.htm', set=set))
     add_glossary('static/print.htm', 'static/dict.csv')
