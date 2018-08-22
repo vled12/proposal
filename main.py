@@ -1,6 +1,6 @@
 import io, os, subprocess
 from flask import Flask, request, render_template, send_file
-from lxml import html
+from lxml import html, etree
 
 DEV = True
 
@@ -25,20 +25,38 @@ def htm2x(f, type):
     subprocess.run(['python', 'unoconv', '-f', type, f])
 
 
-def add_glossary(html, dict):
-    pass
+def add_glossary(page, dict):
+    dic={}
+    with open(dict,'r',encoding='utf-8') as vocF:
+        for line in vocF:
+            (key,value)=line.split(';')
+            dic[key]=value
+    glossary={}
+    with open(page, 'r',encoding='utf-8') as inF:
+        for line in inF:
+            for key,value in dic.items():
+                if (key in line) and not key in glossary:### FIXME: Change to REGEX
+                    if DEV: print('found',key)
+                    glossary[key]=value
+    result= html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
+    glossary_table = result.find("//table[@id='glossary']")
+    for key,value in sorted(glossary.items()):
+        row="<tr><td>"+key+"</td><td>"+value+"</td></tr>"
+        glossary_table.append(etree.XML(row))
+    result.write(page,pretty_print=True, encoding='utf-8')
 
+#add_glossary('static/print.htm', 'static/dict.csv')
 @server.route('/')
 def static_page():
     return render_template('index.htm')
 
-
 @server.route("/get/<type>", methods=["GET", "POST"])
 def show_result(type):
     set = request.values.to_dict()
+    lang = set['lang']
     if DEV: print(set)
     print(type)
-    articles = ["text/" + x for x in sorted(os.listdir("text")) if (x[0] != '.') and (x[:2] == 'ru')]
+    articles = ["text/" + x for x in sorted(os.listdir("text")) if (x[0] != '.') and (x[:2] == lang)]
     with open("templates/result.htm", 'wb') as f:
         f.write(put_in_body(articles).read())
     with open("static/print.htm", 'w', encoding='utf-8') as f:
@@ -47,12 +65,12 @@ def show_result(type):
     if type == "preview":
         return server.send_static_file('print.htm')  # render_template('result.htm', set=set)
     if type == "pdf" or type == "docx":
-        with open("print.htm", 'w', encoding='utf-8') as f:
-            f.write(render_template('result.htm', set=set))
-        htm2x("print.htm", type)
+        #with open("print.htm", 'w', encoding='utf-8') as f:
+        #    f.write(render_template('result.htm', set=set))
+        htm2x("static/print.htm", type)
         # , mimetype="application/pdf"
         # , attachment_filename="print.pdf"
-        return send_file('print.' + type, as_attachment=True)
+        return send_file('static/print.' + type, as_attachment=True)
 
 
 @server.after_request
