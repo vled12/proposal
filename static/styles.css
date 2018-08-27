@@ -31,6 +31,7 @@ body {
   min-height: 100%;
   color: #0f0f0f;
   background: #ffffff;
+  counter-reset: h1counter;
 }
 
 hr {
@@ -51,21 +52,20 @@ h3
 }
 
 h1 {
-  font-size: 1.6rem;
-  margin: 12px 8px;
-  padding: 6px 8px;
+  font-size: 1.4rem;
+  margin: 4px 2px;
+  padding: 2px 3px;
+  counter-reset: h2counter;
 }
+
 
 h2 {
-  font-size: 1.4rem;
-  margin: 12px 8px;
-  padding: 6px 8px;
+  font-size: 1.0rem;
+  counter-reset: h3counter;
 }
-
+	
 h3 {
-  font-size: 1.2rem;
-  margin: 8px;
-  padding: 2px 8px;
+  font-size: 1.0rem;
 }
 
 
@@ -122,8 +122,42 @@ h3 {
 /* document */
 .document {
 	overflow: hidden;
-	font-size: 1.2rem;
-	line-height: 1.56;
+	font-size: 1.0rem;
+	line-height: 1.1
+	
+}
+
+
+.document h1:before {
+        content: counter(h1counter) ".\0000a0\0000a0";
+        counter-increment: h1counter;
+        counter-reset: h2counter;
+}
+
+.document h1.nocount:before {
+        content: none;
+        counter-increment: none;
+}
+
+
+.document h2:before {
+        content: counter(h1counter) "." counter(h2counter) ".\0000a0\0000a0";
+        counter-increment: h2counter;
+        counter-reset: h3counter;
+}
+
+.document h2.nocount:before {
+        content: none;
+        counter-increment: none;
+}
+
+.document h3:before {
+        content: counter(h1counter) "." \counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+        counter-increment: h3counter;
+}
+.document h3.nocount:before {
+        content: none;
+        counter-increment: none;
 }
 
 .document h2 {
@@ -238,3 +272,7 @@ button:active {
   border: 1px solid #f99;
 }
 
+#wiki {
+	    height : auto;
+    width : 300px;
+}

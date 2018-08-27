@@ -13,8 +13,7 @@ def put_in_body(args):
     body = tree.xpath(".//body")[0]
 
     for x in args:
-        article = html.parse(x, parser=html.HTMLParser(encoding='utf-8')).xpath("//html/body/article")[
-            0]  # find first article in html
+        article = html.parse(x, parser=html.HTMLParser(encoding='utf-8')).getroot()#xpath("///html/body/article")[0]  # find first article in html
         body.append(article)
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
