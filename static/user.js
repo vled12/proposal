@@ -11,6 +11,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 		$( "#config" ).load("/static/"+this.value+".htm",
 			function(response, status, xhr){
 			//console.log(response);
+			loadFormFromCookie($("#config"));
 			});
 	})
  
@@ -29,6 +30,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
  
 	$("#get-preview,#get-docx,#get-pdf").click(function(){
 		var params=$("#config").serializeArray();
+		saveFormToCookie($("#config"));
 		var type =this.id.slice(4);
 		console.log(params);
 		

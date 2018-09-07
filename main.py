@@ -44,32 +44,32 @@ def add_glossary(page, dict):
         glossary_table.append(etree.XML(row))
     result.write(page,pretty_print=True, encoding='utf-8')
 
-#add_glossary('static/print.htm', 'static/dict.csv')
 @server.route('/')
 def static_page():
     return render_template('index.htm')
 
 @server.route("/get/<type>", methods=["GET", "POST"])
 def show_result(type):
-    set = request.values.to_dict()
-    lang = set['lang']
+    set={k:v if len(v)>1 else v[0] for k,v in request.values.to_dict(flat=False).items()}
     if DEV: print(set)
+    lang = set['lang']
+
     print(type)
     articles = ["text/" + x for x in sorted(os.listdir("text")) if (x[0] != '.') and (x[:2] == lang)]
     with open("templates/result.htm", 'wb') as f:
         f.write(put_in_body(articles).read())
-    with open("static/print.htm", 'w', encoding='utf-8') as f:
+    with open("print.htm", 'w', encoding='utf-8') as f:
         f.write(render_template('result.htm', set=set))
-    add_glossary('static/print.htm', 'static/dict.csv')
+    add_glossary('print.htm', 'static/dict.csv')
     if type == "preview":
-        return server.send_static_file('print.htm')  # render_template('result.htm', set=set)
+        return send_file('print.htm')  # render_template('result.htm', set=set)
     if type == "pdf" or type == "docx":
         #with open("print.htm", 'w', encoding='utf-8') as f:
         #    f.write(render_template('result.htm', set=set))
-        htm2x("static/print.htm", type)
+        htm2x("print.htm", type)
         # , mimetype="application/pdf"
         # , attachment_filename="print.pdf"
-        return send_file('static/print.' + type, as_attachment=True)
+        return send_file('print.' + type, as_attachment=True)
 
 
 @server.after_request

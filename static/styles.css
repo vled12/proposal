@@ -117,17 +117,20 @@ h3 {
 }
 .flex-item{
     flex-grow: 1;
+	height:1000px;
+	overflow-y: scroll;
 }
 
 /* document */
 .document {
 	overflow: hidden;
 	font-size: 1.0rem;
-	line-height: 1.1
+	line-height: 1.1;
 	
 }
 
 
+/* headers counting
 .document h1:before {
         content: counter(h1counter) ".\0000a0\0000a0";
         counter-increment: h1counter;
@@ -159,7 +162,7 @@ h3 {
         content: none;
         counter-increment: none;
 }
-
+*/
 .document h2 {
   border-bottom: 1px solid #ccc;
 }
@@ -186,21 +189,30 @@ h3 {
     padding-top: 0;
 }
 
-.document .image{
+.document .img-container{
     position: relative;
-    padding: 5px;
+    /*padding: 5px;
     padding-top: 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 16px;
+    margin: 16px;*/
 }
 
-.document .image-title{
+.document .img-container > img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	max-width:100%;
+}
+
+.document .img-title{
     position: absolute;
-    top: 5px;
-    right: 10px;
-    color: black;
-    background-color: rgba(255,255,255,0.5)
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* /document */
@@ -209,31 +221,15 @@ h3 {
 form input,
 form textarea,
 form select {
-  padding: 4px;
+  padding: 0px;
   margin: 2px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 form label {
   padding: 4px;
   margin: 2px;
   font-size: 14px;
-}
-
-form input[type=text],
-form select {
-  min-width: 160px;
-}
-
-form .error {
-  display: block;
-  padding: 4px;
-  margin: 8px auto;
-  background: #fcc;
-  border: 1px dotted #dd7682;
-  border-radius: 2px;
-  font-size: 14px;
-  line-height: 16px;
 }
 
 /* /form */
@@ -270,9 +266,4 @@ button:hover {
 
 button:active {
   border: 1px solid #f99;
-}
-
-#wiki {
-	    height : auto;
-    width : 300px;
 }
