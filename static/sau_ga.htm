@@ -6,28 +6,30 @@
 	<h1>Объем поставки</h1>
     Полное наименование<input type="text" name="contract_title"><br>
     Функциональный Заказчик (Пользователь)<input type="text" name="contract_user"><br>
+	Страница объекта wikipedia<input type="text" name="wiki_link"><br>
     Проектная организация<input type="text" name="contract_projecter"><br>
 	Названия ТТ<input type="text" name="contract_demands"><br>
 	<input type="checkbox" name="SpecApplication">Наличие приложения с подробной спецификацией, его код <input type="text" name="SpecApplicationCode" style="width: 10px;"><br>
 	<input type="checkbox" name="DigitalGovernor">Цифровая часть системы регулирования<input type="checkbox" name="Pcomb">P-комбинатор<input type="checkbox" name="OPU">МНУ<br>
-	<input type="checkbox" name="TA">ТА<input type="checkbox" name="TC">ТК<input type="checkbox" name="VC">ВК<input type="checkbox" name="PenStockControl">Упр. водоприемником<br>
+	<input type="checkbox" name="TA">ТА<input type="checkbox" name="EL MS">ШИС<input type="checkbox" name="TC">СТК<input type="checkbox" name="VC">ВК<input type="checkbox" name="PenStockControl">УВ<input type="checkbox" name="GeneratorProtection">ШЗГ<br>
 	<input type="checkbox" name="HMGovernor">Модерн. ГМК<br>
 	<input type="checkbox" name="SetupTools">Вспомогательные инструменты<br>
 	<input type="checkbox" name="GRAM">ГРАМ<input type="checkbox" name="GRN">ГРН<input type="checkbox" name="VU">ВУ АСУ ТП<br>
 	<input type="checkbox" name="SOEV">СОЕВ<br>
-
+	<input type="checkbox" name="Redundancy" checked>Дублирование компонентов
+	<input type="checkbox" name="External Gov electric measure" checked>Эл. измерения ЭГР в отдельном шкафу
 	<select name="plc_vendor">
 				<option disabled  value>Вендор PLC</option>
 				<option selected value="omron">Omron</option>
 				<option value="siemens">Siemens</option>
     </select>
-
+	<input type="checkbox" name="RedPLC" checked>Дублирование ПЛК
 	
 	<select multiple name="plc_families">
 				<option disabled  value>Применяемые ПЛК</option>
-				<option value="s7-400">S7-400</option>
-				<option value="сj2">CJ2</option>
-				<option selected value="nj">NJ, NX</option>
+				<option value="S7-400">S7-400</option>
+				<option value="CJ2H">CJ2</option>
+				<option selected value="NJ/NX">NJ, NX</option>
     </select>
 
 	<select name="server_type">
@@ -40,7 +42,6 @@
     <input type="radio" name="TurbineType" value="kaplan" checked>Каплан (ПЛ)
 	<input type="radio" name="TurbineType" value="kaplan_fixed">Пропеллерная
 	<input type="radio" name="TurbineType" value="pelton">Пелтон (ковш)<br>
-
 	<input type="checkbox" name="ManualMech">Ручное управление ГМК<br>
 	Активная мощность, МВт<input type="text" name="Pnom"><br>
 	Примерный напор, м<input type="text" name="Hnom"><br>

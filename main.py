@@ -1,4 +1,5 @@
-import io, os, subprocess
+import io, os, subprocess, json
+import requests
 from flask import Flask, request, render_template, send_file
 from lxml import html, etree
 
@@ -6,6 +7,11 @@ DEV = True
 
 server = Flask(__name__)
 server.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
+with open('config.json') as json_data_file:
+    cfg = json.load(json_data_file)
+print(cfg)
 
 
 def put_in_body(args):
@@ -21,8 +27,13 @@ def put_in_body(args):
 
 
 def htm2x(f, type):
-    subprocess.run(['python', 'unoconv', '-f', type, f])
+    #delete cell spaning cause of pandoc no support
+    tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
+    etree.strip_attributes(tree,"class","style","colspan","rowspan")
+    with open(f, 'wb') as file:
+        file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
 
+    subprocess.run([cfg['pandoc']['location'],'-o','out/print.'+type,f,'--reference-doc=.\/templates\default.'+type])
 
 def add_glossary(page, dict):
     dic={}
@@ -55,6 +66,22 @@ def show_result(type):
     lang = set['lang']
 
     print(type)
+
+    wikilink = set['wiki_link']+"?action=render"
+    #res=requests.get(wikilink)
+    with requests.get(wikilink) as response:
+        with open("text/ru_03_wiki.htm", 'wb') as wiki:
+            wiki.write(response.content)
+    #tree = html.parse(wikilink)
+    #res = requests.get('http://en.wikipedia.org/wiki/Bratsk_Hydroelectric_Power_Station')
+    #tree = html.parse(res.content)
+    #print(res.content)
+
+    tree = html.parse("text/ru_03_wiki.htm", parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
+    with open("text/ru_03_wiki.htm", 'wb') as wiki:
+        infobox = tree.xpath("//table[@class='infobox']")[0]
+        wiki.write(html.tostring(infobox, pretty_print=True, encoding='utf-8'))
+
     articles = ["text/" + x for x in sorted(os.listdir("text")) if (x[0] != '.') and (x[:2] == lang)]
     with open("templates/result.htm", 'wb') as f:
         f.write(put_in_body(articles).read())
@@ -69,7 +96,7 @@ def show_result(type):
         htm2x("print.htm", type)
         # , mimetype="application/pdf"
         # , attachment_filename="print.pdf"
-        return send_file('print.' + type, as_attachment=True)
+        return send_file('out/print.' + type, as_attachment=True)
 
 
 @server.after_request

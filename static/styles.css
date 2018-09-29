@@ -22,7 +22,7 @@ select {
 
 html {
   min-height: 100%;
-  font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;
+  /*font-family: "-apple-system",BlinkMacSystemFont,Arial,sans-serif;*/
   font-size: 12px;
 }
 
@@ -124,8 +124,8 @@ h3 {
 /* document */
 .document {
 	overflow: hidden;
-	font-size: 1.0rem;
-	line-height: 1.1;
+	/*font-size: 1.0rem;
+	line-height: 1.1;*/
 	
 }
 
@@ -163,15 +163,11 @@ h3 {
         counter-increment: none;
 }
 */
-.document h2 {
-  border-bottom: 1px solid #ccc;
-}
 
-.document p {
-  
-  padding: 8px 16px;
+.document p { 
+  font-style: normal;
   text-align: justify;
-  text-justify: newspaper;
+  /*text-justify: newspaper;*/
 }
 
 .document ul {
@@ -198,12 +194,13 @@ h3 {
     margin: 16px;*/
 }
 
-.document .img-container > img {
+.document .img-container img {
 	display: block;
     margin-left: auto;
     margin-right: auto;
 	max-width:100%;
 }
+
 
 .document .img-title{
     position: absolute;
