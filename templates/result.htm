@@ -4,7 +4,6 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конфигуратор технических описаний</title>
-	<link rel="stylesheet" href="static/styles.css">
 	</head>
 	<body>
 	<html><body>
@@ -17,7 +16,6 @@
 </body></html>
 <html><body>
 <article class="document ru">
-    {% for system in set['delivery']%}{% if system["parent"]=="1" and system["state"]["selected"] %} {{system["text"]}},{%endif%}{% endfor %}
     <h1>Введение</h1>
             <p>ООО «Ракурс-инжиниринг» является лидером российского рынка промышленной автоматизации для объектов
                 гидроэнергетики. Компания выполняет полный цикл работ по автоматизации технологических процессов
@@ -104,36 +102,30 @@
 </body></html>
 <html><body>
 <table class="infobox" style="" data-name="Электростанция"><tbody>
-<tr><td colspan="2" class="" style="text-align:center; font-size: 125%; font-weight: bold; background: #4682B4; color:#fff;">ГУП «Дубоссарская ГЭС»</td></tr>
-<tr><td colspan="2" class="" style="text-align:center;"> <span class="no-wikidata" data-wikidata-property-id="P18"><a href="//ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB:%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg" class="image"><img alt="ГЭС Дубоссары двойной кадр.jpg" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/95/%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg/350px-%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg" width="350" height="135" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/95/%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg/525px-%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/95/%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg/700px-%D0%93%D0%AD%D0%A1_%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%8B_%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D0%BE%D0%B9_%D0%BA%D0%B0%D0%B4%D1%80.jpg 2x" data-file-width="6032" data-file-height="2328"></a><br><span data-wikidata-qualifier-id="P2096" style="display:block">Вид с верхнего <a href="//ru.wikipedia.org/wiki/%D0%91%D1%8C%D0%B5%D1%84" title="Бьеф">бьефа</a></span></span> </td></tr>
+<tr><td colspan="2" class="" style="text-align:center; font-size: 125%; font-weight: bold; background: #4682B4; color:#fff;">Братская ГЭС</td></tr>
+<tr><td colspan="2" class="" style="text-align:center;"> <span class="no-wikidata" data-wikidata-property-id="P18"><a href="//ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB:Wasserkraftwerk-Bratsk.jpg" class="image"><img alt="Wasserkraftwerk-Bratsk.jpg" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wasserkraftwerk-Bratsk.jpg/300px-Wasserkraftwerk-Bratsk.jpg" width="300" height="201" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wasserkraftwerk-Bratsk.jpg/450px-Wasserkraftwerk-Bratsk.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wasserkraftwerk-Bratsk.jpg/600px-Wasserkraftwerk-Bratsk.jpg 2x" data-file-width="1523" data-file-height="1020"></a></span> </td></tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Страна</th>
 <td class="plainlist" style="min-width:130px;">
-<span class="no-wikidata" data-wikidata-property-id="P17"><span style="display: none; speak: none;" class="noprint">Приднестровье</span><span class="nowrap"><span class="flagicon"><a href="//ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%B4%D0%BD%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%9C%D0%BE%D0%BB%D0%B4%D0%B0%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0" title="Приднестровская Молдавская Республика"><img alt="Flag of Transnistria (state).svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Transnistria_%28state%29.svg/22px-Flag_of_Transnistria_%28state%29.svg.png" width="22" height="11" class="thumbborder" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Transnistria_%28state%29.svg/33px-Flag_of_Transnistria_%28state%29.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Transnistria_%28state%29.svg/44px-Flag_of_Transnistria_%28state%29.svg.png 2x" data-file-width="600" data-file-height="300"></a></span> <a href="//ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%B4%D0%BD%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%9C%D0%BE%D0%BB%D0%B4%D0%B0%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0" title="Приднестровская Молдавская Республика"><span class="wrap">Приднестровье</span></a></span></span>
-</td>
-</tr>
-<tr>
-<th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Местоположение</th>
-<td class="plainlist" style="min-width:130px;">
-<span class="wikidata-claim" data-wikidata-property-id="P131" data-wikidata-claim-id="Q1987011$692F9951-8C41-4112-B18A-B8A723802A25"><span class="wikidata-snak wikidata-main-snak"><a href="//ru.wikipedia.org/wiki/%D0%94%D1%83%D0%B1%D0%BE%D1%81%D1%81%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D1%80%D0%B0%D0%B9%D0%BE%D0%BD_(%D0%9F%D1%80%D0%B8%D0%B4%D0%BD%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%9C%D0%BE%D0%BB%D0%B4%D0%B0%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0)" title="Дубоссарский район (Приднестровская Молдавская Республика)">Дубоссарский район</a></span></span>
+<span class="no-wikidata" data-wikidata-property-id="P17"><span style="display: none; speak: none;" class="noprint">Россия</span><span class="nowrap"><span class="flagicon"><a href="//ru.wikipedia.org/wiki/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F" title="Россия"><img alt="Flag of Russia.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/22px-Flag_of_Russia.svg.png" width="22" height="15" class="thumbborder" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/33px-Flag_of_Russia.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/44px-Flag_of_Russia.svg.png 2x" data-file-width="900" data-file-height="600"></a></span> <a href="//ru.wikipedia.org/wiki/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F" title="Россия"><span class="wrap">Россия</span></a></span></span>
 </td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;"><a href="//ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BA%D0%B0" title="Река">Река</a></th>
 <td class="plainlist" style="min-width:130px;">
-<a href="//ru.wikipedia.org/wiki/%D0%94%D0%BD%D0%B5%D1%81%D1%82%D1%80" title="Днестр">Днестр</a>
+<a href="//ru.wikipedia.org/wiki/%D0%90%D0%BD%D0%B3%D0%B0%D1%80%D0%B0" title="Ангара">Ангара</a>
 </td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Каскад</th>
 <td class="plainlist" style="min-width:130px;">
-<span class="nowrap"><a href="//ru.wikipedia.org/wiki/%D0%94%D0%BD%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%B0%D1%81%D0%BA%D0%B0%D0%B4_%D0%93%D0%AD%D0%A1" title="Днестровский каскад ГЭС">Днестровский каскад ГЭС</a></span>
+<a href="//ru.wikipedia.org/wiki/%D0%90%D0%BD%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%B0%D1%81%D0%BA%D0%B0%D0%B4_%D0%93%D0%AD%D0%A1" title="Ангарский каскад ГЭС">Ангарский</a>
 </td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Собственник</th>
 <td class="plainlist" style="min-width:130px;">
-<span class="no-wikidata" data-wikidata-property-id="P127">Госслужба энергетики и ЖКХ <a href="//ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE_%D0%9F%D1%80%D0%B8%D0%B4%D0%BD%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B9_%D0%9C%D0%BE%D0%BB%D0%B4%D0%B0%D0%B2%D1%81%D0%BA%D0%BE%D0%B9_%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B8" title="Правительство Приднестровской Молдавской Республики">Правительства Приднестровской Молдавской Республики</a></span>
+<span class="no-wikidata" data-wikidata-property-id="P127"><a href="//ru.wikipedia.org/wiki/%D0%95%D0%B2%D1%80%D0%BE%D0%A1%D0%B8%D0%B1%D0%AD%D0%BD%D0%B5%D1%80%D0%B3%D0%BE" title="ЕвроСибЭнерго">ЕвроСибЭнерго</a></span>
 </td>
 </tr>
 <tr>
@@ -144,13 +136,12 @@
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Год начала строительства</th>
 <td class="plainlist" style="min-width:130px;">
-1950</td>
+1954</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Годы ввода агрегатов</th>
 <td class="plainlist" style="min-width:130px;">
-<a href="//ru.wikipedia.org/wiki/1954" class="mw-redirect" title="1954">1954</a>-<a href="//ru.wikipedia.org/wiki/1955" class="mw-redirect" title="1955">1955</a>
-</td>
+1961—1966</td>
 </tr>
 <tr>
 <th colspan="2" style="text-align:center;background: #4682B4; color:#fff;">Основные характеристики</th>
@@ -159,38 +150,55 @@
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Годовая выработка электроэнергии, млн <span class="nowrap"> <a href="//ru.wikipedia.org/wiki/%D0%9A%D0%B8%D0%BB%D0%BE%D0%B2%D0%B0%D1%82%D1%82-%D1%87%D0%B0%D1%81" title="Киловатт-час">кВт⋅ч</a></span>
 </th>
 <td class="plainlist" style="min-width:130px;">
-261</td>
+22 600</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Разновидность электростанции</th>
 <td class="plainlist" style="min-width:130px;">
-плотинно-русловая</td>
+плотинная</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Расчётный <a href="//ru.wikipedia.org/wiki/%D0%9D%D0%B0%D0%BF%D0%BE%D1%80" title="Напор">напор</a>, м</th>
 <td class="plainlist" style="min-width:130px;">
-14 метров (в 2008 году выдержала напор в 29 метров)</td>
+101,5</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Электрическая мощность, <a href="//ru.wikipedia.org/wiki/%D0%9C%D0%B5%D0%B3%D0%B0%D0%B2%D0%B0%D1%82%D1%82" class="mw-redirect" title="Мегаватт">МВт</a>
 </th>
 <td class="plainlist" style="min-width:130px;">
-<span class="no-wikidata" data-wikidata-property-id="P2109">48</span>
+<span class="no-wikidata" data-wikidata-property-id="P2109">4500</span>
 </td>
 </tr>
 <tr>
 <th colspan="2" style="text-align:center;background: #4682B4; color:#fff;">Характеристики оборудования</th>
 </tr>
 <tr>
+<th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Тип турбин</th>
+<td class="plainlist" style="min-width:130px;">
+<a href="//ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B4%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BE%D1%81%D0%B5%D0%B2%D0%B0%D1%8F_%D1%82%D1%83%D1%80%D0%B1%D0%B8%D0%BD%D0%B0" title="Радиально-осевая турбина">радиально-осевые</a>
+</td>
+</tr>
+<tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Количество и марка турбин</th>
 <td class="plainlist" style="min-width:130px;">
-4х</td>
+12×РО-115-В-558, 6×РО-115/662-ВМ-550</td>
+</tr>
+<tr>
+<th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Расход через турбины, м³/<a href="//ru.wikipedia.org/wiki/%D0%A1%D0%B5%D0%BA%D1%83%D0%BD%D0%B4%D0%B0" title="Секунда">с</a>
+</th>
+<td class="plainlist" style="min-width:130px;">
+18×254</td>
+</tr>
+<tr>
+<th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Количество и марка генераторов</th>
+<td class="plainlist" style="min-width:130px;">
+18хСВ-1190/250-48</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Мощность генераторов, <a href="//ru.wikipedia.org/wiki/%D0%9C%D0%92%D1%82" class="mw-redirect" title="МВт">МВт</a>
 </th>
 <td class="plainlist" style="min-width:130px;">
-4х12</td>
+18×250</td>
 </tr>
 <tr>
 <th colspan="2" style="text-align:center;background: #4682B4; color:#fff;">Основные сооружения</th>
@@ -198,17 +206,17 @@
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Тип плотины</th>
 <td class="plainlist" style="min-width:130px;">
-железобетонная водосливная; дополнительные: насыпная и намывная</td>
+бетонная гравитационная</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Высота плотины, м</th>
 <td class="plainlist" style="min-width:130px;">
-30 метров</td>
+125</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Длина плотины, м</th>
 <td class="plainlist" style="min-width:130px;">
-основная - 133 м.; дополнительные: 257 м., 354 м.</td>
+1430</td>
 </tr>
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;"><a href="//ru.wikipedia.org/wiki/%D0%A8%D0%BB%D1%8E%D0%B7_(%D0%B3%D0%B8%D0%B4%D1%80%D0%BE%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D1%81%D0%BE%D0%BE%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5)" title="Шлюз (гидротехническое сооружение)">Шлюз</a></th>
@@ -218,17 +226,27 @@
 <tr>
 <th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;"><a href="//ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5_%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE" title="Распределительное устройство">ОРУ</a></th>
 <td class="plainlist" style="min-width:130px;">
-110 кВ</td>
+500 кВ, 220 кВ</td>
+</tr>
+<tr>
+<th colspan="2" style="text-align:center;background: #4682B4; color:#fff;">Прочая информация</th>
+</tr>
+<tr>
+<th class="plainlist" style="background: #ADD8E6; padding-left:.4em; padding-right:.4em; font-weight:normal; min-width:130px;">Награды</th>
+<td class="plainlist" style="min-width:130px;">
+<a href="//ru.wikipedia.org/wiki/%D0%9E%D1%80%D0%B4%D0%B5%D0%BD_%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0" title="Орден Ленина"><img alt="Орден Ленина" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Order_of_Lenin.svg/40px-Order_of_Lenin.svg.png" width="40" height="42" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Order_of_Lenin.svg/60px-Order_of_Lenin.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Order_of_Lenin.svg/80px-Order_of_Lenin.svg.png 2x" data-file-width="150" data-file-height="159"></a><a href="//ru.wikipedia.org/wiki/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA_%D0%B2_%D0%BE%D0%B7%D0%BD%D0%B0%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_50-%D0%BB%D0%B5%D1%82%D0%B8%D1%8F_%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F_%D0%A1%D0%BE%D1%8E%D0%B7%D0%B0_%D0%A1%D0%A1%D0%A0" title="Юбилейный почётный знак ЦК КПСС, ПВС СССР, СМ СССР и ВЦСПС в ознаменование 50-летия образования СССР"><img alt="Юбилейный почётный знак ЦК КПСС, ПВС СССР, СМ СССР и ВЦСПС в ознаменование 50-летия образования СССР" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b2/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/40px-%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg" width="40" height="42" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b2/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/60px-%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b2/%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/80px-%D0%AE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9%D0%BD%D1%8B%D0%B9_%D0%BF%D0%BE%D1%87%D1%91%D1%82%D0%BD%D1%8B%D0%B9_%D0%B7%D0%BD%D0%B0%D0%BA.jpg 2x" data-file-width="1404" data-file-height="1476"></a>
+</td>
 </tr>
 <tr>
 <th colspan="2" style="text-align:center;background: #4682B4; color:#fff;">На карте</th>
 </tr>
 <tr><td colspan="2" class="" style="text-align:center;;"><div class="location-map" style="width:300px; ;;margin:0 auto"><div class=""><div class="thumbimage" style="overflow:hidden;max-width:100%;width:300px;position:relative; ;">
-<a href="//ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB:Pridnestrovie_Locator_map.svg" class="image" title="ГУП «Дубоссарская ГЭС» (Приднестровская Молдавская Республика)"><img alt="ГУП «Дубоссарская ГЭС» (Приднестровская Молдавская Республика)" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Pridnestrovie_Locator_map.svg/300px-Pridnestrovie_Locator_map.svg.png" width="300" height="414" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Pridnestrovie_Locator_map.svg/450px-Pridnestrovie_Locator_map.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Pridnestrovie_Locator_map.svg/600px-Pridnestrovie_Locator_map.svg.png 2x" data-file-width="2660" data-file-height="3668"></a><div style="font-size:88%;line-height:1.2em;position:absolute;z-index:2;left:43.390571218645%;top:53.777856640563%">
+<a href="//ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BB:Russia_physical_location_map_(Crimea_disputed,_compressed).jpg" class="image" title="Братская ГЭС (Россия)"><img alt="Братская ГЭС (Россия)" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg/300px-Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg" width="300" height="169" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg/450px-Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg/600px-Russia_physical_location_map_%28Crimea_disputed%2C_compressed%29.jpg 2x" data-file-width="2374" data-file-height="1339"></a><div style="font-size:88%;line-height:1.2em;position:absolute;z-index:2;left:56.937116673246%;top:76.502300773804%">
 <div style="position:relative;float:left;left:-4px;top:-4px;line-height:0;"><img alt="Red pog.png" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Red_pog.png/9px-Red_pog.png" width="9" height="9" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Red_pog.png/14px-Red_pog.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Red_pog.png/18px-Red_pog.png 2x" data-file-width="64" data-file-height="64"></div>
-<div style="position:absolute;width:156px;top:-0.5em;text-align:left;left:6.5px"><span style="background:none;padding:0 2px">ГУП «Дубоссарская ГЭС»</span></div>
+<div style="position:absolute;width:156px;top:-0.5em;text-align:right;left:-162.5px"><span style="background:none;padding:0 2px">Братская ГЭС</span></div>
 </div>
 </div></div></div></td></tr>
+<tr><td colspan="2" class="" style="text-align:center;;"><span class="wikidata-claim" data-wikidata-property-id="P373" data-wikidata-claim-id="q1965517$727D518D-4D4B-49CC-A1C1-CE95E5E316FD"><span class="wikidata-snak wikidata-main-snak"><a href="https://commons.wikimedia.org/wiki/Category:Bratsk_Dam" title="commons:Category:Bratsk Dam"><img alt="Commons-logo.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/15px-Commons-logo.svg.png" width="15" height="20" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/23px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376"></a> <a href="https://commons.wikimedia.org/wiki/Category:Bratsk_Dam" class="extiw" title="commons:Category:Bratsk Dam">Категория на Викискладе</a></span></span></td></tr>
 </tbody></table>
 
 </body></html>
@@ -306,15 +324,18 @@
 	<p>В состав технологического уровня управления входят следующие системы.</p>
 	<p><b>Система автоматического управления гидроагрегатом (САУ ГА)</b>, в которую входят следующие подсистемы</p>
 	<ul>
+		<!-->{% for system in set['delivery']%}{% if system["parent"]=="system" and system["state"]["selected"] %} {{system["text"]}},{%endif%}{% endfor %}<-->		
 		{% if set['TA'] %}
 		<li>
 <i>подсистема технологической автоматики (ТА) гидроагрегата</i> (управление гидроагрегатом в переходных режимах при выполнении операций по пуску, нормальной и аварийной остановкам, переводу агрегата из одного режима в любой другой из возможных режимов в соответствии с принятой технологией управления);</li>
+		<li>
+<i>подсистема управления вспомогательным оборудованием</i>;</li>
 		{% endif %}
 		{% if set['DigitalGovernor'] %}
-		<li><i>Подсистема цифровой части системы регулирования;</i></li>
+		<li><i>подсистема цифровой части системы регулирования;</i></li>
 		{% endif %}
 		{% if set['OPU'] %}
-		<li><i>Подсистема управления маслонапорной установкой;</i></li>
+		<li><i>подсистема управления маслонапорной установкой;</i></li>
 		{% endif %}
 		{% if set['TA'] %}
 		<li><i>подсистема измерений электрических параметров;</i></li>
@@ -367,15 +388,15 @@
 <td></td>
 </tr>
 			<tr>
-<td><i>Подсистема технологической автоматики (ТА) гидроагрегата</i></td>
+<td><i>подсистема технологической автоматики (ТА) гидроагрегата</i></td>
 <td>Шкаф ПТК ТА</td>
 </tr>
 			<tr>
-<td><i>Подсистема цифровой части системы регулирования</i></td>
+<td><i>подсистема цифровой части системы регулирования</i></td>
 <td>Шкаф ПТК ЭГР</td>
 </tr>
 			<tr>
-<td><i>Подсистема управления маслонапорной установкой</i></td>
+<td><i>подсистема управления маслонапорной установкой</i></td>
 <td>Шкаф ПТК МНУ</td>
 </tr>
 			<tr>
@@ -557,8 +578,7 @@
 </article>
 </body></html>
 <html><body>
-<article class="document ru">
-	<h1>Аппаратная архитектура</h1>
+<h1>Аппаратная архитектура</h1>
 	<p>Автоматизированная система управления технологическим процессом ГЭС (АСУТП ГЭС), представляет собой типовое, тиражируемое решение, имеющее распределенную структуру, отдельные подсистемы которой являются функционально-законченными и могут разрабатываться и внедряться независимо друг от друга. Каждая подсистема предусматривает возможность дальнейшего наращивания и расширения состава решаемых задач и выполняемых функций.</p>
 	<p>В состав АСУ ТП будут включены следующие технические средства:</p>
     <ul>
@@ -571,7 +591,6 @@
 		<li>серверное оборудование;</li>
 		<li>средства обмена данными по ТСПД (включая коммутационное оборудование);</li>
 		<li>контрольные и интерфейсные кабели;</li>
-		<li>контрольные и интерфейсные кабели;</li>
 		<li>монтажные шкафы в комплекте с устройствами электропитания.</li>
 	</ul>
 	<h2>Предложения по обеспечению общих требований к системе</h2>
@@ -579,7 +598,7 @@
 		<p>ООО «Ракурс-инжиниринг», как компания, работающая на рынке автоматизации объектов энергетики России с 1991 года, накопила большой опыт создания систем АСУ ТП отвечающих всем требованиям безопасности, предъявляемым к подобным системам.</p>
 		<div class="img-container">
 			<div custom-style="subtitle"><img src="static/sau_ga/sau_ga_bgges.jpg"></div>
-			<div class="img-title"><h4>САУ ГА Богучанская ГЭС</h4></div>
+			<div class="img-title"><h4>САУ ГА Богучанской ГЭС</h4></div>
 		</div>
 		<p>Интерфейс операторов АСУТП ГЭС будет построен таким образом, чтобы блокировать ошибочные действия оперативного персонала. Разделение уровней допуска персонала к управлению технологическим процессом позволяет предотвратить несанкционированные изменения режимов работы оборудования, уставок срабатывания сигнализации и защит. Регистрация всех событий в системе в хронологическом порядке с метками времени позволяет анализировать возникшие нештатные ситуации и действия операторов по их ликвидации и, тем самым повышать уровень подготовки оперативного персонала.</p>
 		<p>Конструктивное исполнение ПТК АСУТП ГЭС удовлетворяет требованиям электробезопасности в соответствии с «Правилами технической эксплуатации электрических станций и сетей».</p>
@@ -588,23 +607,33 @@
 		<p>Создаваемая система строится по принципу открытой, расширяемой системы на платформе программно-технического комплекса «Апогей».</p>
 		<p>Программно-технические комплексы, входящие в состав АСУТП ГЭС выполняются на основе унифицированных технических, программных и информационных средств с использованием минимального числа типов и конструктивов аппаратуры, поддерживающих стандартные протоколы обмена данными.</p>
 		<p>Программно-технические комплексы, входящие в состав АСУТП ГЭС построены по принципу открытой системы, программное обеспечение ПТК выполнено в соответствие международным стандартом IEC 1131-3, что дает возможность обеспечить простоту интеграции с системами сторонних производителей.</p>
+		<p>ПЛК обладают возможностью синхронизации часов по протоколу NTP и SNTP с дискретизацией не хуже 1 мс. Метка времени присваивается в момент поступления в ПЛК с дискретизацией не хуже 1 мс.</p>
 		<p>Отличительные возможности:</p>
 		<ul>
 			{% if set['Redundancy'] %}<li>Выполнено резервирование критически важных компонентов, в том числе контроллеров, для обеспечения максимальной надежности и с безударным переключением (ручное и автоматическое в случае диагностики неисправности). Имеется возможность горячей замены резервированных компонентов. Среднее время восстановления работоспособности при любом единичном отказе любой функции – не более 1 часа.</li>{% endif %}
 			<li>Панели оснащены органами управления, светодиодной индикацией и терминалом (тачпанелью) оператора на передних дверях за застекленной поворотной рамой с замком.</li>
 			<li>Все панели оснащены индивидуальным автоматическим освещением и двумя розетками 220VAC.</li>
 			<li>Панели имеют принудительную вентиляцию, управляемой по температуре внутри панелей.</li>
-			<li>Питание осуществляется от двух вводов: переменного 220VAC и постоянного (оперативного тока) 220VDC с безпрерывным переключением.</li>
+			<li>Питание осуществляется от двух вводов: переменного 220VAC и постоянного (оперативного тока) 220VDC с беспрерывным переключением.</li>
 			<li>Внутреннее питание всех элементов и сигналов осуществляется напряжением 24VDC.</li>
 			<li>Модули поканальной гальванической развязки всех внешних (входных и выходных) дискретных и аналоговых сигналов с напряжением пробоя изоляции не ниже 2000В переменного тока.</li>
 			<li>Хранение программы и конфигурации в энергонезависимой памяти.</li>
 			<li>Блоки клемм с пружинным зажимом для всех информационных сигналов.</li>
 		</ul>
+		<h3>Надежность и срок службы</h3>
+		<p>В составе нижнего уровня управления применяются компоненты со сроком службы не менее 15 лет.</p>
+		{% if set['Redundancy'] %}
+		<p>Значения MTBF для следующих функций:</p>
+		<ul>
+			<li>ввод дискретного сигнала – не менее 80 000 часов;</li>
+			<li>вывод дискретного сигнала – не менее 100 000 часов;</li>
+			<li>ввод и вывод аналогового сигнала – не менее 90 000 часов.</li>
+		</ul>{% endif %}
 		<h3>Диагностика и ремонтопригодность</h3>
 		<p>Уверенность эксплуатационного персонала в оборудовании определяется не только и не столько торговой маркой (фирмой – изготовителем), сколько открытостью и ремонтопригодностью. В настоящее время в мире практически не осталось производителей, которые позволяют себе производить некачественные компоненты, они уже вытеснены с рынка. Однако различная закрытость, отсутствие доступа к информации о необходимых специалистах, отсутствие документации на понятном языке, отсутствие схем и т.д. не позволяют быть уверенным в оборудовании на 100%.</p>
 		<div class="img-container">
 			<div custom-style="subtitle"><img src="static/sau_ga/sau_shges.jpg"></div>
-			<div class="img-title"><h4>САУ ГА Шульбинская ГЭС</h4></div>
+			<div class="img-title"><h4>САУ ГА Шульбинской ГЭС</h4></div>
 		</div>
 		<p>Предлагаемый нами ПТК поставляется с полностью открытым программным обеспечением, кроме того, в рамках контракта мы обучим достаточное число специалистов станции работе с нашим программным обеспечением. Это уникальная открытость, а следовательно – уникальный уровень диагностики и способности к ремонту. Причем ремонту не только восстанавливающего (замена модулей на аналогичные из ЗИП), но и модернизирующего, развивающего, изменяющего характера.</p>
 		<p>В ПТК «Апогей» реализованы развитые диагностические функции:</p>
@@ -672,7 +701,7 @@
 		{% if ("NJ/NX" in set['plc_families']) %}
 		<h3>Контроллеры Omron серии NJ/NX</h3>
 			<p><i>Комплексная и надежная система автоматизации оборудования</i></p>
-			<p>Универсальный контроллер является центральным звеном платформы Sysmac. Данный контроллер характеризуется непревзойденным быстродействием, гибкой, масштабируемой программно-ориентированной архитектурой и традиционной надежностью, характерной для ПЛК Omron. Он разработан в расчете на исключительно высокие требования к скорости и точности управления движением, коммуникационным возможностям, безопасности и безотказности системы. Контроллер представлен серией устройств с различной производительность в целях мастштабирования и оптимизации.</p>
+			<p>Универсальный контроллер является центральным звеном платформы Sysmac. Данный контроллер характеризуется непревзойденным быстродействием, гибкой, масштабируемой программно-ориентированной архитектурой и традиционной надежностью, характерной для ПЛК Omron. Он разработан в расчете на исключительно высокие требования к скорости и точности управления движением, коммуникационным возможностям, безопасности и безотказности системы. Контроллер представлен серией устройств с различной производительность в целях масштабирования и оптимизации.</p>
 			<div class="img-container">
 				<div custom-style="subtitle"><img src="static/plc/nj_comparison.png"></div>
 				<div class="img-title"><h4>Сравнение ПЛК Omron Sysmac</h4></div>
@@ -728,6 +757,11 @@
 			<div custom-style="subtitle"><img src="static/scada/Rakurs_switches.jpg"></div>
 			<div class="img-title"><h4>Шкаф сетевого коммутационного оборудования</h4></div>
 		</div>
+		<p>В шкафах нижнего уровня устанавливаются управляемые коммутаторы MOXA серии EDS-500A</p>
+		<div class="img-container">
+			<div custom-style="subtitle"><img src="static/scada/eds_508.jpg"></div>
+			<div class="img-title"><h4>Коммутаторы в шкафах нижнего уровня</h4></div>
+		</div>		
 	<h2>АРМ операторов и инженерного персонала</h2>
 		<p>Для повышения надежности и устойчивости АРМ АСУ ТП, в составе типового решения предлагается использование персональных компьютеров в составе АРМ на терминалы («тонкие клиенты»), с одновременным переносом  клиентского ПО АРМ на серверы кластера АСУ ТП.  Целесообразность данного решения определяется следующими факторами:</p>
 		<ul>
@@ -743,7 +777,7 @@
 		</li>
 </ul>
 		<div class="img-container">
-			<img style="width:50%;" src="static/scada/nuc.jpg">
+			<div custom-style="subtitle"><img style="width:50%;" src="static/scada/nuc.jpg"></div>
 			<div class="img-title"><h4>Тонкий клиент для АРМ</h4></div>
 		</div>
 		<p>Вместе с тем, очевидно что АРМ АСУ ТП выполняют одну-две строго определенные функции отображения данных, подготовки отчетов, программирование/отладка. В этом случае целесообразно заменить ПК на терминалы – «тонкие клиенты». В варианте установки терминалов – «тонких клиентов» на рабочих местах, появляются следующие преимущества:</p>
@@ -885,13 +919,14 @@
 </div>
 <p>Выдерживает испытательное напряжение между сигналами и землей – 4000 В переменного тока для ЭГСС, 1500 В для некритических.</p>
 
-</li></article>
+</li>
 </body></html>
 <html><body>
-<h2>Подсистема ТА ГА</h2>
+<h1>Функциональная архитектура</h1>
+	<h2>Подсистема ТА ГА</h2>
 	<p>Подсистема технологической автоматики гидроагрегата (ТА) предназначена для управления гидроагрегатом в переходных режимах при выполнении операций по пуску, нормальной и аварийной остановкам, переводу агрегата из одного режима в любой другой из возможных режимов в соответствии с принятой технологией управления.</p>
 	<div class="img-container">
-			<img src="static/sau_ga/ta_bgges.jpg">
+			<div custom-style="subtitle"><img src="static/sau_ga/ta_bgges.jpg"></div>
 			<div class="img-title">Лицевая панель шкафа с подсистемой ТА</div>
 	</div>
 	<p>Подсистема технологической автоматики является основной в структуре САУ ГА, осуществляющей сбор информации с остальных подсистем о состоянии оборудования и протекании технологического процесса, прием команд управления от оперативного персонала, групповых устройств регулирования, устройств противоаварийной и системной автоматики, устройств защит, алгоритмическую обработку собранной информации и выдачу управляющих воздействий либо через соответствующие подсистемы САУ ГА либо непосредственно на оборудование.</p>
@@ -913,8 +948,9 @@
 		<li>для информационного обмена с внешними системами и подсистемами.</li>
 	</ul>
 	<p>При исполнении команд на изменение состояния гидроагрегата производится проверка необходимых условий по переводу гидроагрегата в соответствующий режим, контроль времени исполнения как самой команды, так и отдельных операций. При нарушении условий или превышении контрольного времени выполнения отдельных операций формируется соответствующее сообщение оперативному персоналу и подается предупредительный сигнал. При превышении времени исполнения команды формируется аварийный сигнал.</p>
-	<p>Подсистема ТА обеспечивает автоматическое резервирование по алгоритму подсистемы самодиагностики ответственных1 компонентов и функциональных комплексов.Для параметров, потеря измерения которых (неисправность измерительного канала) угрожает аварией оборудования, предусмотрены дублирующие измерительные преобразователи, а в некоторых случаях – три независимых канала измерения с логическим выбором «два из трёх».</p>
+	<p>Подсистема ТА обеспечивает автоматическое резервирование по алгоритму подсистемы самодиагностики ответственных1 компонентов и функциональных комплексов. Для параметров, потеря измерения которых (неисправность измерительного канала) угрожает аварией оборудования, предусмотрены дублирующие измерительные преобразователи, а в некоторых случаях – три независимых канала измерения с логическим выбором «два из трёх».</p>
 	<p>ТА содержит локальную панель управлению с целью оперативного управления гидроагрегатом – смена режимов работы, активной мощности, уставки системы возбуждения и частоты, смена законов стабилизации частоты и акт. мощности. Для дополнительного контроля, на шкафе обеспечивается индикация электрических параметров, состояние выключателей и разъединителей (в том числе недостоверное состояние). Для удобства, на лицевую панель шкафа может быть нанесена мнемосхема.</p>
+	<p>Для упрощения пусконаладочных и ремонтных работ, система предусматривает возможности имитации сигналов и блокировок защит (с соответствующей сигнализацией).</p>
 	<h3>Технологические счетчики</h3>
  	<p>Обеспечивается непрерывный контроль (с помощью программно-аппаратных счётчиков) и регистрация следующих показателей:</p>
 	<ul>
@@ -936,7 +972,7 @@
 	При превышении 90% от допустимых величин количества циклов переходов и суммарного времени нахождения в зоне, запрещённой (ограниченной) работы на установленном заводом изготовителем интервале времени формируется предупредительная сигнализация, при исчерпании соответствующих величин – аварийная сигнализация. При исчерпании допустимого времени работы гидроагрегата в зоне ограниченной работы в пределах установленного заводом изготовителем гидротурбины периода, указанная зона переводится в статус запрещённой, исключается из регулировочного диапазона ГА с наложением на работу гидроагрегата соответствующего ограничения, которые снимаются по окончании установленного периода. При исчерпании допустимого количества лимитированных операций (пуска/останова, перехода через зоны ограниченной работы) Подсистема ТА обеспечивает соблюдение ограничений на работу ГА, установленных в ЭД производителя ГА. Подсистема ТА обеспечивает автоматическое, дистанционное и местное управление с проверкой необходимых условий по переводу агрегата в соответствующий режим. При несоблюдении этих условий Подсистема ТА формирует сообщение с перечнем невыполненных условий.	При выполнении операций по пуску, останову и переводу агрегата из одного режима в другой производится контроль времени исполнения как самой команды, так и отдельных операций. При превышении контрольного времени формируется сообщение и подается предупредительный сигнал.
 	{% endif %}
 	<h3>Технологические (гидромеханические) защиты</h3>
-	<p>Гидромеханические защиты предназначены для обеспечения безопасности механической части гидроагрегата при выходе любого из контролируемых параметров за пределы допустимых значений. Такими параметрами являются следующие:</p>\
+	<p>Гидромеханические защиты предназначены для обеспечения безопасности механической части гидроагрегата при выходе любого из контролируемых параметров за пределы допустимых значений. Такими параметрами являются следующие:</p>
 	<ul>
 		<li>повышение температуры узла ГА;</li>
 		<li>повышение вибрации узла ГА;</li>
@@ -958,16 +994,103 @@
 	<p>Подсистема ТА осуществляет индикацию состояния технологического процесса своих подсистем локально, обеспечивает передачу на сервер АСУТП ГЭС истории событий и массивы параметров. Подсистема ТА осуществляет приём команд как локально, так и надежным образом от верхнего уровня АСУ ТП.</p>
 </body></html>
 <html><body>
+<h2>Подсистема УВО</h2>
+	<p>Предназначены для решения следующих задач:</p>
+	<ul>
+	<li>управление, контроль и диагностика дренажной системы (в том числе насосы осушения проточной части);</li>
+	<li>управление лекажным агрегатом;</li>
+	<li>управление системой отжатия воды для режима СК;</li>
+	<li>управление двигателями и перепускными клапанами насосов МНУ;</li>
+	<li>управление и контроль системы охлаждения (ТВС);</li>
+	<li>управление и контроль системы торможения и подъема гидроагрегата;</li>
+	<li>управление и контроль системы пожаротушения.</li>
+	</ul>
+	<h3>Общее техническое решение</h3>
+	<p>Местные шкафы управления предоставляют возможность как местного ручного оперирования двигателями и приводами, так и автономную работу при неисправности связи с АСУ ТП или выводе связанных элементов АСУ ТП в ремонт (кроме насосов маслонапорной установки).</p>
+	<p>Для каждого электродвигателя и привода предусмотрены устройства плавного пуска (УПП) и рубильники-разъединители (кроме системы МНУ, где применяются разъединители), обеспечивающий видимый разрыв и возможность фиксации навесным замком для соблюдения регламента и обеспечения безопасности работ.</p>
+	<p>Для ручного управления, на дверях шкафов предусмотрена световая сигнализация о состоянии двигателей и приводов, показания с соответствующих датчиков. Показания аналоговых датчиков выведены через цифровые индикаторы. Ключи выбора режима работы и приоритета выполнены на кулачковых переключателях с фиксацией.</p>
+	<p>Сигналы с соответствующих датчиков поступают как в местных шкаф управления для обработки, так и в АСУ ТП. Подключение может производиться параллельно (последовательная «токовая петля»), либо местный шкаф управления выступает в качества шлюза.</p>
+	<p>По желанию заказчика выбирается один из двух способов автоматизации:</p>
+	<ul>
+	<li>программируемое промышленное реле с цифровым интерфейсом для связи с АСУ ТП (Modbus RTU через RS485) и предоставлением средства программирования для инженерного персонала;</li>
+	<li>релейная схема с использованием промышленных реле и взаимодействием с АСУ ТП через физические сигналы.</li>
+	</ul>
+	<p>Внутри шкафа предусмотрено внутреннее освещение и розетка 220VAC.</p>
+	<h3>Силовые шкафы МНУ</h3>
+	<p>Система представлена одним шкафов для двух насосов. Исполнение шкафов – напольное с прокладкой кабелей снизу. Для защиты электродвигателей применяются откидывающиеся плавкие вставки (плавкие вставки входят в комплект ЗИП). УПП отдельно подключаются к АСУ ТП по полевому интерфейсу (протокол Modbus RTU через RS485) для получения более полной информации о состоянии электродвигателя.</p>
+	<div class="img-container">
+			<div custom-style="subtitle">
+<img src="static/sau_ga/smnu.jpg"><img src="static/sau_ga/smnu_door.jpg">
+</div>
+			<div class="img-title">Пример силового шкафа МНУ</div>
+	</div>
+	<p>При ручном управлении с лицевой панели, существует возможность оперирования перепускным клапаном насоса при их соответствующем включении и отключении, что позволяет осуществлять безопасную автономную ручную работу.</p>
+	<p>На двери каждого шкафа находятся следующие элементы:</p>
+	<ul>
+	<li>ключ «Автоматический – Отключен – Включен);
+	</li>
+<li>сигнальные лампы о наличии неисправности УПП (электродвигателя), наличия ввода, наличия внутреннего питания 24VDC;</li>
+	<li>сигнальные лампы «Насос включен», «Насос отключен»;</li>
+	<li>амперметр тока нагрузки;</li>
+	</ul>
+	<h3>Лекажный агрегат</h3>
+	<p>Система представлена одним навесным шкафом для управления двумя насосами. Ввод кабелей возможен сверху и снизу.
+	</p>
+<p>В шкаф заводятся сигналы как с аналогового датчика, так и конечных выключателей уровня. Сигналы с датчиков резервируют друг друга. Это повышает надежность системы в случае отказа связи или блокировки поплавка. В автоматическом режиме работы насосы запускаются поочередно.
+	</p>
+<div class="img-container">
+			<div custom-style="subtitle">
+<img src="static/sau_ga/sln.jpg"><img src="static/sau_ga/sln_door.jpg">
+</div>
+			<div class="img-title">Пример монтажа шкафа лекажного агрегата</div>
+	</div>
+	<p>На двери шкафа находятся следующие элементы:
+	</p>
+<ul>
+		<li>Совмещенные ключи выбора режима работы и приоритета (Автоматический–  Отключен – Включен) для каждого из насоса.</li>
+		<li>сигнальные лампы о наличии неисправности УПП (электродвигателя) для каждого из насоса, наличия ввода, наличия внутреннего питания 24VDC;</li>
+		<li>сигнальные лампы «Насос включен», «Насос отключен для каждого из насоса;</li>
+		<li>цифровой индикатор уровня от аналогового датчика.</li>
+	</ul>
+<h3>Дренажный агрегат (откачка воды с крышки турбины)</h3>
+<p>Система представлена одним навесным шкафом для управления двумя насосами. Ввод кабелей возможен сверху и снизу.</p>
+<p>В шкаф заводятся сигналы как с аналогового датчика, так и конечных выключателей уровня. Сигналы с датчиков резервируют друг друга. Это повышает надежность системы в случае отказа связи или блокировки поплавка. Возле дренажных насосов устанавливаются компактные пульты управления высокой защиты для дополнительных возможностей ручного управления. В автоматическом режиме работы насосы запускаются поочередно.</p>
+<div class="img-container">
+			<div custom-style="subtitle"><img src="static/sau_ga/sdn.jpg"></div>
+			<div class="img-title">Пример монтажа шкафа дренажного агрегата</div>
+	</div>
+<p>На двери шкафа находятся следующие элементы:</p>
+<ul>
+<li>Совмещенные ключи выбора режима работы и приоритета (Автоматический –  Отключен – Включен) для каждого из насоса.</li>
+<li>сигнальные лампы о наличии неисправности УПП (электродвигателя) для каждого из насоса, наличия ввода, наличия внутреннего питания 24VDC;</li>
+<li>сигнальные лампы «Насос №1 включен», «Насос №1 отключен», «Насос №2 включен», «Насос №2 отключен»;</li>
+<li>цифровой индикатор уровня от аналогового датчика.</li>
+</ul>
+<h3>Автоматика ТВС гидроагрегата</h3>
+<p>Система представлена одним навесным шкафом для управления тремя задвижками. Ввод кабелей возможен сверху и снизу.</p>
+<p>Управление задвижками производится вручную в местном режиме, либо по сигналу от АСУ ТП. Отключение привода по достижения концевым или моментным выключателем упорного положения производится автоматически. В ручном режиме управление может быть импульсным, либо требующим постоянного нажатия на кнопку управления (выбор осуществляется ключом внутри шкафа).</p>
+<div class="img-container">
+			<div custom-style="subtitle"><img src="static/sau_ga/stvs.jpg"></div>
+			<div class="img-title">Пример лицевой панели шкафа автоматики ТВС гидроагрегата</div>
+</div>
+<p>На двери шкафа находятся следующие элементы:</p>
+<ul>
+<li>совмещенные ключи выбора режима работы (Автоматический – Ручной) для каждого из привода;</li>
+<li>кнопки открытия и закрытия для каждой из задвижки;</li>
+<li>сигнальные лампы о наличии неисправности УПП (электродвигателя) для каждого из привода, наличия ввода, наличия внутреннего питания 24VDC.</li>
+</ul>
+</body></html>
+<html><body>
 <h2>Подсистема ЭГР ГА</h2>
 	<p>Подсистема предназначена для выполнения функций стабилизации частоты и управления активной мощностью гидроагрегата. Представляет собой электронную часть электрогидравлического регулятора частоты вращения и мощности гидротурбины, предназначенную для ведения эксплуатационных и технологических режимов гидроагрегата по активной мощности и частоте за счет изменения механической мощности гидротурбины путем взаимодействия с гидравлической частью системы регулирования, как в составе станционной автоматизированной системы группового управления, так и в индивидуальном режиме управления при приеме команд от оперативного персонала.</p>
 	<div class="img-container">
-			<img src="static/sau_ga/kurges_egr.jpg">
+			<div custom-style="subtitle"><img src="static/sau_ga/kurges_egr.jpg"></div>
 			<div class="img-title">Установленный шкаф ЭГР</div>
 	</div>
 	<p>Органы управления обеспечивают ручное цифровое, автоматическое местное и автоматическое дистанционное управление частотой вращения в пределах от 45 до 55 Гц в режиме стабилизации частоты и открытием направляющего аппарата от 0 до 100% в режиме регулирования мощности, а также управление уставкой оперативного технологического ограничения максимального открытия направляющего аппарата. Щитовые приборы отображают такие величины, как: открытие сервомотора (-ов), мощности и частоты. Элементы управления и индикации продублированы на ОП, что позволяет при необходимости отказаться от физических элементов управления и/или организовать полноценную систему контроля доступа.</p>
 	{% if (set['ManualMech']) %}<p>ЭГР со стороны электрической части обеспечивает возможность полноценного механического ручного управления, позволяя проводить безударный переходы между контурами управления. Воздействие подсистемы АРЧ на гидромеханическую часть регулятора выполнено таким образом, что при отказе подсистемы АРЧ обеспечивается сохранение прежней нагрузки и переход на ручное управление агрегатом.</p>{% endif %}
 	<div class="img-container">
-			<img src="static/sau_ga/ru/egr_front.png">
+			<div custom-style="subtitle"><img src="static/sau_ga/ru/egr_front.png"></div>
 			<div class="img-title">Чертеж локальной лицевой панели ЭГР</div>
 	</div>
 <p>Переходы между режимами, между резервированными компонентами происходит безударно, т. е. без заметных для человека изменений. Формируемые регулятором законы стабилизации частоты и управления мощностью в части применяемых алгоритмов и их реализации удовлетворяют требованиям МЭК 60308:2005, МЭК 61362:2012, МЭК 62270:2013 и ГОСТ 12405-81 «Регуляторы электрогидравлические для гидравлических турбин. Технические условия», СТО 17330282.27.140.018-2008 «Гидротурбинные установки. Условия поставки. Нормы и требования».</p>
@@ -987,17 +1110,18 @@
 </ul>
 <h3>Статические и динамические характеристики</h3>
 <p>Скорость отработки требуемой первичной мощности соответствует требованиям участия в ОПРЧ и НПРЧ. Время полного изменения сигнала устройства задания мощности (открытия) определяется допустимой скоростью перемещения регулирующих органов турбины, по указанию производителя турбины.</p>
-<p>Уставка мёртвой зоны по частоте системы имеет регулировки от 0 до 0,2 Гц. Для обеспечения участия в НПРЧ уставка мёртвой зоны может переключаться оперативно, с шагом 0,005 Гц. Зона нечувствительности первичного регулирования не будет более 0,05 Гц. Нечувствительность регулятора по частоте не будет превышать 0,01 Гц. Устройство статизма будет иметь пределы изменения значений статизма от 0% до 10%, с шагом 0,1 %. Настройка параметров изодромного устройства будет раздельной для работы агрегата на холостом ходу и под нагрузкой, с автоматическим переключением уставок при изменении режима работы. Стабилизирующие устройства не будут снижать быстродействие системы регулирования при реализации управляющих воздействий на изменение мощности гидроагрегата при работе в энергосистеме.Уставки контура стабилизирующих частоты регулируются в следующих пределах:</p>
+<p>Уставка мёртвой зоны по частоте системы имеет регулировки от 0 до 0,2 Гц. Для обеспечения участия в НПРЧ уставка мёртвой зоны может переключаться оперативно, с шагом 0,005 Гц. Зона нечувствительности первичного регулирования не будет более 0,05 Гц. Нечувствительность регулятора по частоте не будет превышать 0,01 Гц. Устройство статизма будет иметь пределы изменения значений статизма от 0% до 10%, с шагом 0,1 %. Настройка параметров изодромного устройства будет раздельной для работы агрегата на холостом ходу и под нагрузкой, с автоматическим переключением уставок при изменении режима работы. Стабилизирующие устройства не будут снижать быстродействие системы регулирования при реализации управляющих воздействий на изменение мощности гидроагрегата при работе в энергосистеме. Уставки контура стабилизирующих частоты регулируются в следующих пределах:</p>
 <ul>
 	<li>постоянная времени изодрома - от 0 до 60 с;</li>
 	<li>временная неравномерность - от 0% до 100%;</li>
 	<li>постоянная времени ускорения - от 0 до 1,5 с.</li>
 </ul>
 	<div class="img-container">
-			<img src="static/sau_ga/ru/structure.png">
+			<div custom-style="subtitle"><img src="static/sau_ga/ru/structure.png"></div>
 			<div class="img-title">Упрощенная структура системы регулирования</div>
 	</div>
 <h3>Ключевые особенности:</h3>
+	<ul>
 	<li>гибкая параметризация зон эксплуатации с выделением типа с соответствующим поведением;</li>
 	<li>Поддержка контроллером вычислений с двойной плавающей запятой;</li>
     <li>Поканальная гальвано развязка всех внешних электрических сигналов;</li>
@@ -1029,6 +1153,178 @@
     <li>Независимая диагностика гидравлической и электрической части системы регулирования;</li>
     <li>Полный цикл разработки под ключ: обследование, поставка, установка и наладка шкафов управления, измерительных устройств, устройств управления, в т. ч. гидравлических;</li>
     <li>Учебный центр в Санкт-Петербурге с индивидуальным обучением на подробном симуляторе регулятора и технологической автоматики, подключенного к модели ГА. Обучение средству программирования применительно к поставляемым ПТК;</li>
+	</ul>
+</body></html>
+<html><body>
+<article class="document ru">
+    {% if (set['Pcomb'] or set['TurbineType']=='kaplan') %}
+    <h1>Комбинаторный механизм поворотнолопастных турбин, параметризованный сигналом эл. мощности (<i>P</i>-комбинатор)
+    </h1>
+    <h2>Напор нетто</h2>
+    <p>Для турбомашины любой конструкции актуальной проблемой является минимизация потери, связанной с выходной
+        скоростью. Если для высоконапорных машин доля этой потери относительно невелика, то для низконапорного ГА,
+        пропускающего большие расходы воды и работающего при изменяющемся в широких пределах низком напоре, организация
+        потока в проточной части имеет первостепенное значение для достижения высокой экономичности. Высокая
+        экономичность таких ГА обеспечивается применением поворотнолопастных гидротурбин, в которых требуемая для того
+        или иного режима геометрия проточной части организуется согласованным изменением углов установки лопаток
+        направляющего аппарата и лопастей рабочего колеса — комбинаторным механизмом.</p>
+    <p>Комбинаторный механизм, несмотря на простоту выполняемой функции, требует к себе повышенного внимания, так как от
+        него зависят коэффициент полезного действия турбины и техническое состояние агрегата. Хорошо известны
+        недостатки, присущие классическим комбинаторным механизмам, формирующим величину угла разворота лопастей
+        рабочего колеса по значениям открытия направляющего аппарата и напора нетто агрегата (см. рис.). Ведь согласно
+        определению, напор нетто является разностью полных удельных энергий воды на входе и выходе гидротурбины. Эту
+        величину не только невозможно получить напрямую, но и для этого требуется множество сложных измерений во время
+        всего периода эксплутации.</p>
+    <div class="image right">
+        <div custom-style="subtitle"><img src="static/sau_ga/ru/h_cam.png"></div>
+        <div class="image-title">Классические комбинаторные зависимости</div>
+    </div>
+    {% if set['head-measure']=="diff" %}
+    <p>Несмотря на то, что изготовитель турбины дает комбинаторную зависимость в функции именно от напора нетто, на
+        текущий момент на гидроагрегате для комбинаторного механизма используют данные измерения статического напора на
+        ГЭС (разность уровней). Как следует из проведенных исследованиях, отождествление статического напора ГЭС и
+        напора нетто может привести к ошибкам в величине последнего от +3.8% до -11,6%. Безусловно, величина ошибок в
+        определении напора нетто может быть уменьшена введением поправок, учитывающих влияние того или иного фактора.
+        Однако создание такой системы идентификации напора нетто требует индивидуального подхода не только к каждой ГЭС,
+        но и к каждому агрегату. Нетрудно представить себе алгоритмическую и аппаратную сложность такой системы, а также
+        - порядок ее стоимости.</p>
+    {% endif %}
+    <p>К недостаткам комбинаторных механизмов, использующих сигнал напора нетто, можно отнести также сложность методик
+        идентификации закладываемых в них комбинаторных зависимостей в натурном эксперименте. Это и необходимость
+        ожидания подходящего значения действующего напора, и сложность измерения расхода, и большая вероятность ошибки в
+        определении связи между статическим напором ГЭС и напором нетто агрегата.</p>
+    <p>Измерение величины напора-нетто невозможно вести с высокой точностью, а, следовательно, и ошибка классического
+        комбинаторного механизма может приводить к потерям к. п. д. (величины потерь можно точнее оценить по
+        характеристикам гидротурбины, режиме работы и напора гидроустановки).</p>
+    <p><i>Можно утверждать, что классический комбинатор устарел и не использует современные вычислительные мощности для
+        повышения энергоэффективности. Разработанный для механических регуляторов еще в начале 20 века подход до сих пор
+        используется и не был переработан, несмотря на свои существенные недостатки.</i></p>
+    <h2>Использование величины мощности</h2>
+    <p>Включение в число параметров, позволяющих правильно выбрать взаимное положение регулирующих органов, сигнала
+        мощности позволяет избежать ошибок в измерении напора нетто. Величина мощности, развиваемой турбиной, в отличие
+        от напора нетто оказывает влияние на режим работы значительно большего числа факторов. Величина мощности
+        является интегральным показателем параметров режима:</p>
+    <ul>
+        <li>напора нетто, как разности полных удельных энергий воды на входе и на выходе из турбины;</li>
+        <li>расхода, зависящего от напора нетто и взаимного положения регулирующих органов.</li>
+    </ul>
+    <p>Определение механической мощности из электрической мощности в нормальном эксплуатационном режиме трудности не
+        составляет. Но нельзя просто начать использовать величину мощности вместо напора нетто. В настоящее время
+        вычислительные ресурсы позволяют применить новые идеи, до этого неосуществимые на мехаинческой и аналоговой
+        вычислительной базе, используемой в прошлом.</p>
+    <h2>Комбинатор по мощности</h2>
+    <p>Комбинаторная зависимость строится совокупностью точек при различных напорах, где режим работы комбинаторный.
+        Если добавить для каждой из этих точек величину мощности, развиваемую на тот момент, можно построить новую
+        функцию в тех же координатах (открытие НА, разворот РК) — значения комбинаторной мощности. Соединив точки
+        с одинаковыми значениями мощности на комбинаторных зависимостях для разных напоров, получим комбинаторные
+        зависимости, параметризованные величиной мощности. Можно строго доказать, что данная функция непрерывная и
+        монотонна. На рисунке представлены два семейства графиков комбинаторных зависимостей наложенных друг на друга:
+        параметризованных напором (красными пунктирными линиями) и параметризированных мощностью (черные сплошные
+        линии).</p>
+    <div class="image left">
+        <div custom-style="subtitle"><img src="static/sau_ga/ru/p_cam.png"></div>
+        <div class="image-title">Используемые комбинаторные зависимости</div>
+    </div>
+    <p>Можно строго доказать, что во время эксплуатации в любой момент времени для заданной мощности найдётся лишь одна
+        пара таких положений сервомоторов НА и РК, где текущяя мощность совпадет с мощностью из комбинаторной
+        зависимостью, и <b>эта точка будет комбинаторной</b>. Иными словами нужно найти такое положение сервомотора НА,
+        при котором соответствующее ему положение сервомотора РК (по классической зависимости) на выбранной изолинии
+        комбинаторной мощности Pk=Pзаданное обеспечит достижение турбиной мощности Pзаданное. Такой комбинаторный
+        механизм становится комбинатором по мощности, или <i>P</i>-комбинатор. Регулятор отходит от необходимости
+        получать напор нетто извне, а определяет его самостоятельно через обратное преобразование.</p>
+    <p>Важно, что комбинаторный механизм, входящий в систему регулирования, должен иметь высокие динамические
+        характеристики. {% if set['AutoSecondary'] %} Особенно при участии в автоматическом вторичном регулировании,
+        когда задание мощности меняется оперативно и в достаточно широких пределах.{% endif %} Предлагаемое решение
+        интегрировано в регулятор мощности, позволяя исполнять задание мощности не просто не хуже стандартном
+        ПИ-регулятора, но и быстрее за счет использования структуры типа "feed-forward".</p>
+    <h2>Закладываемые характеристики</h2>
+    <p>Также, как и классическому комбинаторному механизму, P-комбинатору требуются исходные данные для параметризации.
+        Существующие методы обладают множеством недостатков в связи с неточностью измерений.</p>
+    <p>Завод-изготовитель гидротурбины предоставляет комбинаторную зависимость в классическом виде, но её
+        недостаточно:необходимо знание величины мощности в каждой из точек. Однако у завода-изготовителя есть все
+        данные, чтобы предоставлять их в полном виде. Другим классическим вариантом является проведение энергетических
+        испытаний (с измерением расхода абсолютным методом) — это требует привлечение сторонней организации и
+        фактический вывод агрегата из нормальной работы.</p>
+    <p>В первом случае, для турбин, эксплуатируемых долгое время, отклонение от модели может быть значительно или
+        характеристика вовсе утерена в архивах. Для второго случая, задача измерения расхода слишком дорога, а в случае
+        ГЭС руслового типа (без длинного прямого водовода) сложна и недостаточно точна. </p>
+    <div class="image right">
+        <div custom-style="subtitle"><img src="static/sau_ga/ru/isol_p.png"></div>
+        <div class="image-title">Линии равной мощности</div>
+    </div>
+    <p>Предлагается рассмотреть новый метод, не требующий измерения расхода и подходящий только для <i>P</i>-комбинатора.
+        Это собственный метод постоянной мощности, основанный на фундаментальном свойстве поворотнолопастных
+        гидротурбин: достижении одной и той же мощности за счет разного соотношения открытия НА и разворота лопастей РК
+        (см. рис). Лишь одна точка на линии для текущего режима является комбинаторной,а метод осуществляет её поиск. В
+        основе лежит специальный способ извлечения информации, заложенной в форму изолинии. Методология выведена
+        математически и проверена в ходе вычислительного эксперимент на значимом числе цифровых моделей гидроагрегатах,
+        а также в ходе серии натурных испытаний на Новосибирской ГЭС совместно с НПО ЦКТИ. Эксперименты показали ошибку
+        <b>не более 0,1% по к. п. д.</b></p>
+    <p>Актуальным является не только соблюдение комбинаторных зависимостей, но и контроль их изменения во времени из-за
+        износа проточной части турбин при эксплуатации. Поэтому необходимо располагать средствами по оперативной ее
+        идентификации. Важно, что метод автоматизирован и может быть использован эксплуатационным персоналом без
+        изменения режима ГЭС и без участия сторонних организаций и проведения специальных испытаний в течении всего
+        срока эксплуатации гидротурбины.
+    </p>
+<p>Таким образом, предлагаемое решение инвариантно относительно наличия модельных и актуальных эксплуатационных
+        характеристик.</p>
+    <h2>Преимущества решения</h2>
+    <p>Преимуществами комбинаторного механизма, использующего сигнал мощности являются:</p>
+    <ul>
+        <li>высокая точность формирования комбинаторной зависимости — максимальная эффективность для режима работы
+            ГА
+        </li>
+        <li>исключительная простота реализации для режима работы на мощную энергосистему;</li>
+        <li>сохранение дианмических характеристик с сохранением возможности участия в АВРЧМ и НПРЧ;</li>
+        <li>регулятор мощности типа «feed-forward» с предрасчетом положения регулирующих органов (особенно с учетом
+            нелинейности моментных и расходных характеристик)
+        </li>
+        <li>безопасное и надежное отключение в ненормальных режимах;</li>
+        <li>определение напора нетто гидротурбины;</li>
+        <li>уточнение комбинаторных зависимостей в течение всего срока эксплуатации без привлечения дорогостоящих
+            специализированных организаций.
+        </li>
+    </ul>
+    <p><b>Метод уже апробирован на серии натурных испытаниях и готов к промышленному применению</b></p>
+    <p>В течение 2015 года на агрегате №6 Новосибирской ГЭС специалистами компании «Ракурс-инжиниринг» выполнялись
+        экспериментальные исследования с целью проверки и доведения алгоритмов идентификации комбинаторного режима и
+        наладка работы комбинаторного механизма, использующего для точной настройки сигнал мощности. В процессе
+        испытаний была определена окончательная методика нахождений комбинаторной зависимости собственным методом
+        постоянной мощности в режиме полуавтоматического выполнения поискового движения.</p>
+    <div class="image left">
+        <div custom-style="subtitle"><img src="static/sau_ga/ru/step.png"></div>
+        <div class="image-title">Переходный процесс по мощности</div>
+    </div>
+    <p>В 2016 году на агрегате №4 Шульбинской ГЭС проводились экспериментальные исследования метода идентификации</p>
+    <p>В 2016 и 2017 г. вышеуказанный регулятор прошел натурные испытания на модернизированных ГА ст. №3,4 Новосибирской
+        ГЭС. Результаты подтвердили, что регулятор корректно решает поставленные перед ним задачи.</p>
+    <p><b>Научно-исследовательские и экспериментальные работы, выполненные компанией «Ракурс-инжиниринг» в процессе
+        модернизации агрегатных систем управления Новосибирской ГЭС позволяют реализовать современное решение регулятора
+        мощности поворотнолопастной гидротурбины с корректором комбинаторной зависимости по мощности, а также обеспечить
+        поддержку высокой эффективности предложенного решения экспресс контролем комбинаторных зависимостей, выполняемым
+        с использованием аппаратных и программных средств штатных ПТК ЭГР.</b></p>
+    <h2>Награды</h2>
+    <ul>
+        <li>Лучшая научно-исследовательская работа в области гидро\нергетики в 2016 г. (ПАО "РусГидро)</li>
+        <li>Первое место среди потенциальных научных проектов AES Казахстан в 2017 г.</li>
+        <li>Russian Startup Tour 2015. 3 место в треке «Энергоэффективность и энергосбережение, разработка инновационных
+            энергетических технологий».
+        </li>
+        <li>Вторая Всероссийская научно-практическая конференция молодых ученых, специалистов, аспирантов и студентов
+            «ГИДРОЭЛЕКТРОСТАНЦИИ В XXI веке». 1 место в секции «Модернизация и реконструкция ГЭС».
+        </li>
+        <li>Конкурс лучших инновационных проектов в сфере науки и высшего профеcсионального образования Санкт-Петербурга
+            в 2015 году. Лауреат премии «Лучший инновационный продукт».
+        </li>
+    </ul>
+    <div class="image left">
+        <div custom-style="subtitle">
+<img src="static/sau_ga/ru/rushydro.jpg"><img src="static/sau_ga/ru/aes.jpg">
+</div>
+        <div class="image-title">Награды</div>
+    </div>
+    {% endif %}
+</article>
 </body></html>
 <html><body>
 <h2>Устройство управления маслонапорной установкой (МНУ)</h2>
@@ -1067,7 +1363,7 @@
 	<li>Хорошая обзорность благодаря большой поверхности для маркировки и однозначно распознаваемым коммутационным состояниям</li>
 </ul>
 <div class="img-container">
-			<img src="static/%D0%B8%D0%B7%D0%BC.%20%D1%8D%D0%BB.%20%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%B2/fame.jpg">
+			<div custom-style="subtitle"><img src="static/%D0%B8%D0%B7%D0%BC.%20%D1%8D%D0%BB.%20%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%B2/fame.jpg"></div>
 			<div class="img-title">Контрольные колодки для измерительных цепей</div>
 </div>
 </body></html>
@@ -1134,7 +1430,7 @@
 </ul>
 <p>Система построена с использованием специализированных модулей измерения сигналов термометров сопротивления (в дальнейшем ТС) и термопар с повышенной помехоустойчивостью, и предназначенных для приёма сигналов от датчиков, находящихся в зоне действия сильных электромагнитных полей. Также, при необходимости, в состав могут входить модули приема унифицированных сигналов тока и напряжения, панельный компьютер, вторичные источники питания, принтер и промышленный компьютер.</p>
 <div class="img-container">
-			<img src="static/sau_ga/stk_inside.jpg">
+			<div custom-style="subtitle"><img src="static/sau_ga/stk_inside.jpg"></div>
 			<div class="img-title">Пример внутреннего исполнения ТК</div>
 </div>
 <p>Сигналы от ТС, термопар и унифицированные сигналы напряжения и силы постоянного тока  поступают на  цифровые измерительные преобразователи, где преобразуются в цифровой код. Контроллер сравнивает измеренные сигналы с уставками и вырабатывает выходные дискретные сигналы управления и предупреждения при превышении уставок. Информация о текущих параметрах отображается на панельном компьютере, расположенном на двери шкафа и АРМ АСУ ТП. Информация о выявленных отклонениях от нормальной работы и сменные отчеты сохраняются автоматически или по запросу оператор. Ввод настроечных параметров: выбор канала, тип номинальной статической характеристики (в дальнейшем НСХ), подключаемого параметра, диапазон измерения, значения уставок и т.д. осуществляются с экрана панельного компьютера и защищен паролем.</p>
@@ -1166,7 +1462,7 @@
 </ul>
 <p>Система ГРАМ позволяет автоматизировать процесс поддержания активной мощности и частоты, и ускорить переходные процессы. Возможно раздельное регулирование ГА (деление на группы). ГРАМ в общем случае не участвует в первичном регулировании частоты и не препятствует действию регуляторов частоты вращения гидротурбин по отклонению частоты. ГРАМ осуществляет вторичное регулирование (предотвращение аварийные ситуации и стабилизация энергосистемы).</p>
 <div class="img-container">
-			<img src="static/os/grarm_bges.jpg">
+			<div custom-style="subtitle"><img src="static/os/grarm_bges.jpg"></div>
 			<div class="img-title">Дублированный ГРАМ и ГРН Братской ГЭС</div>
 </div>
 <p>Суммарное задание мощности группы формируется с учетом заданной плановой мощности, автоматического задания вторичной мощности, команд оперативного персонала, отклонения частоты от заданной уставки. Суммарное задание мощности группы распределяется между ГА. При этом учитывается:</p>
@@ -1183,7 +1479,7 @@
 <li>управление реактивной мощностью ГЭС для стабилизации напряжения в узловых точках энергосистемы с астатическими ограничениями  максимального и минимального уровней напряжения на шинах станции.</li>
 </ul>
 <div class="img-container">
-			<img src="static/os/arg_grarm_bgges.png">
+			<div custom-style="subtitle"><img src="static/os/arg_grarm_bgges.png"></div>
 			<div class="img-title">Интерфейс оператора ГРАМ и ГРН Богучанской ГЭС</div>
 </div>
 <p>Система ГРНРМ позволяет автоматизировать процесс поддержания напряжения и реактивной мощности как при внутренних, так и при внешних возмущениях. Возможно раздельное регулирование ГА (деление на группы). Суммарное задание мощности группы за вычетом мощности ГА на индивидуальном управлении распределяется между ГА в соответствии с одним из выбранных критериев:</p>
@@ -1221,7 +1517,7 @@
 		<li>подсистема дренажа и осушения(Drainage and dewatering control).</li>
 </ul>
 <div class="img-container">
-			<img src="static/os/auxsystems_inside.jpg">
+			<div custom-style="subtitle"><img src="static/os/auxsystems_inside.jpg"></div>
 			<div class="img-title">Внутренне наполнение подсистемы для Нижне-Бурейской ГЭС</div>
 </div>
 </article>
@@ -1241,7 +1537,7 @@
 <li>Светодиодные элементы с длительным сроком службы</li>
 
 <div class="img-container">
-			<img src="static/sau_ga/abb_k70.jpg">
+			<div custom-style="subtitle"><img src="static/sau_ga/abb_k70.jpg"></div>
 			<div class="img-title">Сигнальная стойка</div>
 </div>
 </article>
@@ -1391,7 +1687,7 @@
 различные варианты оформления графиков;
 отображение курсоров на графике, отображение значений параметров над курсорами, точное измерение интервалов времени между событиями на графике, отображение статистической информации на отрезке между курсорами (max,min,avg,dx/dt);
 <div class="image left">
-			<img src="static/scada/trends_tree.png">
+			<div custom-style="subtitle"><img src="static/scada/trends_tree.png"></div>
 			<div class="image-title">Пример древа архивируемых параметров</div>
 </div>
 отображение данных в табличном виде;
@@ -1409,7 +1705,7 @@
 управление параметрами отчёта (если отчёт предусматривает такую возможность) ;
 редактирование шаблона отчёта;
 <div class="image left">
-			<img src="static/scada/trends_graph.png">
+			<div custom-style="subtitle"><img src="static/scada/trends_graph.png"></div>
 			<div class="image-title">Пример просмотра осциллограммы</div>
 </div>
 отображение исходных данных отчёта в табличном виде;
@@ -1427,7 +1723,7 @@
 <html><body>
 <article class="document ru">
 	<h1>Комплект запасных частей</h1>
-<p>Объем рекомендуемых запасных частей и расходных материалов каждого ПТК в целом определяются по результатам рабочего проектирования и разработки конструкторской документации.</p>
+<p>Объем рекомендуемых запасных частей и расходных материалов каждого ПТК в целом определяются по результатам рабочего проектирования и разработки конструкторской документации (не менее 10% от общего количества оборудования одного наименования, но не менее единицы).</p>
 <p>Комплект рекомендуемых запасных изделий и приборов (ЗИП) будет достаточен для обеспечения быстрого устранения неисправностей поставляемых технических средств.
 </p>
 <p>В объем ЗИП будут входить модули, устройства и компоненты в необходимом и достаточном количестве для выполнения предупредительных ремонтов.</p>
@@ -1454,177 +1750,31 @@
 </article>
 </body></html>
 <html><body>
-<article class="document ru">
-    {% if (set['Pcomb'] or set['TurbineType']=='kaplan') %}
-    <h1>Комбинаторный механизм поворотнолопастных турбин, параметризованный сигналом эл. мощности (<i>P</i>-комбинатор)
-    </h1>
-    <h2>Напор нетто</h2>
-    <p>Для турбомашины любой конструкции актуальной проблемой является минимизация потери, связанной с выходной
-        скоростью. Если для высоконапорных машин доля этой потери относительно невелика, то для низконапорного ГА,
-        пропускающего большие расходы воды и работающего при изменяющемся в широких пределах низком напоре, организация
-        потока в проточной части имеет первостепенное значение для достижения высокой экономичности. Высокая
-        экономичность таких ГА обеспечивается применением поворотнолопастных гидротурбин, в которых требуемая для того
-        или иного режима геометрия проточной части организуется согласованным изменением углов установки лопаток
-        направляющего аппарата и лопастей рабочего колеса — комбинаторным механизмом.</p>
-    <p>Комбинаторный механизм, несмотря на простоту выполняемой функции, требует к себе повышенного внимания, так как от
-        него зависят коэффициент полезного действия турбины и техническое состояние агрегата. Хорошо известны
-        недостатки, присущие классическим комбинаторным механизмам, формирующим величину угла разворота лопастей
-        рабочего колеса по значениям открытия направляющего аппарата и напора нетто агрегата (см. рис.). Ведь согласно
-        определению, напор нетто является разностью полных удельных энергий воды на входе и выходе гидротурбины. Эту
-        величину не только невозможно получить напрямую, но и для этого требуется множество сложных измерений во время
-        всего периода эксплутации.</p>
-    <div class="image right">
-        <img src="static/sau_ga/ru/h_cam.png">
-        <div class="image-title">Классические комбинаторные зависимости</div>
-    </div>
-    {% if set['head-measure']=="diff" %}
-    <p>Несмотря на то, что изготовитель турбины дает комбинаторную зависимость в функции именно от напора нетто, на
-        текущий момент на гидроагрегате для комбинаторного механизма используют данные измерения статического напора на
-        ГЭС (разность уровней). Как следует из проведенных исследованиях, отождествление статического напора ГЭС и
-        напора нетто может привести к ошибкам в величине последнего от +3.8% до -11,6%. Безусловно, величина ошибок в
-        определении напора нетто может быть уменьшена введением поправок, учитывающих влияние того или иного фактора.
-        Однако создание такой системы идентификации напора нетто требует индивидуального подхода не только к каждой ГЭС,
-        но и к каждому агрегату. Нетрудно представить себе алгоритмическую и аппаратную сложность такой системы, а также
-        - порядок ее стоимости.</p>
-    {% endif %}
-    <p>К недостаткам комбинаторных механизмов, использующих сигнал напора нетто, можно отнести также сложность методик
-        идентификации закладываемых в них комбинаторных зависимостей в натурном эксперименте. Это и необходимость
-        ожидания подходящего значения действующего напора, и сложность измерения расхода, и большая вероятность ошибки в
-        определении связи между статическим напором ГЭС и напором нетто агрегата.</p>
-    <p>Измерение величины напора-нетто невозможно вести с высокой точностью, а, следовательно, и ошибка классического
-        комбинаторного механизма может приводить к потерям к. п. д. (величины потерь можно точнее оценить по
-        характеристикам гидротурбины, режиме работы и напора гидроустановки).</p>
-    <p><i>Можно утверждать, что классический комбинатор устарел и не использует современные вычислительные мощности для
-        повышения энергоэффективности. Разработанный для механических регуляторов еще в начале 20 века подход до сих пор
-        используется и не был переработан, несмотря на свои существенные недостатки.</i></p>
-    <h2>Использование величины мощности</h2>
-    <p>Включение в число параметров, позволяющих правильно выбрать взаимное положение регулирующих органов, сигнала
-        мощности позволяет избежать ошибок в измерении напора нетто. Величина мощности, развиваемой турбиной, в отличие
-        от напора нетто оказывает влияние на режим работы значительно большего числа факторов. Величина мощности
-        является интегральным показателем параметров режима:</p>
-    <ul>
-        <li>напора нетто, как разности полных удельных энергий воды на входе и на выходе из турбины;</li>
-        <li>расхода, зависящего от напора нетто и взаимного положения регулирующих органов.</li>
-    </ul>
-    <p>Определение механической мощности из электрической мощности в нормальном эксплуатационном режиме трудности не
-        составляет. Но нельзя просто начать использовать величину мощности вместо напора нетто. В настоящее время
-        вычислительные ресурсы позволяют применить новые идеи, до этого неосуществимые на мехаинческой и аналоговой
-        вычислительной базе, используемой в прошлом.</p>
-    <h2>Комбинатор по мощности</h2>
-    <p>Комбинаторная зависимость строится совокупностью точек при различных напорах, где режим работы комбинаторный.
-        Если добавить для каждой из этих точек величину мощности, развиваемую на тот момент, можно построить новую
-        функцию в тех же координатах (открытие НА, разворот РК) — значения комбинаторной мощности. Соединив точки
-        с одинаковыми значениями мощности на комбинаторных зависимостях для разных напоров, получим комбинаторные
-        зависимости, параметризованные величиной мощности. Можно строго доказать, что данная функция непрерывная и
-        монотонна. На рисунке представлены два семейства графиков комбинаторных зависимостей наложенных друг на друга:
-        параметризованных напором (красными пунктирными линиями) и параметризированных мощностью (черные сплошные
-        линии).</p>
-    <div class="image left">
-        <img src="static/sau_ga/ru/p_cam.png">
-        <div class="image-title">Используемые комбинаторные зависимости</div>
-    </div>
-    <p>Можно строго доказать, что во время эксплуатации в любой момент времени для заданной мощности найдётся лишь одна
-        пара таких положений сервомоторов НА и РК, где текущяя мощность совпадет с мощностью из комбинаторной
-        зависимостью, и <b>эта точка будет комбинаторной</b>. Иными словами нужно найти такое положение сервомотора НА,
-        при котором соответствующее ему положение сервомотора РК (по классической зависимости) на выбранной изолинии
-        комбинаторной мощности Pk=Pзаданное обеспечит достижение турбиной мощности Pзаданное. Такой комбинаторный
-        механизм становится комбинатором по мощности, или <i>P</i>-комбинатор. Регулятор отходит от необходимости
-        получать напор нетто извне, а определяет его самостоятельно через обратное преобразование.</p>
-    <p>Важно, что комбинаторный механизм, входящий в систему регулирования, должен иметь высокие динамические
-        характеристики. {% if set['AutoSecondary'] %} Особенно при участии в автоматическом вторичном регулировании,
-        когда задание мощности меняется оперативно и в достаточно широких пределах.{% endif %} Предлагаемое решение
-        интегрировано в регулятор мощности, позволяя исполнять задание мощности не просто не хуже стандартном
-        ПИ-регулятора, но и быстрее за счет использования структуры типа "feed-forward".</p>
-    <h2>Закладываемые характеристики</h2>
-    <p>Также, как и классическому комбинаторному механизму, P-комбинатору требуются исходные данные для параметризации.
-        Существующие методы обладают множеством недостатков в связи с неточностью измерений.</p>
-    <p>Завод-изготовитель гидротурбины предоставляет комбинаторную зависимость в классическом виде, но её
-        недостаточно:необходимо знание величины мощности в каждой из точек. Однако у завода-изготовителя есть все
-        данные, чтобы предоставлять их в полном виде. Другим классическим вариантом является проведение энергетических
-        испытаний (с измерением расхода абсолютным методом) — это требует привлечение сторонней организации и
-        фактический вывод агрегата из нормальной работы.</p>
-    <p>В первом случае, для турбин, эксплуатируемых долгое время, отклонение от модели может быть значительно или
-        характеристика вовсе утерена в архивах. Для второго случая, задача измерения расхода слишком дорога, а в случае
-        ГЭС руслового типа (без длинного прямого водовода) сложна и недостаточно точна. </p>
-    <div class="image right">
-        <img src="static/sau_ga/ru/isol_p.png">
-        <div class="image-title">Линии равной мощности</div>
-    </div>
-    <p>Предлагается рассмотреть новый метод, не требующий измерения расхода и подходящий только для <i>P</i>-комбинатора.
-        Это собственный метод постоянной мощности, основанный на фундаментальном свойстве поворотнолопастных
-        гидротурбин: достижении одной и той же мощности за счет разного соотношения открытия НА и разворота лопастей РК
-        (см. рис). Лишь одна точка на линии для текущего режима является комбинаторной,а метод осуществляет её поиск. В
-        основе лежит специальный способ извлечения информации, заложенной в форму изолинии. Методология выведена
-        математически и проверена в ходе вычислительного эксперимент на значимом числе цифровых моделей гидроагрегатах,
-        а также в ходе серии натурных испытаний на Новосибирской ГЭС совместно с НПО ЦКТИ. Эксперименты показали ошибку
-        <b>не более 0,1% по к. п. д.</b></p>
-    <p>Актуальным является не только соблюдение комбинаторных зависимостей, но и контроль их изменения во времени из-за
-        износа проточной части турбин при эксплуатации. Поэтому необходимо располагать средствами по оперативной ее
-        идентификации. Важно, что метод автоматизирован и может быть использован эксплуатационным персоналом без
-        изменения режима ГЭС и без участия сторонних организаций и проведения специальных испытаний в течении всего
-        срока эксплуатации гидротурбины.
-    </p>
-<p>Таким образом, предлагаемое решение инвариантно относительно наличия модельных и актуальных эксплуатационных
-        характеристик.</p>
-    <h2>Преимущества решения</h2>
-    <p>Преимуществами комбинаторного механизма, использующего сигнал мощности являются:</p>
-    <ul>
-        <li>высокая точность формирования комбинаторной зависимости — максимальная эффективность для режима работы
-            ГА
-        </li>
-        <li>исключительная простота реализации для режима работы на мощную энергосистему;</li>
-        <li>сохранение дианмических характеристик с сохранением возможности участия в АВРЧМ и НПРЧ;</li>
-        <li>регулятор мощности типа «feed-forward» с предрасчетом положения регулирующих органов (особенно с учетом
-            нелинейности моментных и расходных характеристик)
-        </li>
-        <li>безопасное и надежное отключение в ненормальных режимах;</li>
-        <li>определение напора нетто гидротурбины;</li>
-        <li>уточнение комбинаторных зависимостей в течение всего срока эксплуатации без привлечения дорогостоящих
-            специализированных организаций.
-        </li>
-    </ul>
-    <p><b>Метод уже апробирован на серии натурных испытаниях и готов к промышленному применению</b></p>
-    <p>В течение 2015 года на агрегате №6 Новосибирской ГЭС специалистами компании «Ракурс-инжиниринг» выполнялись
-        экспериментальные исследования с целью проверки и доведения алгоритмов идентификации комбинаторного режима и
-        наладка работы комбинаторного механизма, использующего для точной настройки сигнал мощности. В процессе
-        испытаний была определена окончательная методика нахождений комбинаторной зависимости собственным методом
-        постоянной мощности в режиме полуавтоматического выполнения поискового движения.</p>
-    <div class="image left">
-        <img src="static/sau_ga/ru/step.png">
-        <div class="image-title">Переходный процесс по мощности</div>
-    </div>
-    <p>В 2016 году на агрегате №4 Шульбинской ГЭС проводились экспериментальные исследования метода идентификации</p>
-    <p>В 2016 и 2017 г. вышеуказанный регулятор прошел натурные испытания на модернизированных ГА ст. №3,4 Новосибирской
-        ГЭС. Результаты подтвердили, что регулятор корректно решает поставленные перед ним задачи.</p>
-    <p><b>Научно-исследовательские и экспериментальные работы, выполненные компанией «Ракурс-инжиниринг» в процессе
-        модернизации агрегатных систем управления Новосибирской ГЭС позволяют реализовать современное решение регулятора
-        мощности поворотнолопастной гидротурбины с корректором комбинаторной зависимости по мощности, а также обеспечить
-        поддержку высокой эффективности предложенного решения экспресс контролем комбинаторных зависимостей, выполняемым
-        с использованием аппаратных и программных средств штатных ПТК ЭГР.</b></p>
-    <h2>Награды</h2>
-    <ul>
-        <li>Лучшая научно-исследовательская работа в области гидро\нергетики в 2016 г. (ПАО "РусГидро)</li>
-        <li>Первое место среди потенциальных научных проектов AES Казахстан в 2017 г.</li>
-        <li>Russian Startup Tour 2015. 3 место в треке «Энергоэффективность и энергосбережение, разработка инновационных
-            энергетических технологий».
-        </li>
-        <li>Вторая Всероссийская научно-практическая конференция молодых ученых, специалистов, аспирантов и студентов
-            «ГИДРОЭЛЕКТРОСТАНЦИИ В XXI веке». 1 место в секции «Модернизация и реконструкция ГЭС».
-        </li>
-        <li>Конкурс лучших инновационных проектов в сфере науки и высшего проффесионального образования Санкт-Петербурга
-            в 2015 году. Лауреат премии «Лучший инновационный продукт».
-        </li>
-    </ul>
-    <div class="image left">
-        <img src="static/sau_ga/ru/rushydro.jpg">
-        <div class="image-title"></div>
-    </div>
-    <div class="image left">
-        <img src="static/sau_ga/ru/aes.jpg">
-        <div class="image-title"></div>
-    </div>
-    {% endif %}
-</article>
+<h1>Обучение персонала</h1>
+<p>В процессе работ по договору, может быть организовано и проведено обучение персонала станции, необходимое для эффективного использования всех функций. Обучение персонала станции будет осуществляться в учебном центре ООО «Ракурс-инижиниринг» расположенном в г. Санкт-Петербург, в том числе с привлечением специалистов сторонних организаций (ОАО «НПО ЦКТИ»).</p>
+<p>Учебный центр компании «Ракурс» образован в 1994 году. В учебном центре на протяжении 20 лет проходят обучение технические специалисты предприятий, энергетических объектов и студенты ВУЗа. Центр создавался как база повышения квалификации технического персонала станций, предприятий с целью повышения надежности и безопасности их работы с оборудованием, а также как площадка для формирования резерва инженерных кадров – обучения студентов, обеспечения их практических навыков и знаний работы с оборудованием и системами автоматизации.</p>
+<p>За 20 лет существования учебного центра обучение и переподготовку прошло более 1000 специалистов Заказчиков.</p>
+<p>В ходе учебных занятий рассматриваются:</p>
+<ul>
+    <li>системы регулирования, в том числе с практическими занятиями на специально подготовленном тренажере с подключением к цифровому двойнику ГЭС;</li>
+    <li>вибрационные измерения и диагностика;</li>
+    <li>среда программирования применительно к предлагаемому решению.</li>
+</ul>
+<div class="img-container">
+			<div custom-style="subtitle"><img src="static/sau_ga/study_case.jpg"></div>
+			<div class="img-title">Вид обучающего комплекса</div>
+</div>
+</body></html>
+<html><body>
+<h1>Гарантии</h1>
+<p>Работа по созданию любой сложной АС не заканчивается с прохождением комплексного опробования оборудования и передачи системы в промышленную эксплуатацию. После устранения замечаний наступает длительный период эксплуатации АС, сначала гарантийный, а затем и постгарантийный.</p>
+<p>Исполнитель гарантирует:</p>
+<ul>
+	<li>соответствие поставляемой научно-технической продукции требованиям Заказной спецификации и техническим требованиям;</li>
+	<li>применение высококачественных материалов, а также первоклассную обработку и сборку при изготовлении оборудования;</li>
+	<li>хорошее качество, полноту и комплектность технической документации.</li>
+</ul>
+<p>Гарантийный срок на оборудование составляет 12 месяца с момента ввода системы в промышленную эксплуатацию, но не более 18 месяцев с момента отгрузки.</p>
 </body></html>
 </body>
 </html>

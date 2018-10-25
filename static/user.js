@@ -53,6 +53,10 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			      //"valid_children" : []
 			    }
 			  },
+			  "checkbox" :{
+				  "three_state" :false,
+				  "whole_node": false,
+			  },
 			  "state" : { "key" : "state_delivery" },
 			  "plugins" : [
 			    "contextmenu", "dnd",
