@@ -1,35 +1,135 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+	<link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
     <title>Конфигуратор ТКП АСУ ТП</title>
-    <link rel="stylesheet" href="static/styles.css"/>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-	<script type="text/javascript" src="static/formtocookie.js"></script>
-    <script type="text/javascript" src="static/user.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
+    
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!--<link rel="stylesheet" href="static/styles.css"/>-->
+
+    
+
+    <style type="text/css">
+		body {
+		  padding-top: 3.5rem;
+		}
+
+			/*
+		 * Sidebar
+		 */
+
+		.sidebar {
+		  position: fixed;
+		  top: 0;
+		  bottom: 0;
+		  left: 0;
+		  z-index: 100; /* Behind the navbar */
+		  padding: 0;
+		  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+		}
+
+		.sidebar-sticky {
+		  position: -webkit-sticky;
+		  position: sticky;
+		  top: 48px; /* Height of navbar */
+		  height: calc(100vh - 48px);
+		  padding-top: .5rem;
+		  overflow-x: hidden;
+		  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		}
+
+		.sidebar .nav-link {
+		  font-weight: 500;
+		  color: #333;
+		}
+
+		.sidebar .nav-link .feather {
+		  margin-right: 4px;
+		  color: #999;
+		}
+
+		.sidebar .nav-link.active {
+		  color: #007bff;
+		}
+
+		.sidebar .nav-link:hover .feather,
+		.sidebar .nav-link.active .feather {
+		  color: inherit;
+		}
+
+		.sidebar-heading {
+		  font-size: .75rem;
+		  text-transform: uppercase;
+		}
+
+	.vakata-context { z-index:10052 !important; }
+    </style>
 </head>
 <body>
-	<div class="container">
-		<div class="wrapper box fixed">
-			<select name="type">
-				<option disabled selected value> -- select an option -- </option>
-				<option value="sau_ga">САУ ГА</option>
-				<option value="sau_ga2">САУ ГА2</option>
-			</select>
-			<form id="config">
-			</form>
-			<button type="button" id="get-preview">Preview</button>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    	<a class="navbar-brand" href="#">Техническое описание</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+             <li class="nav-item"><a class="nav-link" id="get-preview" href="javascript:void(0)" role="button">Preview</a></li>
+             <li class="nav-item"><a class="nav-link" id="get-docx" href="javascript:void(0)" role="button">Get docx</a></li>
+             <li class="nav-item"><a class="nav-link" id="print-preview" href="javascript:void(0)" role="button">Print preview</a></li>
+        </ul>
+      </div>
+     
+    </nav>
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="col-md-5 col-lg-5 d-none d-md-block bg-light sidebar">
+				<div class="sidebar-sticky">
+		<!--<div class="wrapper box fixed">-->
+					<h4 class="mb-1">Выбор продукта</h4>
+					<select id="product" name="type">
+						<option disabled selected value> -- select an option -- </option>
+						<option value="hpp">АСУ ТП ГЭС</option>
+						<option value="tpp">АСУ ТП ТЭС</option>
+					</select>
+					<form id="config">
+					</form>
+				</div>
+			<!--<button type="button" id="get-preview">Preview</button>
 			<button type="button" id="get-docx">Get .docx</button>
 			<button type="button" id="get-pdf">Get PDF</button>
 			<button type="button" id="print-preview">Print preview</button>
+
+		              <li class="active" ><a id="get-preview">Preview</a></li>
+              <li><a id="get-docx"">Get docx</a></li>
+              <li><a id="print-preview">Print preview</a></li>
+         	
 		</div>
-		<div id="preview" class="wrapper flex-item"></div>
+		<div id="preview" class="wrapper flex-item"></div>-->
+			</nav>
+			<main role="main" class="col-md-7 col-lg-7 ml-sm-auto col-lg-7 pt-3 px-4">
+				<div id="preview">
+
+				</div>
+			</main>
+		</div>
 	</div>
-		<footer>
-				Vlad Voytenok &mdash; <a href="mailto:voytenok@rakurs.com?Subject=[ткп]">E-mail me</a>
-		</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+	<script type="text/javascript" src="static/formtocookie.js"></script>
+    <script type="text/javascript" src="static/user.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

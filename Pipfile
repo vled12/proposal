@@ -6,8 +6,6 @@ name = "pypi"
 [packages]
 flask = "*"
 lxml = "*"
+requests = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.6"

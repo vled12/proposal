@@ -64,6 +64,7 @@ def show_result(type):
     set={k:v if len(v)>1 else v[0] for k,v in request.values.to_dict(flat=False).items()}
     if DEV: print(set)
     lang = set['lang']
+    set['delivery']=json.loads(set['delivery'])
 
     print(type)
 

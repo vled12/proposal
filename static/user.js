@@ -7,12 +7,63 @@ $.ajaxSetup ({
 const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ],[ 'pdf', 'application/pdf' ]])
  
  $(document).ready(function () {
-	$('select').on('change', function() {
+ 	
+
+
+	$('#product').on('change', function() {
 		$( "#config" ).load("/static/"+this.value+".htm",
 			function(response, status, xhr){
 			//console.log(response);
 			loadFormFromCookie($("#config"));
+			var delivery=0;//Cookies.get('delivery');
+			console.log(delivery);
+			$(function () {
+	 		$('#delivery').jstree({
+			  "core" : {
+			    "animation" : 0,
+			    "check_callback" : true,
+			    "themes" : { "stripes" : true },
+			    'data' :  delivery ? JSON.parse(delivery) : 
+			    	[
+			    		{ "text" : "ГА","type":"system","children": [
+				            { "text" : "Шкаф ПТК ЭГР","type":"sub","children": [
+					            { "text" : "ЭГР","type":"function" }
+					         	]},
+				            { "text" : "Шкаф ПТК АУГ","type":"sub"}
+				         ]},
+			    		{ "text" : "ОС","type":"system"},
+			    		{ "text" : "ВУ","type":"system"}
+			    	]
+			  },
+			  "types" : {
+			    "#" : {
+			     "max_depth" : 3,
+			      "valid_children" : ["root"]
+			    },
+			    "system" : {
+			      "icon" : "fa fa-briefcase",
+			      //"valid_children" : ["sub"]
+			    },
+			    "sub" : {
+			    	"icon" : "fa fa-wrench",
+			      //"valid_children" : ["function"]
+			    },
+			    "function" : {
+			      "icon" : "fa fa-flash",
+			      //"valid_children" : []
+			    }
+			  },
+			  "state" : { "key" : "state_delivery" },
+			  "plugins" : [
+			    "contextmenu", "dnd",
+			    "state", "types", "wholerow", "checkbox"
+			  ]
+			}); 
+	 	});
+
 			});
+		
+
 	})
  
 	$("#print-preview").click(function(){
@@ -30,7 +81,10 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
  
 	$("#get-preview,#get-docx,#get-pdf").click(function(){
 		var params=$("#config").serializeArray();
+		var delivery=JSON.stringify($('#delivery').jstree(true).get_json('#', {flat:true}));
+		params.push({name:"delivery",value:delivery})//add delivery tree data
 		saveFormToCookie($("#config"));
+		Cookies.set('delivery', delivery, {expires: 365});
 		var type =this.id.slice(4);
 		console.log(params);
 		
@@ -69,4 +123,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			request.send($.param(params,true));
 		};
 	});
+
+
+	$('#product').val('hpp').trigger('change');//Choose first one for start
  });
