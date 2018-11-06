@@ -52,5 +52,5 @@ coverage.xml
 docs/_build/
 
 #Current project
-text/
 rakurs/
+out/
