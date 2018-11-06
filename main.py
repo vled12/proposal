@@ -13,6 +13,11 @@ with open('config.json') as json_data_file:
     cfg = json.load(json_data_file)
 print(cfg)
 
+def list2dictID(data):
+    result={}
+    for item in data:
+        result[item["id"]]=item
+    return result
 
 def put_in_body(args):
     tree = html.parse("wrappers/main.htm", parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
@@ -64,15 +69,16 @@ def show_result(type):
     set={k:v if len(v)>1 else v[0] for k,v in request.values.to_dict(flat=False).items()}
     if DEV: print(set)
     lang = set['lang']
-    set['delivery']=json.loads(set['delivery'])
-
-    print(type)
-
-    wikilink = set['wiki_link']+"?action=render"
-    #res=requests.get(wikilink)
-    with requests.get(wikilink) as response:
-        with open("text/ru_03_wiki.htm", 'wb') as wiki:
-            wiki.write(response.content)
+    set['delivery']=list2dictID(json.loads(set['delivery']))
+    print(set['delivery'])
+    if set['wiki_link']!='':        
+        wikilink = set['wiki_link']+"?action=render"
+        try:
+            with requests.get(wikilink) as response:
+                with open("text/ru_03_wiki.htm", 'wb') as wiki:
+                    wiki.write(response.content)
+        except(requests.exceptions.ConnectionError):
+            print("wiki info is not available")
     #tree = html.parse(wikilink)
     #res = requests.get('http://en.wikipedia.org/wiki/Bratsk_Hydroelectric_Power_Station')
     #tree = html.parse(res.content)

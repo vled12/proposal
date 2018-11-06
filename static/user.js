@@ -25,7 +25,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			    "themes" : { "stripes" : true },
 			    'data' :  delivery ? JSON.parse(delivery) : 
 			    	[
-			    		{ "text" : "ГА","type":"system","children": [
+			    		{ "text" : "ГА","id":"ga","type":"system","children": [
 				            { "text" : "Шкаф ПТК ЭГР","type":"sub","children": [
 					            { "text" : "ЭГР","type":"function" }
 					         	]},
