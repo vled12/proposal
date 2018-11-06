@@ -1,0 +1,65 @@
+
+	<h4 class="mb-1">Выбор языка описания</h4>
+	<select name="lang">
+				<option selected value="ru">Русский</option>
+				<option value="en">English</option>
+    </select>
+	<fieldset>
+		<h4>Объем поставки</h4>
+		<div class="row"> 
+		    <div class="col-md-6 mb-1"><label class="mb-1" for="contract_title">Полное наименование</label><input class="form-control" type="text" name="contract_title" placeholder="АСУ ТП Итайпу ГЭС"></div>
+		    <div class="col-md-6 mb-1"><label class="mb-1" for="contract_user">Заказчик</label><input class="form-control" type="text" name="contract_user"></div>
+		</div>
+		<div class="mb-1"><label class="mb-1 mr-1" for="wiki_link">Страница объекта wikipedia</label><input type="text" name="wiki_link"></div>
+    	<div class="mb-1"><label class="mb-1 mr-1" for="contract_projecter">Проектная организация</label><input type="text" name="contract_projecter"></div>
+		<div class="mb-1"><label class="mb-1 mr-1" for="contract_demands">Названия ТТ</label><input type="text" name="contract_demands"></div>
+
+		<div class="mb-1"><input type="checkbox" name="SpecApplication">Наличие приложения с подробной спецификацией, его код <input type="text" name="SpecApplicationCode" style="width: 30px;"></div>
+		<div id="delivery"></div>
+		<!--><input type="checkbox" name="DigitalGovernor">Цифровая часть системы регулирования<input type="checkbox" name="Pcomb">P-комбинатор<input type="checkbox" name="OPU">МНУ<br>
+		<input type="checkbox" name="TA">ТА<input type="checkbox" name="EL MS">ШИС<input type="checkbox" name="TC">СТК<input type="checkbox" name="VC">ВК<input type="checkbox" name="PenStockControl">УВ<input type="checkbox" name="GeneratorProtection">ШЗГ<br>
+		<input type="checkbox" name="HMGovernor">Модерн. ГМК<br>
+		<input type="checkbox" name="SetupTools">Вспомогательные инструменты<br>
+		<input type="checkbox" name="GRAM">ГРАМ<input type="checkbox" name="GRN">ГРН<input type="checkbox" name="VU">ВУ АСУ ТП<br>
+		<input type="checkbox" name="SOEV">СОЕВ<br>
+		<input type="checkbox" name="Redundancy" checked>Дублирование компонентов
+		<input type="checkbox" name="External Gov electric measure" checked>Эл. измерения ЭГР в отдельном шкафу
+		<-->
+		<select name="plc_vendor">
+					<option disabled  value>Вендор PLC</option>
+					<option selected value="Omron">Omron</option>
+					<option value="Siemens">Siemens</option>
+	    </select>
+		<input type="checkbox" name="RedPLC" checked>Дублирование ПЛК
+		<input type="checkbox" name="CountersDoAct" checked>Действия при превышении счетчиков и т. п.
+		
+		<select multiple name="plc_families">
+					<option disabled  value>Применяемые ПЛК</option>
+					<option value="S7-400">S7-400</option>
+					<option value="CJ2H">CJ2</option>
+					<option selected value="NJ/NX">NJ, NX</option>
+	    </select>
+
+		<select name="server_type">
+					<option disabled value>Тип сервера</option>
+					<option selected value="dell_r430">Dell R430</option>
+	    </select>
+		
+		<h4>Гидроагрегат</h4>
+	    <input type="radio" name="TurbineType" value="francise">Франсиса (РО)
+	    <input type="radio" name="TurbineType" value="kaplan" checked>Каплан (ПЛ)
+		<input type="radio" name="TurbineType" value="kaplan_fixed">Пропеллерная
+		<input type="radio" name="TurbineType" value="pelton">Пелтон (ковш)<br>
+		<input type="checkbox" name="ManualMech">Ручное управление ГМК<br>
+		Активная мощность, МВт<input type="text" name="Pnom"><br>
+		Примерный напор, м<input type="text" name="Hnom"><br>
+		<input type="checkbox" name="AutoSecondary">Участие в АВРЧМ<br>
+		<input type="checkbox" name="ConsiderableHeadDiff">Значимое колебание напора<br>
+		<select name="head-measure">
+					<option disabled selected value>Измерение напора нетто</option>
+					<option value="diff">Разность бьефов</option>
+					<option value="diff-sur">Разность бьефов с учетом СУР</option>
+	    </select>
+		<h4>Прочее</h4>
+	    <input type="checkbox" name="Scientific">Подробное научное объяснение<br>
+	</fieldset>
