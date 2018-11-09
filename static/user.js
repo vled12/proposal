@@ -11,7 +11,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 
 
 	$('#product').on('change', function() {
-		$( "#config" ).load("/static/"+this.value+".htm",
+		$( "#config" ).load("static/mat/questionnaire/"+this.value+".htm",
 			function(response, status, xhr){
 			//console.log(response);
 			loadFormFromCookie($("#config"));
@@ -70,18 +70,6 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 
 	})
  
-	$("#print-preview").click(function(){
-		var prtContent = document.getElementById("preview");
-		var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-		WinPrint.document.write(prtContent.innerHTML);
-		WinPrint.document.write(cssLinkTag)
-		WinPrint.document.close();
-		WinPrint.focus();
-		WinPrint.print();
-		WinPrint.close();
-		
-		$("#b-placeholder").load("https://cors.io/?https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D1%80%D1%85%D0%BD%D0%B5%D0%B1%D0%B0%D0%BB%D0%BA%D0%B0%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%93%D0%AD%D0%A1?action=render");
-	})
  
 	$("#get-preview,#get-docx,#get-pdf").click(function(){
 		var params=$("#config").serializeArray();

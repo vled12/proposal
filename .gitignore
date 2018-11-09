@@ -51,6 +51,7 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-#Current project
-rakurs/
-out/
+#materials
+static/mat/
+templates/tmp/
+tmp/
