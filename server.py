@@ -78,12 +78,11 @@ def show_result(type):
                 with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
                     wiki.write(response.content)
                 tree = html.parse("static/mat/text/ru_03_wiki.htm", parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
-			    
+                with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
+                    infobox = tree.xpath("//table[@class='infobox']")[0]
+                    wiki.write(html.tostring(infobox, pretty_print=True, encoding='utf-8'))#delete anything but infobox
         except(requests.exceptions.ConnectionError):
             print("wiki info is not available")
-    with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
-			    	infobox = tree.xpath("//table[@class='infobox']")[0]
-			    	wiki.write(html.tostring(infobox, pretty_print=True, encoding='utf-8'))#delete anything but infobox
     #tree = html.parse(wikilink)
     #res = requests.get('http://en.wikipedia.org/wiki/Bratsk_Hydroelectric_Power_Station')
     #tree = html.parse(res.content)
@@ -91,9 +90,9 @@ def show_result(type):
 
     
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if (x[0] != '.') and (x[:2] == lang)]
-    with open("templates/tmp/result.htm", 'wb') as f:
+    with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())
-    with open("tmp/print.htm", 'w', encoding='utf-8') as f:
+    with open("tmp/print.htm", 'w+', encoding='utf-8') as f:
         f.write(render_template('tmp/result.htm', set=set))
     add_glossary('tmp/print.htm', 'static/mat/dict.csv')
     if type == "preview":
