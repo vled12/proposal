@@ -24,6 +24,7 @@ def put_in_body(args):
     body = tree.xpath(".//body")[0]
 
     for x in args:
+        print(x)
         article = html.parse(x, parser=html.HTMLParser(encoding='utf-8')).getroot()#xpath("///html/body/article")[0]  # find first article in html
         body.append(article)
     # with open(result_file, "wb") as f:
@@ -83,6 +84,7 @@ def show_result(type):
                     wiki.write(html.tostring(infobox, pretty_print=True, encoding='utf-8'))#delete anything but infobox
         except(requests.exceptions.ConnectionError):
             print("wiki info is not available")
+
     #tree = html.parse(wikilink)
     #res = requests.get('http://en.wikipedia.org/wiki/Bratsk_Hydroelectric_Power_Station')
     #tree = html.parse(res.content)
