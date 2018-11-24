@@ -26,10 +26,22 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			    'data' :  delivery ? JSON.parse(delivery) : 
 			    	[
 			    		{ "text" : "ГА","id":"ga","type":"system","children": [
-				            { "text" : "Шкаф ПТК ЭГР","type":"sub","children": [
-					            { "text" : "ЭГР","type":"function" }
+				            { "text" : "ПТК АРЧМ-МНУ Шкаф АРЧМ-МНУ","type":"sub","children": [
+					            { "text" : "ЭГР","type":"function" },{ "text" : "МНУ","type":"function" }
 					         	]},
-				            { "text" : "Шкаф ПТК АУГ","type":"sub"}
+				            { "text" : "ПТК ТА-ТИСУ-ВО Шкаф ТА","type":"sub","children": [
+					            { "text" : "ТА","type":"function"}
+					         	]},
+					        { "text" : "ПТК ТА-ТИСУ-ВО Шкаф УСО","type":"sub","children": [
+					            { "text" : "УСО ТА","type":"function"},
+					            { "text" : "ВО","type":"function"}
+					         	]},
+					        { "text" : "ПТК ТА-ТИСУ-ВО Шкаф УСО ТИСУ","type":"sub","children": [
+					            { "text" : "ТИСУ","type":"function"}
+					         	]},
+					         { "text" : "ШИС","type":"sub","children": [
+					            { "text" : "ИС","type":"function"}
+					         	]}
 				         ]},
 			    		{ "text" : "ОС","type":"system"},
 			    		{ "text" : "ВУ","type":"system"}
