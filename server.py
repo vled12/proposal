@@ -18,11 +18,14 @@ def align_images(input):
     for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
         replacement=etree.XML(prototype)
         try:
-            replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
+            #replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
             replacement.xpath(".//h4")[0].text=image.attrib["alt"]#FIX ME: evade hardlink to h4 tag
         except(KeyError):
             if DEV: print("Image caption (alt) not found")
-        replacement.xpath(".//img")[0].attrib["src"]=image.attrib["src"]
+        #replacement.xpath(".//img")[0].attrib["src"]=image.attrib["src"]
+        re_image=replacement.xpath(".//img")[0]
+        for attr in image.attrib:
+            re_image.set(attr,image.attrib[attr])
         image.getparent().replace(image,replacement)
 
 def list2dictID(data):
