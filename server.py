@@ -15,7 +15,7 @@ print(cfg)
 
 def align_images(input):
     prototype=open("static/mat/img.prototype.htm").read()
-    for image in input.xpath(".//img"):
+    for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
         replacement=etree.XML(prototype)
         try:
             replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
@@ -48,6 +48,14 @@ def put_in_body(args):
 def htm2x(f, type):
     #delete cell spaning cause of pandoc no support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
+    for table in tree.xpath(".//table"):
+        firstrow=table.xpath(".//tr")[0]
+        for cell in firstrow.getchildren():
+            try:
+                for i in range(1,int(cell.attrib["colspan"])):
+                    firstrow.append(etree.XML("<td></td>"))
+            except(KeyError):
+                pass
     etree.strip_attributes(tree,"class","style","colspan","rowspan")
     with open(f, 'wb') as file:
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
