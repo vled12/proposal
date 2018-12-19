@@ -13,6 +13,21 @@ with open('config.json') as json_data_file:
     cfg = json.load(json_data_file)
 print(cfg)
 
+def align_images(input):
+    prototype=open("static/mat/img.prototype.htm").read()
+    for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
+        replacement=etree.XML(prototype)
+        try:
+            #replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
+            replacement.xpath(".//h4")[0].text=image.attrib["alt"]#FIX ME: evade hardlink to h4 tag
+        except(KeyError):
+            if DEV: print("Image caption (alt) not found")
+        #replacement.xpath(".//img")[0].attrib["src"]=image.attrib["src"]
+        re_image=replacement.xpath(".//img")[0]
+        for attr in image.attrib:
+            re_image.set(attr,image.attrib[attr])
+        image.getparent().replace(image,replacement)
+
 def list2dictID(data):
     result={}
     for item in data:
@@ -26,6 +41,7 @@ def put_in_body(args):
     for x in args:
         print(x)
         article = html.parse(x, parser=html.HTMLParser(encoding='utf-8')).getroot()#xpath("///html/body/article")[0]  # find first article in html
+        align_images(article)
         body.append(article)
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
@@ -35,6 +51,14 @@ def put_in_body(args):
 def htm2x(f, type):
     #delete cell spaning cause of pandoc no support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
+    for table in tree.xpath(".//table"):
+        firstrow=table.xpath(".//tr")[0]
+        for cell in firstrow.getchildren():
+            try:
+                for i in range(1,int(cell.attrib["colspan"])):
+                    firstrow.append(etree.XML("<td></td>"))
+            except(KeyError):
+                pass
     etree.strip_attributes(tree,"class","style","colspan","rowspan")
     with open(f, 'wb') as file:
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
