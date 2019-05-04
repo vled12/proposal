@@ -52,7 +52,7 @@ coverage.xml
 docs/_build/
 
 #materials and temp
-#out/
-#static/mat/
-#templates/tmp/
-#tmp/
+out/
+static/mat/
+templates/tmp/
+tmp/

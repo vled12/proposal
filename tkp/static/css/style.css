@@ -1,0 +1,16 @@
+ /* Large devices (large desktops, 1200px and up) */
+	@media (min-width: 1200px) {
+    .sidebar {
+
+		position:fixed;
+		height:100%;
+		    }
+
+   	}
+
+   	
+	.vakata-context { z-index:10052 !important; }
+
+td, th {
+    border: 1px solid grey
+}
