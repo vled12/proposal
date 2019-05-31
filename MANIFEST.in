@@ -1,3 +1,4 @@
 include README.rst
-include tkp/static/*
-include tkp/wrappers
+recursive-include tkp/static
+recursive-include tkp/wrappers
+recursive-include tkp/templates
