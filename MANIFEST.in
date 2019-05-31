@@ -1,4 +1,4 @@
 include README.rst
-include tkp/static
+include tkp/static/css/style.css
 include tkp/templates
 include tkp/wrappers
