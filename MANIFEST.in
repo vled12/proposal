@@ -1,0 +1,4 @@
+include README.rst
+include tkp/static
+include tkp/templates
+include tkp/wrappers

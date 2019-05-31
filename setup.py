@@ -18,5 +18,6 @@ setup(
     author_email='vleduser@gmail.com',
     url='https://github.com/vled12/tkp_auto',
     license=license,
+    include_package_data=True,
     packages=find_packages(exclude=('tests', 'docs'))
 )
