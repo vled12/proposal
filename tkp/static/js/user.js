@@ -46,13 +46,15 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			    "themes" : { "stripes" : true },
 			    'data' :  delivery ? JSON.parse(delivery) : 
 			    	[
-			    	{
-				    "id": "root",				    "text": "Поставка",				    "parent": "#",				    "type": "root"
-					},
-					{
-				    "id": "ga",				    "text": "САУ ГА",				    "parent": "root",				    "type": "system"
-					}, {
-				    "id": "j1_5",				    "text": "ПТК ТА-ТИСУ-ВО Шкаф ТА",				    "parent": "ga",				    "type": "sub"
+			    	{"id": "root",				    "text": "Поставка",				    "parent": "#",				    "type": "root"},
+					
+					{"id": "ga",				    "text": "САУ ГА",				"parent": "root",				    "type": "system"},
+					{"id": "os",				    "text": "ОС",				    "parent": "root",				    "type": "system"},
+					{"id": "gts",				    "text": "ГТС",				    "parent": "root",				    "type": "system"},
+					{"id": "vu",				    "text": "ВУ",				    "parent": "root",				    "type": "system"},
+					{"id": "aux",				    "text": "Доп.",				    "parent": "root",				    "type": "system"},
+
+				{ "id": "j1_5",				    "text": "ПТК ТА-ТИСУ-ВО Шкаф ТА",				    "parent": "ga",				    "type": "sub"
 				}, {
 				    "id": "j1_20",				    "text": "СИГН",				    "parent": "j1_5",				    "type": "function"
 				}, {
@@ -95,10 +97,6 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 				    "id": "j1_16",				    "text": "ЭИ",				    "parent": "j1_12",				    "type": "function"
 				}, {
 				    "id": "j1_13",				    "text": "ЭС",				    "parent": "j1_12",				    "type": "function"
-				}, {
-				    "id": "j1_14",				    "text": "ОС",				    "parent": "root",				    "type": "system"
-				}, {
-				    "id": "j1_15",				    "text": "ВУ",				    "parent": "root",				    "type": "system"
 				}]
 			  },
 			  "types" : {
@@ -143,15 +141,17 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 						var inst = $.jstree.reference(data.reference),
 							obj = inst.get_node(data.reference);
 						var newtype;
-						
+						leave = false;
 						//Choose allowable child type
 						switch(inst.get_type(obj)) {
 							case "sub": newtype = "function";break;
 							case "system": newtype = "sub";break;
-							case "root": newtype = "system";break;
+							//no new systems
+							//case "root": newtype = "system";break;
+							default:leave = True;
 							}
 						
-						if(inst.get_type(obj) != "function"){
+						if(!leave){
 							inst.create_node(obj, { type : newtype }, "last", function (new_node) {
 								try {
 									inst.edit(new_node);
