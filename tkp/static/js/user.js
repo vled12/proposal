@@ -121,10 +121,10 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 			      //"valid_children" : []
 			    }
 			  },
-			  "checkbox" :{
-				  "three_state" :true//,
-				  //"whole_node": false,
-			  },
+	        'checkbox': {
+	            three_state: false,
+	            cascade: 'up'
+	        },
 			  "state" : { "key" : "state_delivery" },
 			  "plugins" : [
 			    "contextmenu", "dnd",
@@ -151,7 +151,7 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 							default:leave = True;
 							}
 						
-						if(!leave){
+						if(!leave) {
 							inst.create_node(obj, { type : newtype }, "last", function (new_node) {
 								try {
 									inst.edit(new_node);
