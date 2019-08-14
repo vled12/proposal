@@ -125,7 +125,7 @@ def show_result(type):
                 tree = html.parse("static/mat/text/ru_03_wiki.htm",
                                   parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
                 with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
-                    infobox = tree.xpath("//table[@class='infobox']")[0]
+                    infobox = tree.xpath("//table[contains(@class,'infobox')]")[0]
                     wiki.write(
                         html.tostring(infobox, pretty_print=True, encoding='utf-8'))  # delete anything but infobox
         except(requests.exceptions.ConnectionError):
