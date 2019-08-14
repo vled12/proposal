@@ -120,11 +120,11 @@ def show_result(type):
         wikilink = set['wiki_link'] + "?action=render"
         try:
             with requests.get(wikilink) as response:
-                with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
+                with open("static/mat/text/"+lang+"_03_wiki.htm", 'wb') as wiki:
                     wiki.write(response.content)
-                tree = html.parse("static/mat/text/ru_03_wiki.htm",
+                tree = html.parse("static/mat/text/"+lang+"_03_wiki.htm",
                                   parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
-                with open("static/mat/text/ru_03_wiki.htm", 'wb') as wiki:
+                with open("static/mat/text/"+lang+"_03_wiki.htm", 'wb') as wiki:
                     infobox = tree.xpath("//table[contains(@class,'infobox')]")[0]
                     wiki.write(
                         html.tostring(infobox, pretty_print=True, encoding='utf-8'))  # delete anything but infobox
