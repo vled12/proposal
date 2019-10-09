@@ -1,4 +1,5 @@
 import io, os, subprocess
+import re
 import json
 import requests
 import configparser
@@ -93,7 +94,8 @@ def add_glossary(page, dict):
     with open(page, 'r', encoding='utf-8') as inF:
         for line in inF:
             for key, value in dic.items():
-                if (key in line) and not key in glossary:  ### FIXME: Change to REGEX
+                #if (key in line) and not key in glossary:  ### FIXME: Change to REGEX
+                if re.search(r'\W'+key, line):
                     if DEV: print('found', key)
                     glossary[key] = value
     result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))

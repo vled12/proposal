@@ -97,7 +97,63 @@ const mme= new Map ([[ 'docx', 'application/vnd.openxmlformats-officedocument.wo
 				    "id": "j1_16",				    "text": "ЭИ",				    "parent": "j1_12",				    "type": "function"
 				}, {
 				    "id": "j1_13",				    "text": "ЭС",				    "parent": "j1_12",				    "type": "function"
-				}]
+				},
+
+				{ "id": "j2_1",				    "text": "ПТК БД",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_2",				    "text": "БД",				    "parent": "j2_1",				    "type": "function"
+				}, {
+				    "id": "j2_3",				    "text": "КО",				    "parent": "j2_1",				    "type": "function"
+				},
+
+				{ "id": "j2_4",				    "text": "АРМ оперативного персонала",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_5",				    "text": "АРМ",				    "parent": "j2_4",				    "type": "function"
+				},
+				{ "id": "j2_6",				    "text": "АРМ ремонтного персонала",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_7",				    "text": "АРМ",				    "parent": "j2_6",				    "type": "function"
+				},
+				{ "id": "j2_8",				    "text": "АРМ административного персонала",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_9",				    "text": "АРМ",				    "parent": "j2_8",				    "type": "function"
+				},
+				{ "id": "j2_8a",				    "text": "Мнемощит",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_9a",				    "text": "АРМ",				    "parent": "j2_8a",				    "type": "function"
+				},
+				{ "id": "j2_8b",				    "text": "Пульт-стол",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_9b",				    "text": "СТОЛ",				    "parent": "j2_8b",				    "type": "function"
+				},
+				
+				{ "id": "j2_10",				    "text": "ПТК ГРАРМ",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_11",				    "text": "ГРАМ",				    "parent": "j2_10",				    "type": "function"
+				}, {
+				    "id": "j2_12",				    "text": "ГРНРМ",				    "parent": "j2_10",				    "type": "function"
+				},
+
+				{ "id": "j2_13",				    "text": "ПТК РУСА",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_14",				    "text": "РУСА",				    "parent": "j2_13",				    "type": "function"
+				},
+
+				{ "id": "j2_15",				    "text": "ПТК ТМ",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_16",				    "text": "ТМ",				    "parent": "j2_15",				    "type": "function"
+				},
+
+				{ "id": "j2_17",				    "text": "Видеонаблюдение",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_18",				    "text": "CCTV",				    "parent": "j2_17",				    "type": "function"
+				},
+
+				{ "id": "j2_19",				    "text": "ПТК СОЕВ",				    "parent": "vu",				    "type": "sub"
+				}, {
+				    "id": "j2_20",				    "text": "СОЕВ",				    "parent": "j2_19",				    "type": "function"
+				}
+				]
 			  },
 			  "types" : {
 			    "#" : {
