@@ -1,0 +1,33 @@
+<h1>Register</h1>
+<form action="" method="post" name="register">
+    {{ regform.hidden_tag() }}
+    <p>
+        {{ regform.username.label }}<br>
+        {{ regform.username(size=32) }}<br>
+        {% for error in regform.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ regform.email.label }}<br>
+        {{ regform.email(size=64) }}<br>
+        {% for error in regform.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ regform.password.label }}<br>
+        {{ regform.password(size=32) }}<br>
+        {% for error in regform.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ regform.password2.label }}<br>
+        {{ regform.password2(size=32) }}<br>
+        {% for error in regform.password2.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ regform.register() }}</p>
+</form>

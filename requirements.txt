@@ -1,0 +1,14 @@
+flask
+flask_wtf
+flask_sqlalchemy
+flask_login
+sqlalchemy-migrate
+lxml
+requests
+pypandoc
+pyopenssl
+pymorphy2
+pymorphy2-dicts-ru
+nltk
+python-docx
+email_validator
