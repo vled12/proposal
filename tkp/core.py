@@ -52,9 +52,9 @@ class LoginForm(FlaskForm):
 
 # Форма добавления пользователя
 class RegistrationForm(FlaskForm):
-    username = StringField('username')  # , validators=[DataRequired()])
-    email = StringField('email')  # , validators=[DataRequired(), Email()])
-    password = PasswordField('password')  # , validators=[DataRequired()])
+    username = StringField('User')  # , validators=[DataRequired()])
+    email = StringField('E-mail')  # , validators=[DataRequired(), Email()])
+    password = PasswordField('Password')  # , validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password')  # , validators=[DataRequired(), EqualTo('password')])
     register = SubmitField('Register')
@@ -70,10 +70,10 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
-# Форма входа
+# Форма редактирования пользователя
 class EditUserForm(FlaskForm):
     id = IntegerField('User ID')  # , validators=[DataRequired()])
-    edit = SubmitField('Edit user')
+    edit = SubmitField('Delete user')
 
 
 @server.before_request
@@ -270,8 +270,8 @@ def admin_panel():
         newUser.set_password(regForm.password.data)
         db.session.add(newUser)
         db.session.commit()
-
         flash('User added successfully.')
+
     if editForm.validate_on_submit() and editForm.edit.data:
         editUser = User.query.filter_by(id=editForm.id.data).first()
         email = editUser.email

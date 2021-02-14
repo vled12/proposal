@@ -2,11 +2,32 @@
 {% extends "base.htm" %}
 
 {% block content %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Пользователь: {{g.user.email}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" id="main" href="/" role="button"><strong>Главная<br>
+                страница</strong></a></li>
+            <!-- Administrator access -->
+            {% if g.user.role == 1 %}
+            <li class="nav-item"><a class="nav-link" id="admin-panel" href="{{ url_for('admin_panel') }}" role="button">Панель<br>администратора</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!--Tabs-->
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-    <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Add user</a></li>
-    <li role="presentation"><a href="#tab2" data-toggle="tab">Edit user</a></li>
+    <li role="presentation" class="active nav-item"><a class="active nav-link" href="#tab1" data-toggle="tab">Add user</a></li>
+    <li role="presentation" class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Delete user</a></li>
 </ul>
-<div class="tab-content">
+
+<div class="tab-content container-fluid">
     <div class="tab-pane active" id="tab1">
         {% include 'register.htm' %}
     </div>

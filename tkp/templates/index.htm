@@ -10,22 +10,20 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item"><a class="nav-link" id="get-preview" href="javascript:void(0)" role="button"><strong>Предварительный
+            <li class="nav-item"><a class="nav-link" id="get-preview" href="javascript:void(0)" role="button"><strong>Предварительный<br>
                 просмотр</strong></a></li>
-            <li class="nav-item"><a class="nav-link" id="get-docx" href="javascript:void(0)" role="button"><strong>Получить
+            <li class="nav-item"><a class="nav-link" id="get-docx" href="javascript:void(0)" role="button"><strong>Скачать текст<br> в формате
                 docx</strong></a></li>
             <!--<li class="nav-item"><a class="nav-link" id="print-preview" href="javascript:void(0)" role="button">Печать превью</a></li>-->
             <li class="nav-item"><a class="nav-link" id="get-cfg" href="javascript:void(0)" role="button">Сохранить<br>
                 конфигурацию</a></li>
-            <li class="nav-item"><a class="nav-link" id="open-convert-dialog" href="javascript:void(0)" role="button">Конвертация<br>файла</a></li>
+            <li class="nav-item"><a class="nav-link" id="open-convert-dialog" href="javascript:void(0)" role="button">Замена формы слов<br>выбранного файла</a></li>
             {% if g.user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" id="logout" href="{{ url_for('logout') }}" role="button">Log
-                out</a></li>
+            <li class="nav-item"><a class="nav-link" id="logout" href="{{ url_for('logout') }}" role="button">Выход из<br>системы</a></li>
             {% endif %}
             <!-- Administrator access -->
             {% if g.user.role == 1 %}
-            <li class="nav-item"><a class="nav-link" id="admin-panel" href="{{ url_for('admin_panel') }}" role="button">Admin
-                panel</a></li>
+            <li class="nav-item"><a class="nav-link" id="admin-panel" href="{{ url_for('admin_panel') }}" role="button">Панель<br>администратора</a></li>
             {% endif %}
         </ul>
     </div>
