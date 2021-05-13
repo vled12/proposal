@@ -105,6 +105,11 @@ def add_header(r):
 def index():
     return render_template('index.htm')
 
+#@server.route('/static/mat/questionnaire/<template>.htm')
+#@login_required
+#def questionnaire(template):
+    #return render_template('static/mat/questionnaire/'+template+'.htm')
+    #return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
 
 @server.route("/get/<type>", methods=["GET", "POST"])
 @login_required
