@@ -18,9 +18,11 @@ $(document).ready(function () {
 
                 $(".dialog").dialog({
                     autoOpen: false,
+                    width:600,
                     modal: true,
+                    position: { my: "left top", at: "left top", of: $('#form') },
                     appendTo: "#form"
-                }).parent().css('z-index', '1000');
+                });//.parent().css('z-index', '1000');
 
                 initDeliveryTree();
             });
