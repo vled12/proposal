@@ -13,8 +13,12 @@ from flask_login import LoginManager
 
 # Инстанс сервера
 server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=os.getcwd()+'\\templates/')
-print(server.template_folder)
 server.config.from_object('srv_cfg')
+# Конфигурация Jinja2
+server.jinja_options["line_statement_prefix"] = "#"
+server.jinja_options["line_comment_prefix"] = "##"
+server.create_jinja_environment()
+#print(server.jinja_environment.)
 # Инстанс базы данных
 db = SQLAlchemy(server)
 #загружаем классы - таблицы БД

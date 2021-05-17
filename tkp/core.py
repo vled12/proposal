@@ -5,7 +5,7 @@ import types
 import configparser
 import argparse
 import sys
-from flask import request, render_template, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
+from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField
@@ -111,6 +111,12 @@ def index():
     #return render_template('static/mat/questionnaire/'+template+'.htm')
     #return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
 
+@server.route("/render_template", methods=["GET", "POST"])
+@login_required
+def test_template():
+    text = request.values.to_dict(flat=False)["TemplateText"]
+    return render_template_string(text[0])
+
 @server.route("/get/<type>", methods=["GET", "POST"])
 @login_required
 def show_result(type):
@@ -126,6 +132,11 @@ def show_result(type):
 
     lang = query['lang']
     query['delivery'] = list2dictID(json.loads(query['delivery']))
+
+    if type == 'template':
+        text = query["TemplateText"]#.replace('\n','<br>\n') #работает не стабильно с line statement
+        print(text)
+        return render_template_string(text, set=query)
 
     if query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
@@ -306,8 +317,11 @@ def main(args=sys.argv[1:]):
 
     args = parser.parse_args(sys.argv[1:])
 
+
+
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
                # ,   ssl_context=('cert.pem', 'key.pem')
                , ssl_context=('adhoc') if not args.nonsecure else None
                , threaded=True)
+

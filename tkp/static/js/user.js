@@ -29,7 +29,7 @@ $(document).ready(function () {
     })
 
 
-    $("#get-preview, #get-docx, #get-pdf, #get-cfg").click(function () {
+    $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
         const params = configElement.serializeArray();
         const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
         params.push({name: "delivery", value: delivery})//add delivery tree data
@@ -50,6 +50,13 @@ $(document).ready(function () {
                 $("#preview").load('/get/preview', params);
             }
 
+            if (type === "template") {
+                // Rendering template
+                const templateText = $("#TemplateText").val();
+                params.push({name: "TemplateText", value: templateText})//add delivery tree data
+                console.log(templateText)
+                $("#preview").load('/get/template', params);
+            }
 
             if (type === "docx" || type === "pdf" || type === "cfg") {
                 const xhr = new XMLHttpRequest();
@@ -88,6 +95,16 @@ $(document).ready(function () {
             }
         }
     });
+
+    // Template check mode
+    $("#CheckTemplate").click(function (e) {
+        if ($(this).is(':checked')){
+            $("#template").show(100)
+        } else {
+            $("#template").hide(100)
+        }
+    });
+
 
 
     productElement.val('hpp').trigger('change');//Choose first one for start
@@ -233,3 +250,4 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
