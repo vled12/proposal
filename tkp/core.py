@@ -293,6 +293,10 @@ def admin_panel():
                            title='Система администрирования',
                            regform=regForm, editform=editForm, userList=User.query)
 
+def remove_from_list(x, l):
+    for _ in range(l.count(x)):
+        l.remove(x)
+    return 0
 
 def main(args=sys.argv[1:]):
     # Print used modules
@@ -311,7 +315,7 @@ def main(args=sys.argv[1:]):
 
     args = parser.parse_args(sys.argv[1:])
 
-
+    server.jinja_env.globals.update(remove_from_list=remove_from_list)
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
