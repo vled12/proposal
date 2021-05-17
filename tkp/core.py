@@ -111,12 +111,6 @@ def index():
     #return render_template('static/mat/questionnaire/'+template+'.htm')
     #return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
 
-@server.route("/render_template", methods=["GET", "POST"])
-@login_required
-def test_template():
-    text = request.values.to_dict(flat=False)["TemplateText"]
-    return render_template_string(text[0])
-
 @server.route("/get/<type>", methods=["GET", "POST"])
 @login_required
 def show_result(type):
