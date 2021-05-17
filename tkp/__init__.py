@@ -12,7 +12,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # Инстанс сервера
-server = Flask(__name__, static_url_path='', static_folder=os.getcwd())
+server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=os.getcwd()+'\\templates/')
+print(server.template_folder)
 server.config.from_object('srv_cfg')
 # Инстанс базы данных
 db = SQLAlchemy(server)

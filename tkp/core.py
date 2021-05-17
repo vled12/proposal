@@ -154,7 +154,7 @@ def show_result(type):
 
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
                 (x[0] != '.') and (x[:2] == lang)]
-    with open(mod_path + "/templates/tmp/result.htm", 'wb+') as f:
+    with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
         f.write(render_template('tmp/result.htm', set=query))

@@ -32,7 +32,7 @@ def list2dictID(data):
 
 
 def put_in_body(args):
-    tree = html.parse(mod_path + "/wrappers/main.htm",
+    tree = html.parse("wrappers/main.htm",
                       parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
     body = tree.xpath(".//body")[0]
 
