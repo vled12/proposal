@@ -104,6 +104,9 @@ $(document).ready(function () {
             $("#template").hide(100)
         }
     });
+    // Default state
+    $("#template").hide(100);
+    $("#CheckTemplate").checked = false;
 
 
 
