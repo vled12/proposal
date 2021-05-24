@@ -110,3 +110,48 @@ td, th {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* JQueryLinedText plugin */
+/*.linedwrap {
+	border: 1px solid #c0c0c0;
+	padding: 3px;
+}
+
+.linedtextarea {
+	padding: 0px;
+	margin: 0px;
+}*/
+
+.linedtextarea textarea, .code textarea, .linedwrap .codelines .lineno {
+	/*font-size: 0.8rem;*/
+	font-family: monospace;
+	line-height: normal !important;
+}
+
+/*.linedtextarea textarea {
+	padding-right:0.3em;
+	padding-top:0.3em;
+	border: 0;
+}*/
+
+.linedwrap .lines {
+	margin-top: 0px;
+	float: left;
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+.linedwrap .codelines {
+	padding-top: 5px;
+}
+
+.linedwrap .codelines .lineno {
+	padding-right: 0.5em;
+	padding-top: 0.0em;
+	text-align: right;
+	white-space: nowrap;
+}
+
+body {
+    font-size:0.8rem;
+}

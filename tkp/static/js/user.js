@@ -108,7 +108,13 @@ $(document).ready(function () {
     $("#template").hide(100);
     $("#CheckTemplate").checked = false;
 
+	$(function() {
 
+	  // Target all classed with ".lined"
+	  $(".lined").linedtextarea(
+		{selectedLine: 1}
+	  );
+	});
 
     productElement.val('hpp').trigger('change');//Choose first one for start
 });//
@@ -253,4 +259,5 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
 
