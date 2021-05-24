@@ -25,8 +25,23 @@ $(document).ready(function () {
                 });//.parent().css('z-index', '1000');
 
                 initDeliveryTree();
+
+                //Add form elements titles as their "name"
+                $('#form').find("input, select, textarea").each(function() {
+                    $(this).attr("title","Name: "+ $(this).attr("name"))
+                    //For select objects add options list
+                    if ($(this).is("select")) {
+                        let options = []
+                        $(this).children().each(function () {
+                            options.push($(this).attr("value"))
+                        })
+                        $(this).attr("title", $(this).attr("title") + "\n" + "Values: "+ options)
+                    }
+                });
             });
     })
+
+
 
 
     $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
