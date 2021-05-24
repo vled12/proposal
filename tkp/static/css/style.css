@@ -10,6 +10,7 @@
     }
 }
 
+@font-face { font-family: Cascadia-Code; src: url('CascadiaCode-Regular.otf'); }
 
 .vakata-context {
     z-index: 10052 !important;
@@ -124,7 +125,7 @@ td, th {
 
 .linedtextarea textarea, .code textarea, .linedwrap .codelines .lineno {
 	/*font-size: 0.8rem;*/
-	font-family: monospace;
+	font-family: Cascadia-Code;
 	line-height: normal !important;
 }
 
