@@ -276,8 +276,9 @@ window.onclick = function(event) {
 }
 
 
-let shiftDown;
+
 // Tab insertion in TemplateText
+let shiftDown;
 let templateTextArea = document.getElementById('TemplateText')
 templateTextArea.addEventListener('keydown', (e) => {
     if (e.key === 'Shift') {
@@ -312,7 +313,5 @@ templateTextArea.addEventListener('keydown', function(e) {
             this.selectionStart =
                 this.selectionEnd = start + 1;
         }
-
-
     }
 });

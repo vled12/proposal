@@ -119,28 +119,19 @@ td, th {
     cursor: pointer;
 }
 
-/* JQueryLinedText plugin */
-/*.linedwrap {
-	border: 1px solid #c0c0c0;
-	padding: 3px;
+textarea  {
+    font-size: 0.8rem;
+    font-family: Cascadia-Code;
+    line-height: normal !important;
 }
 
-.linedtextarea {
-	padding: 0px;
-	margin: 0px;
-}*/
-
+/* JQueryLinedText plugin */
+/* deprecated
 .linedtextarea textarea, .code textarea, .linedwrap .codelines .lineno {
 	font-size: 0.8rem;
 	font-family: Cascadia-Code;
 	line-height: normal !important;
 }
-
-/*.linedtextarea textarea {
-	padding-right:0.3em;
-	padding-top:0.3em;
-	border: 0;
-}*/
 
 .linedwrap .lines {
 	margin-top: 0px;
@@ -159,6 +150,7 @@ td, th {
 	text-align: right;
 	white-space: nowrap;
 }
+*/
 
 body {
     font-size:0.8rem;
