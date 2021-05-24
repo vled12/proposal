@@ -12,6 +12,13 @@
 
 @font-face { font-family: Cascadia-Code; src: url('CascadiaCode-Regular.otf'); }
 
+textarea,
+pre {
+    -moz-tab-size : 2;
+    -o-tab-size : 2;
+    tab-size : 2;
+}
+
 .vakata-context {
     z-index: 10052 !important;
 }
