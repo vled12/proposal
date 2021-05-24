@@ -276,3 +276,43 @@ window.onclick = function(event) {
 }
 
 
+let shiftDown;
+// Tab insertion in TemplateText
+let templateTextArea = document.getElementById('TemplateText')
+templateTextArea.addEventListener('keydown', (e) => {
+    if (e.key === 'Shift') {
+        shiftDown = true;
+    }
+});
+
+templateTextArea.addEventListener('keyup', (e) => {
+    if (e.key === 'Shift') {
+        shiftDown = false;
+    }
+});
+
+templateTextArea.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        if (shiftDown) {
+            if (this.value[start - 1] === '\t') {
+                let endstr = this.value.substring(end)
+                this.value = this.value.substring(0, start - 1) + endstr;
+                this.selectionStart =
+                    this.selectionEnd = start - 1;
+            }
+        }   else {
+            // set textarea value to: text before caret + tab + text after caret
+            this.value = this.value.substring(0, start) +
+                "\t" + this.value.substring(end);
+            // put caret at right position again
+            this.selectionStart =
+                this.selectionEnd = start + 1;
+        }
+
+
+    }
+});

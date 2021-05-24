@@ -131,7 +131,7 @@ td, th {
 }*/
 
 .linedtextarea textarea, .code textarea, .linedwrap .codelines .lineno {
-	/*font-size: 0.8rem;*/
+	font-size: 0.8rem;
 	font-family: Cascadia-Code;
 	line-height: normal !important;
 }
