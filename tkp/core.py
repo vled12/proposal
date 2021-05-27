@@ -218,6 +218,11 @@ def send_js(filename):
 def send_css(filename):
     return send_from_directory(mod_path + '/static/css', filename)
 
+@server.route('/lib/<path:filename>')
+# @login_required
+def send_lib(filename):
+    return send_from_directory(mod_path + '/static/lib', filename)
+
 
 @lm.user_loader
 def load_user(user_id):

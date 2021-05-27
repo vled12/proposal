@@ -119,12 +119,17 @@ td, th {
     cursor: pointer;
 }
 
+/* deprecated
 textarea  {
     font-size: 0.8rem;
     font-family: Cascadia-Code;
     line-height: normal !important;
-}
+}*/
 
+.CodeMirror{
+    font-size: 0.8rem;
+    font-family: Cascadia-Code;
+}
 /* JQueryLinedText plugin */
 /* deprecated
 .linedtextarea textarea, .code textarea, .linedwrap .codelines .lineno {

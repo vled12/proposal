@@ -66,6 +66,7 @@ $(document).ready(function () {
             }
 
             if (type === "template") {
+                myCodeMirror.save();
                 // Rendering template
                 const templateText = $("#TemplateText").val();
                 params.push({name: "TemplateText", value: templateText})//add delivery tree data
@@ -276,7 +277,7 @@ window.onclick = function(event) {
 }
 
 
-
+/* Deprecated
 // Tab insertion in TemplateText
 let shiftDown;
 let templateTextArea = document.getElementById('TemplateText')
@@ -314,4 +315,12 @@ templateTextArea.addEventListener('keydown', function(e) {
                 this.selectionEnd = start + 1;
         }
     }
+});
+*/
+
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
+    mode:  "jinja2",
+    lineNumbers: true,
+    tabSize: 2,
+    lineWrapping: true,
 });
