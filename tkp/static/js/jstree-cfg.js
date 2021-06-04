@@ -126,7 +126,7 @@ const defaultDelivery =
         {"id": "root", "text": "Поставка", "parent": "#", "type": "root", "state": {"selected": true, "opened": false}},
 
 
-        {"id": "ga", "text": "САУ ГА", "parent": "root", "type": "system", "state": {"selected": true}},
+        {"id": "ga", "text": "[4] САУ ГА", "parent": "root", "type": "system", "state": {"selected": true}},
         {"id": "os", "text": "ОС", "parent": "root", "type": "system", "state": {"selected": true}},
         {"id": "gts", "text": "ГТС", "parent": "root", "type": "system", "state": {"selected": true}},
         {"id": "vu", "text": "ВУ", "parent": "root", "type": "system", "state": {"selected": true}},

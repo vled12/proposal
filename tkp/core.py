@@ -5,6 +5,7 @@ import types
 import configparser
 import argparse
 import sys
+import re
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import FlaskForm
@@ -127,9 +128,18 @@ def show_result(type):
     lang = query['lang']
     query['delivery'] = list2dictID(json.loads(query['delivery']))
 
+    #Add amount value according to text in the beginning
+    for id,item in query['delivery'].items():
+        numIndex = re.compile("\[(\d+)\]")
+        match = numIndex.match(item["text"])
+        if match:
+            item.update({"amount": int(match.groups()[0])})
+        else:
+            item.update({"amount": 1})
+
+
     if type == 'template':
         text = query["TemplateText"]#.replace('\n','<br>\n') #работает не стабильно с line statement
-        print(text)
         return render_template_string(text, set=query)
 
     if query['wiki_link'] != '':
@@ -303,6 +313,9 @@ def remove_from_list(x, l):
         l.remove(x)
     return 0
 
+def unique_list(seq):
+    return list(set(seq))
+
 def main(args=sys.argv[1:]):
     # Print used modules
     for module in imports():
@@ -320,7 +333,7 @@ def main(args=sys.argv[1:]):
 
     args = parser.parse_args(sys.argv[1:])
 
-    server.jinja_env.globals.update(remove_from_list=remove_from_list)
+    server.jinja_env.globals.update(remove_from_list=remove_from_list, unique_list=unique_list)
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
