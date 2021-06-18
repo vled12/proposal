@@ -6,6 +6,7 @@ import configparser
 import argparse
 import sys
 import re
+from pathlib import Path
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import FlaskForm
@@ -169,6 +170,8 @@ def show_result(type):
 
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
                 (x[0] != '.') and (x[:2] == lang)]
+    resfile = Path('templates/tmp/result.htm')
+    resfile.touch(exist_ok=True)
     with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
