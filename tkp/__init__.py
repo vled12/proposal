@@ -14,7 +14,7 @@ from flask_login import LoginManager
 
 # Инстанс сервера
 templates = Path.cwd().joinpath('templates')
-print(f'Templates folder is {templates}')
+print('Templates folder is ' + templates)
 server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=templates)
 server.config.from_object('srv_cfg')
 # Конфигурация Jinja2
