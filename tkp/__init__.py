@@ -7,13 +7,12 @@ __author__ = 'Vladislav Voytenok'
 __licence__ = 'GNU'
 
 import os
-from pathlib import Path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # Инстанс сервера
-templates = Path.cwd().joinpath('templates')
+templates = os.path.join(os.getcwd(),'templates')
 print('Templates folder is ' + templates)
 server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=templates)
 server.config.from_object('srv_cfg')
