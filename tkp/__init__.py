@@ -7,12 +7,13 @@ __author__ = 'Vladislav Voytenok'
 __licence__ = 'GNU'
 
 import os
+from pathlib import Path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # Инстанс сервера
-server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=os.getcwd()+'\\templates/')
+server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=Path.cwd().joinpath('templates'))
 server.config.from_object('srv_cfg')
 # Конфигурация Jinja2
 server.jinja_options["line_statement_prefix"] = "#"
