@@ -129,12 +129,17 @@ def show_result(type):
     lang = query['lang']
     query['delivery'] = list2dictID(json.loads(query['delivery']))
 
-    #Add amount value according to text in the beginning
+    #Extract amount value according to text in the beginning
     for id,item in query['delivery'].items():
-        numIndex = re.compile("\[(\d+)\]")
+        numIndex = re.compile("(\s*\[\d+\]\s*)")
         match = numIndex.match(item["text"])
         if match:
-            item.update({"amount": int(match.groups()[0])})
+            numText = match.groups()[0]
+            #Remove chars [ and ] and whitespaces
+            num = int("".join(numText.replace(']','').replace('[','').split()))
+            item.update({"amount": num})
+            #Remove numText
+            item["text"] = item["text"].replace(numText,"")
         else:
             item.update({"amount": 1})
 
