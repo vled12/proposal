@@ -175,6 +175,9 @@ def show_result(type):
         os.mkdir("templates/tmp") # create temporary folder
     with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())
+
+    if "tmp" not in os.listdir("."):
+        os.mkdir("tmp") # create temporary folder
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
         f.write(render_template('tmp/result.htm', set=query))
     add_glossary('tmp/print.html', 'static/mat/dict.csv')
