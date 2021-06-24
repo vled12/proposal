@@ -170,8 +170,9 @@ def show_result(type):
 
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
                 (x[0] != '.') and (x[:2] == lang)]
-    resfile = Path('templates/tmp/result.htm')
-    resfile.touch(exist_ok=True)
+    print(os.listdir("templates/"))
+    if "tmp" not in os.listdir("templates/"):
+        os.mkdir("templates/tmp") # create temporary folder
     with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
