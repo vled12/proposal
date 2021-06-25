@@ -174,7 +174,7 @@ def show_result(type):
     # print(res.content)
 
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
-                (x[0] != '.') and (x[:2] == lang)]
+                (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
 
     with open("templates/tmp/result.htm", 'wb+') as f:
         f.write(put_in_body(articles).read())

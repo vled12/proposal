@@ -2,6 +2,8 @@ import os, subprocess, io
 import re
 from lxml import html, etree
 import pypandoc
+from shutil import copyfileobj
+from tempfile import TemporaryFile
 
 #Рабочая конфигурация
 DEV = True
@@ -38,13 +40,27 @@ def put_in_body(args):
 
     for x in args:
         print(x)
+
+        """ Left in seeking for solution with bug when file ends with one-line jinja statement
+        fx = TemporaryFile('w+', encoding='utf-8')
+        with open(x, encoding='utf-8') as f:
+            copyfileobj(f, fx)
+        # add line break in the file
+        fx.seek(0, 2)
+        fx.write('\n')
+        fx.seek(0)
+        fx.close()
+        """
+
         article = html.parse(x, parser=html.HTMLParser(
-            encoding='utf-8')).getroot()  # xpath("///html/body/article")[0]  # find first article in html
+        encoding='utf-8')).getroot()  # xpath("///html/body/article")[0]  # find first article in html
+
         align_images(article)
         body.append(article)
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
-    return io.BytesIO(html.tostring(tree, pretty_print=True, encoding='utf-8'))
+    text = html.tostring(tree, pretty_print=True, encoding='unicode').replace('&gt;','>').replace('&lt;','<')
+    return io.BytesIO(bytes(text, encoding='utf-8'))
 
 
 def htm2x(f, type, lang, location):
