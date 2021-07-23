@@ -85,25 +85,26 @@ def htm2x(f, type, lang, location):
 
 
 def add_glossary(page, dict):
-    dic = {}
-    with open(dict, 'r', encoding='utf-8') as vocF:
-        for line in vocF:
-            (key, value) = line.split(';')
-            dic[key] = value
-    glossary = {}
-    with open(page, 'r', encoding='utf-8') as inF:
-        #Convert to string
-        data = inF.read().replace('\n', '')
-
-        #Get rid of comments and jinja templates
-        data = re.sub("(<!--.*?-->)|({{%}}.*?%})", "", data, flags=re.DOTALL)
-        for key, value in dic.items():
-            if re.search(r'\W'+key, data):
-                if DEV: print('found', key)
-                glossary[key] = value
     result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
     glossary_table = result.find("//table[@id='glossary']")
-    for key, value in sorted(glossary.items()):
-        row = "<tr><td>" + key + "</td><td>" + value + "</td></tr>"
-        glossary_table.append(etree.XML(row))
-    result.write(page, pretty_print=True, encoding='utf-8')
+    if glossary_table:
+        dic = {}
+        with open(dict, 'r', encoding='utf-8') as vocF:
+            for line in vocF:
+                (key, value) = line.split(';')
+                dic[key] = value
+        glossary = {}
+        with open(page, 'r', encoding='utf-8') as inF:
+            #Convert to string
+            data = inF.read().replace('\n', '')
+
+            #Get rid of comments and jinja templates
+            data = re.sub("(<!--.*?-->)|({{%}}.*?%})", "", data, flags=re.DOTALL)
+            for key, value in dic.items():
+                if re.search(r'\W'+key, data):
+                    if DEV: print('found', key)
+                    glossary[key] = value
+        for key, value in sorted(glossary.items()):
+            row = "<tr><td>" + key + "</td><td>" + value + "</td></tr>"
+            glossary_table.append(etree.XML(row))
+        result.write(page, pretty_print=True, encoding='utf-8')
