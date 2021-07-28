@@ -10,13 +10,13 @@ from pathlib import Path
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField, RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from werkzeug.utils import secure_filename
 
 from tkp import server, db, lm
 
-from tkp.db_model import User, ROLE_USER, ROLE_ADMIN
+from tkp.db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
 
 # Рабочая конфигурация
 DEV = True
@@ -54,11 +54,14 @@ class LoginForm(FlaskForm):
 
 # Форма добавления пользователя
 class RegistrationForm(FlaskForm):
-    username = StringField('User')  # , validators=[DataRequired()])
-    email = StringField('E-mail')  # , validators=[DataRequired(), Email()])
-    password = PasswordField('Password')  # , validators=[DataRequired()])
+    username = StringField('User', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    role = RadioField('Role',
+                      choices = [(ROLE_USER, "Пользователь"),(ROLE_ADMIN, "Администратор"),(ROLE_DEV, "Разработчик")],
+                      default = ROLE_USER,   validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password')  # , validators=[DataRequired(), EqualTo('password')])
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
     register = SubmitField('Register')
 
     def validate_username(self, username):
@@ -299,7 +302,7 @@ def admin_panel():
     regForm = RegistrationForm()
     editForm = EditUserForm()
     if regForm.validate_on_submit() and regForm.register.data:
-        newUser = User(nickname=regForm.username.data, email=regForm.email.data, role=ROLE_USER)
+        newUser = User(nickname=regForm.username.data, email=regForm.email.data, role=regForm.role.data)
         newUser.set_password(regForm.password.data)
         db.session.add(newUser)
         db.session.commit()

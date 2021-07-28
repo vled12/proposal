@@ -5,6 +5,7 @@ from flask_login import UserMixin
 # Формирование структуры баз данных пользователей
 ROLE_USER = 0
 ROLE_ADMIN = 1
+ROLE_DEV = 2
 
 
 class User(UserMixin, db.Model):
