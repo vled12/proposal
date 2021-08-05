@@ -67,13 +67,14 @@ def htm2x(f, type, lang, location):
     # delete cell spaning cause of pandoc no support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
     for table in tree.xpath(".//table"):
-        firstrow = table.xpath(".//tr")[0]
-        for cell in firstrow.getchildren():
-            try:
-                for i in range(1, int(cell.attrib["colspan"])):
-                    firstrow.append(etree.XML("<td></td>"))
-            except(KeyError):
-                pass
+        if table.xpath(".//tr"):
+            firstrow = table.xpath(".//tr")[0]
+            for cell in firstrow.getchildren():
+                try:
+                    for i in range(1, int(cell.attrib["colspan"])):
+                        firstrow.append(etree.XML("<td></td>"))
+                except(KeyError):
+                    pass
     etree.strip_attributes(tree, "class", "style", "colspan", "rowspan")
     with open(f, 'wb') as file:
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
@@ -87,7 +88,7 @@ def htm2x(f, type, lang, location):
 def add_glossary(page, dict):
     result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
     glossary_table = result.find("//table[@id='glossary']")
-    if glossary_table:
+    if glossary_table is not None:
         dic = {}
         with open(dict, 'r', encoding='utf-8') as vocF:
             for line in vocF:
