@@ -36,11 +36,12 @@
     function tokenBase (stream, state) {
       var ch = stream.peek();
 
-      if (stream.eat('#')) {
+      if (!state.charfront && stream.eat('#')) {
+      //if (stream.eat('#')) {
         if (stream.eat('#')) {
           stream.skipToEnd();
           return "comment"
-        } else if (stream.peek() == ' ' || stream.match(keywords, false)) {
+        } else /*if (stream.peek() == ' ' || stream.match(keywords, false))*/{
           state.intag = true;
           state.lineTag = true;
           return "tag";
@@ -98,29 +99,27 @@
         } else if(stream.match(sign)) {
           state.sign = true;
         } else {
-          if(stream.eat(/\s/) || stream.sol() || state.lineTag) {
+          if(stream.eatSpace() || stream.sol() || stream.match(keywords, false)) {//обдумать добавление мэтча
             let result
             if(stream.match(keywords)) {
-              state.lineTag = false
-              result = "keyword";
+              result = "keyword"
             }
             if(stream.match(atom)) {
-              result = "atom";
+              result = "atom"
             }
             if(stream.match(number)) {
-              result = "number";
+              result = "number"
             }
             if (state.lineTag && stream.eol()) {
-              state.intag = false;
-              state.lineTag = false;
+              state.intag = false
+              state.lineTag = false
             }
             if (result) return result
             if(stream.sol()) {
-              stream.next();
+              stream.next()
             }
           } else {
-
-            stream.next();
+            stream.next()
           }
 
         }
@@ -139,14 +138,22 @@
         } else if (ch = stream.eat(/\{|%/)) {
           //Cache close tag
           state.intag = ch;
-          if(ch == "{") {
+          if (ch == "{") {
             state.intag = "}";
           }
           stream.eat("-");
           return "tag";
         }
-      }
-      stream.next();
+        } else if (stream.eatSpace()) {
+          //Miss whitespaces
+        } else if (state.charfront && stream.eol()) {
+          state.charfront = false
+        }
+        else {
+          //Any non-space character
+          state.charfront = true
+          stream.next();
+        }
     };
 
     return {

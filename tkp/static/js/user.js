@@ -7,6 +7,13 @@ $.ajaxSetup({
 const mme = new Map([['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'], ['pdf', 'application/pdf']])
 
 $(document).ready(function () {
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
+        mode:  "jinja2",
+        lineNumbers: true,
+        tabSize: 2,
+        lineWrapping: true,
+    });
+
     const productElement = $('#product')
     const configElement = $("#config")
     productElement.on('change', function () {
@@ -318,9 +325,3 @@ templateTextArea.addEventListener('keydown', function(e) {
 });
 */
 
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
-    mode:  "jinja2",
-    lineNumbers: true,
-    tabSize: 2,
-    lineWrapping: true,
-});

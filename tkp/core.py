@@ -319,6 +319,10 @@ def admin_panel():
                            title='Система администрирования',
                            regform=regForm, editform=editForm, userList=User.query)
 
+@server.route('/editor', methods=['GET', 'POST'])
+def editor():
+    return render_template('editor.htm')
+
 def remove_from_list(x, l):
     for _ in range(l.count(x)):
         l.remove(x)

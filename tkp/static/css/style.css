@@ -129,6 +129,7 @@ textarea  {
 .CodeMirror{
     font-size: 0.7rem;
     font-family: Cascadia-Code;
+    height: 100%;
 }
 /* JQueryLinedText plugin */
 /* deprecated
