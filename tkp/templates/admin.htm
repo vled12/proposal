@@ -1,0 +1,63 @@
+<!-- extend from base layout-->
+{% extends "base.htm" %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Пользователь: {{g.user.email}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" id="main" href="/" role="button"><strong>Главная<br>
+                страница</strong></a></li>
+            <!-- Administrator access -->
+            {% if g.user.role == 1 %}
+            <li class="nav-item"><a class="nav-link" id="admin-panel" href="{{ url_for('admin_panel') }}" role="button">Панель<br>администратора</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!--Tabs-->
+<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+    <li role="presentation" class="active nav-item"><a class="active nav-link" href="#tab1" data-toggle="tab">Add user</a></li>
+    <li role="presentation" class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Delete user</a></li>
+</ul>
+
+<div class="tab-content container-fluid">
+    <div class="tab-pane active" id="tab1">
+        {% include 'register.htm' %}
+    </div>
+    <div class="tab-pane" id="tab2">
+        {% include 'editUser.htm' %}
+    </div>
+</div>
+{% endblock %}
+
+
+<!--<html>
+  <head>
+    <title>Flask Intro - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Please login</h1>
+      <br>
+      <form action="" method="post">
+        <input type="text" placeholder="Username" name="username" value="{{
+          request.form.username }}">
+         <input type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        <input class="btn btn-default" type="submit" value="Login">
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+  </body>
+</html>-->

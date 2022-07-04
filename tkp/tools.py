@@ -60,7 +60,7 @@ def put_in_body(args):
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
     text = html.tostring(tree, pretty_print=True, encoding='unicode').replace('&gt;','>').replace('&lt;','<')
-    return io.BytesIO(bytes(text, encoding='utf-8'))
+    return text#io.BytesIO(bytes(text, encoding='utf-8'))
 
 
 def htm2x(f, type, lang, location):

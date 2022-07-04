@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 # Инстанс сервера
-templates = os.path.join(os.getcwd(),'templates')
+templates = os.path.join(os.path.dirname(__file__), 'templates')
 print('Templates folder is ' + templates)
 server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=templates)
 server.config.from_object('srv_cfg')

@@ -179,11 +179,9 @@ def show_result(type):
     articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
                 (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
 
-    with open("templates/tmp/result.htm", 'wb+') as f:
-        f.write(put_in_body(articles).read())
-
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
-        f.write(render_template('tmp/result.htm', set=query))
+        f.write(render_template_string(put_in_body(articles), set=query))
+
     add_glossary('tmp/print.html', 'static/mat/dict.csv')
     # возможное решение по обработке jinja тегов с картиками
     # rendered = html.parse('tmp/print.html',
@@ -350,8 +348,6 @@ def main(args=sys.argv[1:]):
 
     server.jinja_env.globals.update(remove_from_list=remove_from_list, unique_list=unique_list)
 
-    if "tmp" not in os.listdir("templates/"):
-        os.mkdir("templates/tmp") # create temporary folder
     if "tmp" not in os.listdir("."):
         os.mkdir("tmp") # create temporary folder
 

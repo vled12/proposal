@@ -1,0 +1,28 @@
+<h1>Users list</h1>
+
+<table>
+    <tr>
+        <th>E-mail</th>
+        <th>Роль</th>
+        <th>id</th>
+	</tr>
+    {% for user in userList %}
+    <tr>
+        <th>{{ user.email }}</th>
+        <th>{{ user.role }}</th>
+        <th>{{ user.id }}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+<form action="" method="post" name="edit">
+    {{ editform.hidden_tag() }}
+    <p>
+        {{ editform.id.label }}<br>
+        {{ editform.id(size=32) }}<br>
+        {% for error in editform.id.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ editform.edit() }}</p>
+</form>

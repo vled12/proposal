@@ -1,0 +1,35 @@
+<!-- extend from base layout-->
+{% extends "base.htm" %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Пользователь: {{g.user.email}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" id="main" href="/" role="button"><strong>Главная<br>
+                страница</strong></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="cover-container d-flex p-3 mx-auto flex-column">
+	<main role="main" class="inner cover">
+		<textarea name="EditorText" id="EditorText" class="form-control form-control-sm code"></textarea>
+	</main>
+</div>
+
+<script>
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('EditorText'), {
+	mode:  "jinja2",
+	lineNumbers: true,
+	tabSize: 2,
+	lineWrapping: true,
+});
+</script>
+{% endblock %}

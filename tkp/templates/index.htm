@@ -1,0 +1,108 @@
+{% extends "base.htm" %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Пользователь: {{g.user.email}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item"><a class="nav-link" id="get-preview" href="javascript:void(0)" role="button"><strong>Предварительный<br>
+                просмотр</strong></a></li>
+            <li class="nav-item"><a class="nav-link" id="get-docx" href="javascript:void(0)" role="button"><strong>Скачать текст<br> в формате
+                docx</strong></a></li>
+            <!--<li class="nav-item"><a class="nav-link" id="print-preview" href="javascript:void(0)" role="button">Печать превью</a></li>-->
+            <li class="nav-item"><a class="nav-link" id="get-cfg" href="javascript:void(0)" role="button">Сохранить<br>
+                конфигурацию</a></li>
+            <li class="nav-item"><a class="nav-link" id="open-convert-dialog" href="javascript:void(0)" role="button">Замена формы слов<br>выбранного файла</a></li>
+            {% if g.user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" id="logout" href="{{ url_for('logout') }}" role="button">Выход из<br>системы</a></li>
+            {% endif %}
+            <!-- Administrator access -->
+            {% if g.user.role == 1 %}
+            <li class="nav-item"><a class="nav-link" id="admin-panel" href="{{ url_for('admin_panel') }}" role="button">Панель<br>администратора</a></li>
+            {% endif %}
+            <!-- Special access -->
+            {% if g.user.role > 0 %}
+            <li class="nav-item"><a class="nav-link" id="editor" href="{{ url_for('editor') }}" role="button">Редактор</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!-- Диалог конвертации -->
+<div id="convert-modal" class="modal">
+    <div class="modal-content">
+        <span id="convert-modal-close" class="close">&times;</span>
+        <p>Выберите файл. Поддерживается только формат docx.</p>
+        <input class="nav-link" type="file" id="convert-file"/>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-5 bg-light sidebar"><!-- sidebar">-->
+            <div class="pl-3 pt-3 pr-3 sidebar-sticky"><!-- class="sidebar-sticky">-->
+                <!--<div class="wrapper box fixed">-->
+
+                <div class="form-row row mb-1">
+                    <div class="col">
+                        <label class="col-form-label" for="product"><strong>Выбор продукта</strong></label>
+                    </div>
+                    <div class="col">
+                        <select id="product" class="form-control form-control-sm" name="type">
+                            <option disabled selected value> -- select an option --</option>
+                            <option value="hpp">АСУ ТП ГЭС</option>
+                            <option value="tpp">АСУ ТП ТЭС</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row mb-1">
+                    <div class="col">
+                        <label class="col-form-label" for="open-cfg">Открыть конфигурацию</label>
+                    </div>
+                    <div class="col">
+                        <input class="nav-link" type="file" id="open-cfg"/>
+                    </div>
+                </div>
+                <div class="mb-1 form-row">
+                <div class="col">
+					<div class="form-check col-form-label"><input class="form-check-input" type="checkbox" id="CheckTemplate" name="CheckTemplate"><label class="form-check-label" for="CheckTemplate">Проверка шаблона</label></div>
+                </div>
+					<div class="col"><button id="get-template" href="javascript:void(0)" class="btn btn-secondary btn-sm">Проверить</button></div>
+                </div>
+                <form id="config">                
+                </form>
+            </div>
+        </nav>
+        <main role="main" class="col-md-7 col-lg-7 ml-sm-auto col-lg-7 pt-3 px-4">
+            <div id="template" class="border">
+				<textarea name="TemplateText" id="TemplateText" class="form-control form-control-sm code" rows="25" spellcheck="false"></textarea>
+            </div>
+            <div id="preview" class=document>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script type="text/javascript" src="js/formtocookie.js"></script>
+<script type="text/javascript" src="js/jstree-cfg.js"></script>
+<script src="js/jquery-linedtextarea.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+
+{% endblock %}
+
+

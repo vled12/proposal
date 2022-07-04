@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% set glob = namespace() %}
+{% set glob.alias = dict() %}
+{% set dummy=glob.alias.update({"САУ ГА":"Система управления гидроагрегатом"}) %}
+{% set dummy=glob.alias.update({"ЭГР":"Цифровая часть системы регулирования"}) %}
+{% set dummy=glob.alias.update({"АУГ":"Технологическая автоматика"}) %}
+{% set dummy=glob.alias.update({"ТА":"Технологическая автоматика"}) %}
+{% set dummy=glob.alias.update({"МНУ":"Автоматика маслонапорной установки"}) %}
+{% set dummy=glob.alias.update({"ИЗМ":"Система технологического измерения"}) %}
+{% set dummy=glob.alias.update({"ЭИ":"Подсистема электрических измерений"}) %}
+{% set dummy=glob.alias.update({"ЭС":"Подсистема синхронизации и включения генератора"}) %}
+{% set dummy=glob.alias.update({"ТК":"Подсистема температурного контроля"}) %}
+{% set dummy=glob.alias.update({"ВК":"Подсистема вибрационного контроля"}) %}
+{% set dummy=glob.alias.update({"АРЗ":"Подсистема управления предтурбинным затвором"}) %}
+{% set dummy=glob.alias.update({"СИГН":"Визуальная и звуковая сигнализация"}) %}
+{% set dummy=glob.alias.update({"ВО":"Управление вспомогательным оборудованием"}) %}
+{% set dummy=glob.alias.update({"ШЗГ":"Эл. защита генератора"}) %}
+{% set dummy=glob.alias.update({"ШЗТ":"Эл. защита трансформатора"}) %}
+{% set dummy=glob.alias.update({"ШЗО":"Эл. защита ошиновки"}) %}
+
+{% set glob.devices = dict() %}
+{% set dummy=glob.devices.update({
+	"ЭГР":
+		[{"name":"ПЛК","red":True,"stack":True}]
+		
+})%}
+{% set dummy=glob.devices.update({
+	"МНУ":
+		[{"name":"ПЛК","red":True,"stack":True}]
+}) %}
+
+{% if set['delivery']["ga"]%}
+	<p><b>Система автоматического управления гидроагрегатом (САУ ГА)</b>, в которую входят следующие подсистемы</p>
+ 	<ul>
+		{% for id,item in set['delivery'].items()%}{% if item["type"]=="function" and set['delivery'][item["parent"]]["parent"]=="ga" and item["state"]["selected"] %}
+		{% if item["text"]=='ТА' or item["text"]=='АУГ' %}{% set glob.ta=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i> (управление системами гидроагрегата в переходных режимах при выполнении операций по пуску, нормальной и аварийной остановкам, переводу агрегата из одного режима в любой другой из возможных режимов в соответствии с принятой технологией управления)</li>
+		{% endif %}
+		{% if item["text"]=='ВО'%}{% set glob.vo=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i>, взаимодействующяя с такими механизмами как дренажный и лекажный агрегат, а также задвижками</li>
+		{% endif %}
+		{% if item["text"]=='ЭГР' or item["text"]=='АРЧМ' %}{% set glob.egr=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i>, обеспечивающая стабилизацию скорости вращения и регулирование активной мощности гидроагрегата за счет управления регулирующими органами</li>
+		{% endif %}
+		{% if item["text"]=='МНУ' %}{% set glob.mnu=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i>, обеспечивающая необходимые параметры рабочей жидкости для гидромеханической части системы регулирования</li>
+		{% endif %}
+		{% if item["text"]=='ЭИ' %}{% set glob.ei=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ЭС' %}{% set glob.es=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i>, содержащая средства для осуществления автоматической и ручной синхронизации синхронного генератора путём оперирования выключателем</li>
+		{% endif %}
+		{% if item["text"]=='ИЗМ' %}{% set glob.tisu=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ТК' %}{% set glob.tisu=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='СИГН' %}{% set glob.tisu=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ВК' %}{% set glob.vc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='АРЗ' %}{% set glob.arz=True %}{% set glob.plc=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ШЗГ' %}{% set glob.rza=True %}{% set glob.szg=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ШЗТ' %}{% set glob.rza=True %}{% set glob.szt=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% if item["text"]=='ШЗО' %}{% set glob.rza=True %}{% set glob.szo=True %}
+		<li><i>{{glob.alias[item["text"]]}}</i></li>
+		{% endif %}
+		{% endif %}{% endfor %}
+	</ul>
+	{% endif %}
+
+
+<table>
+	<tr><td><b>Наименование системы</b></td><td><b>Устройства</b></td></tr>
+		{% for id,item in set['delivery'].items() %}
+			{% if item["type"]=="system" %}
+			<tr><td><b>{{glob.alias[item["text"]]}}</b></td><td></td></tr>
+				{% for idchild,itemchild in set['delivery'].items() %}
+					{% if itemchild["type"]=="sub" and itemchild["parent"]==item["id"] %}
+					<tr><td><i>{{itemchild["text"]}}</i></td><td></td></tr>
+					{% set devices=[] %}
+					{% set count={} %}
+						{% for idfunc,itemfunc in set['delivery'].items() %}
+							{% if itemfunc["type"]=="function" and itemfunc["parent"]==idchild %}
+								{% for dev in glob.devices[itemfunc["text"]] %}
+									{% if not (dev in devices) %}
+										{% set dummy=devices.append(dev) %}
+										{% if dev["red"] and set['RedPLC'] %}
+											{% set dummy=count.update({dev["name"]:2}) %}
+										{% else %}
+											{% set dummy=count.update({dev["name"]:1}) %}
+										{% endif %}
+									{% elif dev["stack"] %}
+										{% set dummy=count.update({dev["name"]:(count[dev["name"]]+1)}) %}
+									{% endif %}
+								{% endfor %}
+
+
+							{% endif %}
+						{% endfor %}
+						{% for dev in devices %}
+							<tr><td>{{dev["name"]}}</td><td>{{count[dev["name"]]}}</td></tr>
+						{% endfor %}
+
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+</table>
+
+
+
+</body>
+</html>
