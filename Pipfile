@@ -9,6 +9,17 @@ verify_ssl = true
 lxml = "*"
 requests = "*"
 Flask = "*"
+flask-wtf = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+sqlalchemy-migrate = "*"
+pypandoc = "*"
+pyopenssl = "*"
+pymorphy2 = "*"
+pymorphy2-dicts-ru = "*"
+nltk = "*"
+python-docx = "*"
+email-validator = "*"
 
 [requires]
 python_version = "3.9"
