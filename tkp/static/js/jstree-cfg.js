@@ -6,7 +6,7 @@ initDeliveryTree = function () {
             "expand_selected_onload": false,
             "check_callback": true,
             "themes": {"stripes": true},
-            'data': //typeof delivery !== "undefined" ? JSON.parse(delivery) : //read from Cookies (disabled of the size)
+            'data': //typeof delivery !== "undefined" ? JSON.parse(delivery) : //read from Cookies (disabled cause of the size)
             defaultDelivery
         },
         "types": {
