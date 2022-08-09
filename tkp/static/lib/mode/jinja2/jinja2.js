@@ -1,6 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
-// Modified by Voitenok Vladislav to support one-line statements
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -14,18 +13,18 @@
 
   CodeMirror.defineMode("jinja2", function() {
     var keywords = ["and", "as", "block", "endblock", "by", "cycle", "debug", "else", "elif",
-      "extends", "filter", "endfilter", "firstof", "for", "set",
+      "extends", "filter", "endfilter", "firstof", "for",
       "endfor", "if", "endif", "ifchanged", "endifchanged",
-      "ifequal", "endifequal", "ifnotequal",
+      "ifequal", "endifequal", "ifnotequal", "set", "raw", "endraw",
       "endifnotequal", "in", "include", "load", "not", "now", "or",
-      "parsed", "regroup", "reversed", "spaceless",
-      "endspaceless", "ssi", "templatetag", "openblock",
-      "closeblock", "openvariable", "closevariable",
+      "parsed", "regroup", "reversed", "spaceless", "call", "endcall", "macro",
+      "endmacro", "endspaceless", "ssi", "templatetag", "openblock",
+      "closeblock", "openvariable", "closevariable", "without", "context",
       "openbrace", "closebrace", "opencomment",
       "closecomment", "widthratio", "url", "with", "endwith",
       "get_current_language", "trans", "endtrans", "noop", "blocktrans",
       "endblocktrans", "get_available_languages",
-      "get_current_language_bidi", "plural"],
+      "get_current_language_bidi", "pluralize", "autoescape", "endautoescape"],
     operator = /^[+\-*&%=<>!?|~^]/,
     sign = /^[:\[\(\{]/,
     atom = ["true", "false"],
@@ -36,18 +35,6 @@
 
     function tokenBase (stream, state) {
       var ch = stream.peek();
-
-      if (!state.charfront && stream.eat('#')) {
-      //if (stream.eat('#')) {
-        if (stream.eat('#')) {
-          stream.skipToEnd();
-          return "comment"
-        } else /*if (stream.peek() == ' ' || stream.match(keywords, false))*/{
-          state.intag = true;
-          state.lineTag = true;
-          return "tag";
-        }
-      }
 
       //Comment
       if (state.incomment) {
@@ -91,7 +78,24 @@
           state.instring = ch;
           stream.next();
           return "string";
-        } else if(stream.match(state.intag + "}") || stream.eat("-") && stream.match(state.intag + "}")) {
+        }
+        else if (state.inbraces > 0 && ch ==")") {
+          stream.next()
+          state.inbraces--;
+        }
+        else if (ch == "(") {
+          stream.next()
+          state.inbraces++;
+        }
+        else if (state.inbrackets > 0 && ch =="]") {
+          stream.next()
+          state.inbrackets--;
+        }
+        else if (ch == "[") {
+          stream.next()
+          state.inbrackets++;
+        }        
+        else if (!state.lineTag && (stream.match(state.intag + "}") || stream.eat("-") && stream.match(state.intag + "}"))) {        
           state.intag = false;
           return "tag";
         } else if(stream.match(operator)) {
@@ -100,27 +104,25 @@
         } else if(stream.match(sign)) {
           state.sign = true;
         } else {
-          if(stream.eatSpace() || stream.sol() || stream.match(keywords, false)) {//обдумать добавление мэтча
-            let result
+          if (stream.column() == 1 && state.lineTag && stream.match(keywords)) {
+            //allow nospace after tag before the keyword
+            return "keyword";
+          }
+          if(stream.eat(" ") || stream.sol()) {
             if(stream.match(keywords)) {
-              result = "keyword"
+              return "keyword";
             }
             if(stream.match(atom)) {
-              result = "atom"
+              return "atom";
             }
             if(stream.match(number)) {
-              result = "number"
+              return "number";
             }
-            if (state.lineTag && stream.eol()) {
-              state.intag = false
-              state.lineTag = false
-            }
-            if (result) return result
             if(stream.sol()) {
-              stream.next()
+              stream.next();
             }
           } else {
-            stream.next()
+            stream.next();
           }
 
         }
@@ -139,30 +141,43 @@
         } else if (ch = stream.eat(/\{|%/)) {
           //Cache close tag
           state.intag = ch;
-          if (ch == "{") {
+          state.inbraces = 0;
+          state.inbrackets = 0;
+          if(ch == "{") {
             state.intag = "}";
           }
           stream.eat("-");
           return "tag";
         }
-        } else if (stream.eatSpace()) {
-          //Miss whitespaces
-        } else if (state.charfront && stream.eol()) {
-          state.charfront = false
+      //Line statements
+      } else if (stream.eat('#')) {
+        if (stream.peek() == '#') {
+          stream.skipToEnd();
+          return "comment"
         }
-        else {
-          //Any non-space character
-          state.charfront = true
-          stream.next();
+        else if (!stream.eol()) {
+          state.intag = true;
+          state.lineTag = true;
+          state.inbraces = 0;
+          state.inbrackets = 0;
+          return "tag";
         }
+      }
+      stream.next();
     };
 
     return {
       startState: function () {
         return {tokenize: tokenBase};
       },
-      token: function (stream, state) {
-        return state.tokenize(stream, state);
+      token: function(stream, state) {
+        var style = state.tokenize(stream, state);
+        if (stream.eol() && state.lineTag && !state.instring && state.inbraces == 0 && state.inbrackets == 0) {
+          //Close line statement at the EOL
+          state.intag = false
+          state.lineTag = false
+        }
+	return style;
       },
       blockCommentStart: "{#",
       blockCommentEnd: "#}",

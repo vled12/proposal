@@ -26,6 +26,53 @@
 <h2>Jinja2 mode</h2>
 <form><textarea id="code" name="code">
 {# this is a comment #}
+{%- for item in li -%}
+<li>{{ foo['bar'] }}</li>
+{% endfor -%}
+{% if loop.index is divisibleby 3 %}
+{{ '{{' }}
+{% raw %}
+    {% for item in seq %}
+        <li>{{ item }}</li>
+    {% endfor %}
+{% endraw %}
+
+{{ item.sand == true and item.keyword == false ? 1 : 0 }}
+{{ app.get(55, 1.2, true) }}
+{% if app.get('_route') == ('_home') %}home{% endif %}
+{% if app.session.flashbag.has('message') %}
+{% for message in app.session.flashbag.get('message') %}
+{{ message.content }}
+{% endfor %}
+{% endif %}
+{{ path('_home', {'section': app.request.get('section')}) }}
+{{ path('_home', {
+'section': app.request.get('section'),
+'boolean': true,
+'number': 55.33
+})
+}}
+{% include ('test.incl.html.twig') %}
+
+# for item in seq:
+    <li>{{ item }}</li>     ## this comment is ignored
+# endfor
+
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+
+{% include "sidebar.html" without context %}
+# set text = "Multiline
+	text"
+# for href, caption in [('index.html', 'Index'),
+                        ('about.html', 'About')]:
+    <li><a href="{{ href }}">{{ caption }}</a></li>
+# endfor
+{{ "[{}]".format(page.title) if page.title }}
 
 
 </textarea></form>
@@ -35,22 +82,3 @@
         {name: "jinja2", htmlMode: true}});
     </script>
   </article>
-{%- for item in li -%}
-&lt;li&gt;{{ item.label }}&lt;/li&gt;
-{% endfor -%}
-{{ item.sand == true and item.keyword == false ? 1 : 0 }}
-{{ app.get(55, 1.2, true) }}
-{% if app.get(&#39;_route&#39;) == (&#39;_home&#39;) %}home{% endif %}
-{% if app.session.flashbag.has(&#39;message&#39;) %}
-{% for message in app.session.flashbag.get(&#39;message&#39;) %}
-{{ message.content }}
-{% endfor %}
-{% endif %}
-{{ path(&#39;_home&#39;, {&#39;section&#39;: app.request.get(&#39;section&#39;)}) }}
-{{ path(&#39;_home&#39;, {
-&#39;section&#39;: app.request.get(&#39;section&#39;),
-&#39;boolean&#39;: true,
-&#39;number&#39;: 55.33
-})
-}}
-{% include (&#39;test.incl.html.twig&#39;) %}-->
