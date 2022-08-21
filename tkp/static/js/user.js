@@ -101,8 +101,11 @@ $(document).ready(function () {
                         }
 
                         // Form filename
-                        const today = new Date()
-                        link.download = today.getFullYear() + '-' +  (today.getMonth() + 1) + '-' + today.getDate() + "." + extension
+                        let today = new Date()
+                        const offset = today.getTimezoneOffset()
+                        today = new Date(today.getTime() - (offset*60*1000))
+                        const ISO_date = today.toISOString().split('T')[0]
+                        link.download = ISO_date + "." + extension
 
                         // Click imitation
                         document.body.appendChild(link);
