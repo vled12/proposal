@@ -13,7 +13,7 @@
 
   CodeMirror.defineMode("jinja2", function() {
     var keywords = ["and", "as", "block", "endblock", "by", "cycle", "debug", "else", "elif",
-      "extends", "filter", "endfilter", "firstof", "for",
+      "extends", "filter", "endfilter", "firstof", "do", "for",
       "endfor", "if", "endif", "ifchanged", "endifchanged",
       "ifequal", "endifequal", "ifnotequal", "set", "raw", "endraw",
       "endifnotequal", "in", "include", "load", "not", "now", "or",
@@ -94,7 +94,7 @@
         else if (ch == "[") {
           stream.next()
           state.inbrackets++;
-        }        
+        }
         else if (!state.lineTag && (stream.match(state.intag + "}") || stream.eat("-") && stream.match(state.intag + "}"))) {        
           state.intag = false;
           return "tag";
