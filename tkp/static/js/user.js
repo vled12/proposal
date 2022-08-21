@@ -14,15 +14,17 @@ $(document).ready(function () {
         lineWrapping: true,
     });
 
+    // Initial product configuration
     const productElement = $('#product')
     const configElement = $("#config")
     productElement.on('change', function () {
         configElement.load("static/mat/questionnaire/" + this.value + ".htm",
             function (response, status, xhr) {
                 loadFormFromCookie(configElement);
-                //Проверяем наличие сохраненного объема поставки. Не используем из-за размера
+                // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
 
+                //Pop-up windows for detailed configuration
                 $(".dialog").dialog({
                     autoOpen: false,
                     width:600,
@@ -33,10 +35,11 @@ $(document).ready(function () {
 
                 initDeliveryTree();
 
-                //Add form elements titles as their "name"
+                // Automatically fill "Title" attribute with configuration tags
+                // Required just for developers
                 $('#form').find("input, select, textarea").each(function() {
                     $(this).attr("title","Name: "+ $(this).attr("name"))
-                    //For select objects add options list
+                    // For select objects add options list
                     if ($(this).is("select")) {
                         let options = []
                         $(this).children().each(function () {
@@ -48,65 +51,60 @@ $(document).ready(function () {
             });
     })
 
-
-
-
+    // Handling the query
     $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
-        const params = configElement.serializeArray();
+        const params = configElement.serializeArray();// Form parameters
         const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
-        params.push({name: "delivery", value: delivery})//add delivery tree data
-        //Для отладки
-        //console.log(params);
-
+        // Add Delivery tree data
+        params.push({name: "delivery", value: delivery})
         saveFormToCookie(configElement);
 
-        //Слишком большой размер
+        // Delivery tree save is currently disabled to 4096 byte Cookie limit
         //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
 
-        //Определяем команду
-        let argv = this.id.split("-")
-
+        // Recognize the action
+        const argv = this.id.split("-")
+        const action = argv[0]
         const type = argv[1]
-        if (argv[0] === "get") {
+
+        // Handle depends on type
+        if (action === "get") {
             if (type === "preview") {
                 $("#preview").load('/get/preview', params);
             }
 
             if (type === "template") {
                 myCodeMirror.save();
-                // Rendering template
                 const templateText = $("#TemplateText").val();
-                params.push({name: "TemplateText", value: templateText})//add delivery tree data
-                console.log(templateText)
+                // Add Delivery tree data
+                params.push({name: "TemplateText", value: templateText})
                 $("#preview").load('/get/template', params);
             }
 
             if (type === "docx" || type === "pdf" || type === "cfg") {
                 const xhr = new XMLHttpRequest();
+                // Send the file request
                 xhr.open('POST', '/get/' + type, true);
                 xhr.responseType = 'blob';
                 xhr.onload = function () {
                     // Only handle status code 200
                     if (xhr.status === 200) {
-
-
-                        // Try to find out the filename from the content disposition `filename` value
-                        //var disposition = request.getResponseHeader('content-disposition');
-                        //var matches = /"([^"]*)"/.exec(disposition);
-                        //var filename = (matches != null && matches[1] ? matches[1] : 'file.pdf');
-
                         // The actual download
                         let blob = new Blob([xhr.response], {type: mme[type]});
                         let link = document.createElement('a');
                         link.href = window.URL.createObjectURL(blob);
-                        //link.download = 'result.' + type;
+
+                        // Match the extension
                         let extension = type
                         if (type === "cfg") {
                             extension = "json"
                         }
-                        //Используем текущую дату в качестве имени
+
+                        // Form filename
                         const today = new Date()
-                        link.download = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear() + "." + extension
+                        link.download = today.getFullYear() + '-' +  (today.getMonth() + 1) + '-' + today.getDate() + "." + extension
+
+                        // Click imitation
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -119,7 +117,8 @@ $(document).ready(function () {
         }
     });
 
-    // Template check mode
+    // Template editor
+    // Appearance
     $("#CheckTemplate").click(function (e) {
         if ($(this).is(':checked')){
             $("#template").show(100)
@@ -129,17 +128,19 @@ $(document).ready(function () {
     });
     // Default state
     $("#template").hide(100);
-    $("#CheckTemplate").checked = false;
+    $("#CheckTemplate").prop("checked", false);
 
+    //Line numeration for certain objects
 	$(function() {
-
 	  // Target all classed with ".lined"
 	  $(".lined").linedtextarea(
 		{selectedLine: 1}
 	  );
 	});
 
-    productElement.val('hpp').trigger('change');//Choose first one for start
+	//Choose first product at start
+	const firstProduct = productElement.children().first().val()
+    productElement.val(firstProduct).trigger('change');
 });//
 
 
