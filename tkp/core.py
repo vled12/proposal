@@ -18,8 +18,15 @@ from tkp import server, db, lm
 
 from tkp.db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
 
-# Рабочая конфигурация
-DEV = True
+parser = argparse.ArgumentParser(description='Launch service server.',
+                                 usage='''tkp <port> [<args>]
+    ''')
+parser.add_argument('port', help='Port to serve')
+parser.add_argument('--nonsecure', '-n', action='store_true', help='Run non-secured, just http')
+parser.add_argument('--debug', '-D', action='store_true', help='Debugging mode')
+
+args = parser.parse_args(sys.argv[1:])
+
 # Рабочая директория
 mod_path = os.path.dirname(__file__)
 
@@ -93,7 +100,7 @@ def before_request():
 
 @server.after_request
 def add_header(r):
-    if DEV:
+    if args.debug:
         """
         Add headers to both force latest IE rendering engine or Chrome Frame,
        and also to cache the rendered page for 10 minutes.
@@ -102,7 +109,7 @@ def add_header(r):
         r.headers["Pragma"] = "no-cache"
         r.headers["Expires"] = "0"
         r.headers['Cache-Control'] = 'public, max-age=0'
-        return r
+    return r
 
 
 @server.route('/')
@@ -120,7 +127,7 @@ def index():
 @login_required
 def show_result(type):
     query = {k: v if len(v) > 1 else v[0] for k, v in request.values.to_dict(flat=False).items()}
-    if DEV:
+    if args.debug:
         print(query)
 
     if type == 'cfg':
@@ -333,22 +340,14 @@ def remove_from_list(x, l):
 def unique_list(seq):
     return list(set(seq))
 
-def main(args=sys.argv[1:]):
+def main():
     # Print used modules
-    for module in imports():
-        try:
-            print("using module " + module.__name__ + " version " + module.__version__)
-        except(AttributeError):
-            print("using module " + module.__name__ + " with no particular version")
-
-    parser = argparse.ArgumentParser(description='Launch service server.',
-                                     usage='''tkp <port> [<args>]
-                                         
-    ''')
-    parser.add_argument('port', help='Port to serve')
-    parser.add_argument('-n', '--nonsecure', action='store_true', help='Run non-secured, just http')
-
-    args = parser.parse_args(sys.argv[1:])
+    if args.debug:
+        for module in imports():
+            try:
+                print("using module " + module.__name__ + " version " + module.__version__)
+            except(AttributeError):
+                print("using module " + module.__name__ + " with no particular version")
 
     server.jinja_env.globals.update(remove_from_list=remove_from_list, unique_list=unique_list)
 
@@ -358,6 +357,7 @@ def main(args=sys.argv[1:]):
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
                # ,   ssl_context=('cert.pem', 'key.pem')
+               , debug = args.debug
                , ssl_context=('adhoc') if not args.nonsecure else None
                , threaded=True)
 
