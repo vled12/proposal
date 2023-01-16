@@ -13,13 +13,13 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='tkp',
+    name='proposal',
     version='0.1.0',
-    description='Technical commercial proposal generator',
+    description='Proposal generator for a product presentation',
     long_description=readme,
-    author='Vladislav Voytenok',
+    author='Vladislav Voitenok',
     author_email='vleduser@gmail.com',
-    url='https://github.com/vled12/tkp_auto',
+    url='https://github.com/vled12/proposal',
     license=license,
     include_package_data=True,
     packages=find_packages(exclude=('tests', 'docs')),

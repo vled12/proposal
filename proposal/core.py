@@ -14,9 +14,9 @@ from wtforms import StringField, BooleanField, PasswordField, SubmitField, Integ
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from werkzeug.utils import secure_filename
 
-from tkp import server, db, lm
+from proposal import server, db, lm
 
-from tkp.db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
+from proposal.db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
 
 parser = argparse.ArgumentParser(description='Launch service server.',
                                  usage='''tkp <port> [<args>]
@@ -47,8 +47,8 @@ config.read('run.cfg')
 os.environ.setdefault('PYPANDOC_PANDOC', config['pandoc']['location'])
 
 # Загружаем внутренние библиотеки
-from tkp.tools import *
-import tkp.case_change
+from proposal.tools import *
+import proposal.case_change
 
 
 # Форма входа

@@ -1,7 +1,7 @@
 #!flask/bin/python
 import types, importlib
 from migrate.versioning import api
-from tkp import db
+from proposal import db
 from srv_cfg import SQLALCHEMY_DATABASE_URI
 from srv_cfg import SQLALCHEMY_MIGRATE_REPO
 migration = SQLALCHEMY_MIGRATE_REPO + '/versions/%03d_migration.py' % (api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO) + 1)

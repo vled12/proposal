@@ -2,7 +2,7 @@
 from migrate.versioning import api
 from srv_cfg import SQLALCHEMY_DATABASE_URI
 from srv_cfg import SQLALCHEMY_MIGRATE_REPO
-from tkp import db
+from proposal import db
 import os.path
 
 db.create_all()

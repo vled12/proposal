@@ -1,12 +1,5 @@
-Automated technical proposal generator
+Proposal generator for a product presentation
 ========================
-
-This simple project is an example repo for Python projects.
-
-`Learn more <http://www.kennethreitz.org/essays/repository-structure-and-python>`_.
-
----------------
-
-If you want to learn more about ``setup.py`` files, check out `this repository <https://github.com/kennethreitz/setup.py>`_.
-
-✨🍰✨
+Primarily, the software intends to give an ability to form certain hyper-document, based on questionnaire-form.
+------------------------
+Application should be run with configuration (templates, forms, etc), defining the expected outcome. Manuals and examples would be available in future.
