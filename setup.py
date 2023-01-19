@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from setuptools import setup, find_packages
 
 with open('README.rst') as f:
@@ -12,9 +10,19 @@ with open('LICENSE') as f:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+version = (
+    open("proposal/__init__.py")
+    .read()
+    .split("__version__ = ")[-1]
+    .split("\n")[0]
+    .strip("")
+    .strip("'")
+    .strip('"')
+)
+
 setup(
     name='proposal',
-    version='0.1.0',
+    version=version,
     description='Proposal generator for a product presentation',
     long_description=readme,
     author='Vladislav Voitenok',

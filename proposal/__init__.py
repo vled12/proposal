@@ -1,4 +1,4 @@
-__version__ = '0.1.0-dev'
+__version__ = '0.1.0'
 __author__ = 'Vladislav Voytenok'
 __licence__ = 'GNU'
 
@@ -9,7 +9,7 @@ from flask_login import LoginManager
 
 # Flask configuration
 templates = os.path.join(os.path.dirname(__file__), 'templates')
-#print('Templates folder is ' + templates)
+print('Templates folder is ' + templates)
 server = Flask(__name__, static_url_path='', static_folder=os.getcwd(), template_folder=templates)
 server.config.from_object('srv_cfg')
 

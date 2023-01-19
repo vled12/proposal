@@ -7,19 +7,19 @@ import argparse
 import sys
 import re
 from pathlib import Path
-from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, session, flash, g, abort
+from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, \
+    session, flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField, RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from werkzeug.utils import secure_filename
 
-from proposal import server, db, lm
-
-from proposal.db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
+from . import server, db, lm, case_change
+from .db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
 
 parser = argparse.ArgumentParser(description='Launch service server.',
-                                 usage='''tkp <port> [<args>]
+                                 usage='''proposal <port> [<args>]
     ''')
 parser.add_argument('port', help='Port to serve')
 parser.add_argument('--nonsecure', '-n', action='store_true', help='Run non-secured, just http')
@@ -27,18 +27,15 @@ parser.add_argument('--debug', '-D', action='store_true', help='Debugging mode')
 
 args = parser.parse_args(sys.argv[1:])
 
-# Рабочая директория
-mod_path = os.path.dirname(__file__)
+# Module directory
+module_path = os.path.dirname(__file__)
 
 # правила загрузки файлов
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'docx'}
 
 
-def imports():
-    for name, val in list(globals().items()):
-        if isinstance(val, types.ModuleType):
-            yield val
+
 
 
 # Конфигурация бэкенда
@@ -64,8 +61,8 @@ class RegistrationForm(FlaskForm):
     username = StringField('User', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     role = RadioField('Role',
-                      choices = [(ROLE_USER, "Пользователь"),(ROLE_ADMIN, "Администратор"),(ROLE_DEV, "Разработчик")],
-                      default = ROLE_USER,   validators=[DataRequired()])
+                      choices=[(ROLE_USER, "Пользователь"), (ROLE_ADMIN, "Администратор"), (ROLE_DEV, "Разработчик")],
+                      default=ROLE_USER, validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
@@ -117,11 +114,12 @@ def add_header(r):
 def index():
     return render_template('index.htm')
 
-#@server.route('/static/mat/questionnaire/<template>.htm')
-#@login_required
-#def questionnaire(template):
-    #return render_template('static/mat/questionnaire/'+template+'.htm')
-    #return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
+
+# @server.route('/static/mat/questionnaire/<template>.htm')
+# @login_required
+# def questionnaire(template):
+# return render_template('static/mat/questionnaire/'+template+'.htm')
+# return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
 
 @server.route("/get/<type>", methods=["GET", "POST"])
 @login_required
@@ -139,23 +137,22 @@ def show_result(type):
     lang = query['lang']
     query['delivery'] = list2dictID(json.loads(query['delivery']))
 
-    #Extract amount value according to text in the beginning
-    for id,item in query['delivery'].items():
+    # Extract amount value according to text in the beginning
+    for id, item in query['delivery'].items():
         numIndex = re.compile("(\s*\[\d+\]\s*)")
         match = numIndex.match(item["text"])
         if match:
             numText = match.groups()[0]
-            #Remove chars [ and ] and whitespaces
-            num = int("".join(numText.replace(']','').replace('[','').split()))
+            # Remove chars [ and ] and whitespaces
+            num = int("".join(numText.replace(']', '').replace('[', '').split()))
             item.update({"amount": num})
-            #Remove numText
-            item["text"] = item["text"].replace(numText,"")
+            # Remove numText
+            item["text"] = item["text"].replace(numText, "")
         else:
             item.update({"amount": 1})
 
-
     if type == 'template':
-        text = query["TemplateText"]#.replace('\n','<br>\n') #работает не стабильно с line statement
+        text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
         return render_template_string(text, set=query)
 
     if query['wiki_link'] != '':
@@ -228,7 +225,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             fullname = os.path.join(server.config['UPLOAD_FOLDER'], filename)
             file.save(fullname)
-            tkp.case_change.convert_file(fullname, "tmp/converted.docx")
+            case_change.convert_file(fullname, "tmp/converted.docx")
             return send_file(os.getcwd() + '/tmp/converted.docx', as_attachment=True)
     return ""
 
@@ -238,15 +235,18 @@ def upload_file():
 def send_js(filename):
     return send_from_directory(mod_path + '/static/js', filename)
 
+
 @server.route('/js/defaultDelivery.js')
 # @login_required
 def send_defaultDelivery_js():
     return send_from_directory(os.getcwd() + '/static/js', "defaultDelivery.js")
 
+
 @server.route('/css/<path:filename>')
 # @login_required
 def send_css(filename):
     return send_from_directory(mod_path + '/static/css', filename)
+
 
 @server.route('/lib/<path:filename>')
 # @login_required
@@ -290,7 +290,7 @@ def login():
         flash('Некорректный ввод данных. Повторите снова.')
 
     return render_template('login.htm',
-                           title='Вход в систему',
+                           title='Login to system',
                            form=form)
 
 
@@ -328,36 +328,32 @@ def admin_panel():
                            title='Система администрирования',
                            regform=regForm, editform=editForm, userList=User.query)
 
+
 @server.route('/editor', methods=['GET', 'POST'])
 def editor():
     return render_template('editor.htm')
 
-def remove_from_list(x, l):
-    for _ in range(l.count(x)):
-        l.remove(x)
-    return 0
-
-def unique_list(seq):
-    return list(set(seq))
-
-def main():
+def start():
     # Print used modules
     if args.debug:
+        def imports():
+            for name, val in list(globals().items()):
+                if isinstance(val, types.ModuleType):
+                    yield val
+
         for module in imports():
             try:
-                print("using module " + module.__name__ + " version " + module.__version__)
+                print("Using module " + module.__name__ + " version " + module.__version__)
             except(AttributeError):
-                print("using module " + module.__name__ + " with no particular version")
+                print("Using module " + module.__name__ + " with no particular version")
 
     server.jinja_env.globals.update(remove_from_list=remove_from_list, unique_list=unique_list)
 
     if "tmp" not in os.listdir("."):
-        os.mkdir("tmp") # create temporary folder
+        os.mkdir("tmp")  # Create temporary folder
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
-               # ,   ssl_context=('cert.pem', 'key.pem')
-               , debug = args.debug
+               , debug=args.debug
                , ssl_context=('adhoc') if not args.nonsecure else None
                , threaded=True)
-

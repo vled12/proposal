@@ -109,3 +109,11 @@ def add_glossary(page, dict):
             row = "<tr><td>" + key + "</td><td>" + value + "</td></tr>"
             glossary_table.append(etree.XML(row))
         result.write(page, pretty_print=True, encoding='utf-8')
+
+def remove_from_list(x, l):
+    for _ in range(l.count(x)):
+        l.remove(x)
+    return 0
+
+def unique_list(seq):
+    return list(set(seq))
