@@ -112,7 +112,9 @@ def add_header(r):
 @server.route('/')
 @login_required
 def index():
-    return render_template('index.htm')
+    products = os.listdir("static/mat/questionnaire/")
+    print(products)
+    return render_template('index.htm', products = products)
 
 
 # @server.route('/static/mat/questionnaire/<template>.htm')
@@ -135,6 +137,7 @@ def show_result(type):
         return send_file(os.getcwd() + '/tmp/cfg.json', as_attachment=True)
 
     lang = query['lang']
+    product = query['product']
     query['delivery'] = list2dictID(json.loads(query['delivery']))
 
     # Extract amount value according to text in the beginning
@@ -155,15 +158,17 @@ def show_result(type):
         text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
         return render_template_string(text, set=query)
 
+    text_path = "static/mat/text/" + product + "/"
+
     if query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
         try:
             with requests.get(wikilink) as response:
-                with open("static/mat/text/" + lang + "_03_wiki.htm", 'wb+') as wiki:
+                with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     wiki.write(response.content)
-                tree = html.parse("static/mat/text/" + lang + "_03_wiki.htm",
+                tree = html.parse(text_path + lang + "_03_wiki.htm",
                                   parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
-                with open("static/mat/text/" + lang + "_03_wiki.htm", 'wb+') as wiki:
+                with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     infobox = tree.xpath("//table[contains(@class,'infobox')]")[0]
                     wiki.write(
                         html.tostring(infobox, pretty_print=True, encoding='utf-8'))  # delete anything but infobox
@@ -171,7 +176,7 @@ def show_result(type):
             print("wiki info is not available")
     else:
         try:
-            os.remove("static/mat/text/" + lang + "_03_wiki.htm")
+            os.remove(text_path + lang + "_03_wiki.htm")
         except FileNotFoundError:
             pass
 
@@ -180,7 +185,7 @@ def show_result(type):
     # tree = html.parse(res.content)
     # print(res.content)
 
-    articles = ["static/mat/text/" + x for x in sorted(os.listdir("static/mat/text")) if
+    articles = [text_path + x for x in sorted(os.listdir(text_path)) if
                 (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
 
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:

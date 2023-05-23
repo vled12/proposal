@@ -16,9 +16,9 @@ $(document).ready(function () {
 
     // Initial product configuration
     const productElement = $('#product')
-    const configElement = $("#config")
+    const configElement = $("#questionnaire")
     productElement.on('change', function () {
-        configElement.load("static/mat/questionnaire/" + this.value + ".htm",
+        configElement.load("static/mat/questionnaire/" + this.value,
             function (response, status, xhr) {
                 loadFormFromCookie(configElement);
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     // Handling the query
     $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
-        const params = configElement.serializeArray();// Form parameters
+        const params = $('#config').serializeArray();// Form parameters
         const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
         // Add Delivery tree data
         params.push({name: "delivery", value: delivery})
