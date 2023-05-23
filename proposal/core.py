@@ -197,7 +197,7 @@ def show_result(type):
     if type == "pdf" or type == "docx":
         # with open("print.html", 'w', encoding='utf-8') as f:
         #    f.write(render_template('result.htm', set=set))
-        htm2x("tmp/print.html", type, lang, config['pandoc']['location'])
+        htm2x("tmp/print.html", type, lang, query.get('CompactVersion'))
         # , mimetype="application/pdf"
         # , attachment_filename="print.pdf"
         return send_file(os.getcwd() + '/tmp/print.' + type, as_attachment=True)

@@ -63,7 +63,7 @@ def put_in_body(args):
     return text#io.BytesIO(bytes(text, encoding='utf-8'))
 
 
-def htm2x(f, type, lang, location):
+def htm2x(f, type, lang, compact):
     # delete cell spaning cause of pandoc no support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
     for table in tree.xpath(".//table"):
@@ -79,8 +79,8 @@ def htm2x(f, type, lang, location):
     with open(f, 'wb') as file:
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
 
-    pypandoc.convert_file(source_file="tmp/print.html", to='docx',outputfile='tmp/print.docx',
-                         extra_args=["--reference-doc","static/mat/templates/"+lang+"_msword.docx"])
+    pypandoc.convert_file(source_file="tmp/print.html", to=type, outputfile='tmp/print.docx',
+                         extra_args=["--reference-doc","static/mat/templates/" + lang + ("_compact" if compact else "") + "_msword.docx"])
     #subprocess.run([location,'-o','tmp/print.'+type,f,'--reference-doc=.\/static\/mat\/templates\/'+lang+'_msword.'+type])
     #subprocess.run(['d:\/distr\/pandoc-2.7-windows-x86_64\/pandoc.exe', '-o', 'tmp/print.' + type, f, '--reference-doc=.\/static\/mat\/templates\/' + lang + '_msword.' + type])
 
