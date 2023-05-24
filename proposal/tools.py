@@ -10,13 +10,13 @@ DEV = True
 # Рабочая директория
 mod_path = os.path.dirname(__file__)
 
-def align_images(input):#TODO убрать сьедание соседних jinja тегов
+def align_images(input):#TODO explain jinja tags near image problem in doc
     prototype = open("static/mat/img.prototype.htm").read()
     for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
         replacement = etree.XML(prototype)
         try:
             # replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
-            replacement.xpath(".//h4")[0].text = image.attrib["alt"]  # FIX ME: evade hardlink to h4 tag
+            replacement.xpath(".//h4")[0].text = image.attrib["alt"]  # TODO: evade hardlink to h4 tag
         except(KeyError):
             if DEV: print("Image caption (alt) not found")
         # replacement.xpath(".//img")[0].attrib["src"]=image.attrib["src"]

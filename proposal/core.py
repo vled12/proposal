@@ -188,15 +188,15 @@ def show_result(type):
     articles = [text_path + x for x in sorted(os.listdir(text_path)) if
                 (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
 
+    if DEV:
+        with open("tmp/template.html", 'w+', encoding='utf-8') as f:
+            f.write(put_in_body(articles))
+
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
         f.write(render_template_string(put_in_body(articles), set=query))
 
     add_glossary('tmp/print.html', 'static/mat/dict.csv')
-    # возможное решение по обработке jinja тегов с картиками
-    # rendered = html.parse('tmp/print.html',
-    #                   parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
-    # align_images(rendered)
-    # rendered.write('tmp/print.html', pretty_print=True, encoding='utf-8')
+
     if type == "preview":
         return send_file(os.getcwd() + '/tmp/print.html')  # render_template('result.htm', set=set)
     if type == "pdf" or type == "docx":
