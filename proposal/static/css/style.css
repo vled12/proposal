@@ -41,10 +41,14 @@ td, th {
     font-style: italic;
 }
 
-.figure-caption h4{
-    font-size: 1rem;
-    font-weight: inherit;
+.figure{
+    width: 100%;
     text-align: center;
+}
+
+.figure-caption h4{
+    font-size: 0.8rem;
+    font-weight: inherit;
 }
 
 .loginWrapper {
