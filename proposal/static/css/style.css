@@ -41,6 +41,11 @@ td, th {
     font-style: italic;
 }
 
+.document p{
+    margin-bottom: .5rem;
+    text-align: justify;
+}
+
 .figure{
     width: 100%;
     text-align: center;
