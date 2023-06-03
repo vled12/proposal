@@ -6,6 +6,7 @@ import configparser
 import argparse
 import sys
 import re
+import pypandoc
 from pathlib import Path
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, \
     session, flash, g, abort
@@ -41,7 +42,8 @@ ALLOWED_EXTENSIONS = {'docx'}
 # Server configuration
 config = configparser.ConfigParser()
 config.read('run.cfg')
-os.environ.setdefault('PYPANDOC_PANDOC', config['pandoc']['location'])
+# obsolete
+# os.environ.setdefault('PYPANDOC_PANDOC', config['pandoc']['location'])
 
 # Internal libraries
 from proposal.tools import *
@@ -354,6 +356,13 @@ def start():
 
     if "tmp" not in os.listdir("."):
         os.mkdir("tmp")  # Create temporary folder
+
+    try:
+        print("Pandoc installed version:", pypandoc.get_pandoc_version())
+    except(OSError):
+        print("Installing pandoc to default location")
+        pypandoc.download_pandoc(delete_installer=True)
+
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.view_functions['static'] = login_required(server.send_static_file)
