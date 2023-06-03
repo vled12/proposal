@@ -2,12 +2,14 @@
 
 <table>
     <tr>
+        <th>Имя</th>
         <th>E-mail</th>
         <th>Роль</th>
         <th>id</th>
 	</tr>
     {% for user in userList %}
     <tr>
+        <th>{{ user.nickname }}</th>
         <th>{{ user.email }}</th>
         <th>{{ user.role }}</th>
         <th>{{ user.id }}</th>
