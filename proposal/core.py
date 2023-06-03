@@ -30,7 +30,7 @@ args = parser.parse_args(sys.argv[1:])
 # Module directory
 module_path = os.path.dirname(__file__)
 
-# правила загрузки файлов
+# File upload rules
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'docx'}
 
@@ -38,17 +38,16 @@ ALLOWED_EXTENSIONS = {'docx'}
 
 
 
-# Конфигурация бэкенда
+# Server configuration
 config = configparser.ConfigParser()
 config.read('run.cfg')
 os.environ.setdefault('PYPANDOC_PANDOC', config['pandoc']['location'])
 
-# Загружаем внутренние библиотеки
+# Internal libraries
 from proposal.tools import *
 import proposal.case_change
 
 
-# Форма входа
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email("Пожалуйста введи e-mail адрес")])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -56,7 +55,6 @@ class LoginForm(FlaskForm):
     login = SubmitField('Login')
 
 
-# Форма добавления пользователя
 class RegistrationForm(FlaskForm):
     username = StringField('User', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
@@ -71,15 +69,14 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(nickname=username.data).first()
         if user is not None:
-            raise ValidationError('Please use a different username.')
+            raise ValidationError('Данное имя пользователя уже используется.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Please use a different email address.')
+            raise ValidationError('Данный почтовый адрес уже используется.')
 
 
-# Форма редактирования пользователя
 class EditUserForm(FlaskForm):
     id = IntegerField('User ID')  # , validators=[DataRequired()])
     edit = SubmitField('Delete user')
@@ -113,7 +110,8 @@ def add_header(r):
 @login_required
 def index():
     products = os.listdir("static/mat/questionnaire/")
-    print(products)
+    if args.debug:
+        print("Product list:", products)
     return render_template('index.htm', products = products)
 
 
@@ -214,6 +212,7 @@ def allowed_file(filename):
 
 
 @server.route('/convert-file', methods=['GET', 'POST'])
+@login_required
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -236,25 +235,22 @@ def upload_file():
 
 
 @server.route('/js/<path:filename>')
-# @login_required
 def send_js(filename):
     return send_from_directory(mod_path + '/static/js', filename)
 
 
 @server.route('/js/defaultDelivery.js')
-# @login_required
+@login_required
 def send_defaultDelivery_js():
     return send_from_directory(os.getcwd() + '/static/js', "defaultDelivery.js")
 
 
 @server.route('/css/<path:filename>')
-# @login_required
 def send_css(filename):
     return send_from_directory(mod_path + '/static/css', filename)
 
 
 @server.route('/lib/<path:filename>')
-# @login_required
 def send_lib(filename):
     return send_from_directory(mod_path + '/static/lib', filename)
 
@@ -308,6 +304,7 @@ def logout():
 
 
 @server.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin_panel():
     # Forbid access
     if not current_user.is_authenticated or current_user.role != ROLE_ADMIN:
@@ -335,6 +332,7 @@ def admin_panel():
 
 
 @server.route('/editor', methods=['GET', 'POST'])
+@login_required
 def editor():
     return render_template('editor.htm')
 
@@ -358,6 +356,7 @@ def start():
         os.mkdir("tmp")  # Create temporary folder
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    server.view_functions['static'] = login_required(server.send_static_file)
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
                , debug=args.debug
                , ssl_context=('adhoc') if not args.nonsecure else None
