@@ -138,7 +138,10 @@ def show_result(type):
 
     lang = query['lang']
     product = query['product']
-    query['delivery'] = list2dictID(json.loads(query['delivery']))
+    if not query.get('delivery'):
+        query['delivery'] = {}
+    else:
+        query['delivery'] = list2dictID(json.loads(query['delivery']))
 
     # Extract amount value according to text in the beginning
     for id, item in query['delivery'].items():
@@ -160,7 +163,7 @@ def show_result(type):
 
     text_path = "static/mat/text/" + product + "/"
 
-    if query['wiki_link'] != '':
+    if query.get("wiki_link") and query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
         try:
             with requests.get(wikilink) as response:

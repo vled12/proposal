@@ -20,10 +20,17 @@ $(document).ready(function () {
     productElement.on('change', function () {
         configElement.load("static/mat/questionnaire/" + this.value,
             function (response, status, xhr) {
-                loadFormFromCookie(configElement);
+                //Disable until fixing several products issue
+                //loadFormFromCookie($('#config'));
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
-
+                
+                //Dynamically load default delivery
+                $.getScript("static/mat/text/" + productElement.val() + '/defaultDelivery.js', function( data, textStatus, jqxhr ) {
+                  initDeliveryTree();
+                });
+                
+                
                 //Pop-up windows for detailed configuration
                 $(".dialog").dialog({
                     autoOpen: false,
@@ -33,7 +40,7 @@ $(document).ready(function () {
                     appendTo: "#form"
                 });//.parent().css('z-index', '1000');
 
-                initDeliveryTree();
+
 
                 // Automatically fill "Title" attribute with configuration tags
                 // Required just for developers
@@ -54,10 +61,14 @@ $(document).ready(function () {
     // Handling the query
     $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
         const params = $('#config').serializeArray();// Form parameters
-        const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
-        // Add Delivery tree data
-        params.push({name: "delivery", value: delivery})
-        saveFormToCookie(configElement);
+        
+        //Check if exists
+        if ($('#delivery').length) {
+          const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
+          // Add Delivery tree data
+          params.push({name: "delivery", value: delivery})
+        }
+        saveFormToCookie($('#config'));
 
         // Delivery tree save is currently disabled to 4096 byte Cookie limit
         //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
@@ -149,7 +160,14 @@ $(document).ready(function () {
 });//
 
 
-
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        //async: true
+    });
+}
 
 
 
