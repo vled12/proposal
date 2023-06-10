@@ -135,7 +135,9 @@ def show_result(type):
             # f.write(request.get_data(cache=True, as_text=True, parse_form_data=False))
             f.write(json.dumps(query))
         return send_file(os.getcwd() + '/tmp/cfg.json', as_attachment=True)
-
+    
+    query = {k:v for k, v in query.items() if v != "off" }
+  
     lang = query['lang']
     product = query['product']
     if not query.get('delivery'):

@@ -24,7 +24,8 @@ $(document).ready(function () {
             function () {
 
             //Disable until fixing several products issue
-                loadFormFromCookie($(productElement).val(), $(configElement));
+                //loadFormFromCookie($(productElement).val(), $(configElement));
+                loadForm($(configElement), Cookies.get($(productElement).val()))
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
 
@@ -63,15 +64,19 @@ $(document).ready(function () {
 
     // Handling the query
     function query(action, type) {
-        const params = $(configElement).serializeArray();// Form parameters
+        //const params = $(configElement).serializeArray();// Form parameters
+        const params = $(configElement).serializeJSON();
+        Cookies.set($(productElement).val(), params, {expires: 365, samesite: "strict"});
+
         deliveryElement = document.getElementById('delivery')
         //Check if exists
         if ($(deliveryElement).length) {
             const delivery = JSON.stringify($(deliveryElement).jstree(true).get_json('#', {flat: true}));
             // Add Delivery tree data
-            params.push({name: "delivery", value: delivery})
+            params["delivery"] = delivery;
         }
-        saveFormToCookie($(productElement).val(), configElement);
+
+        //saveFormToCookie($(productElement).val(), configElement);
 
         // Delivery tree save is currently disabled to 4096 byte Cookie limit
         //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
@@ -86,7 +91,7 @@ $(document).ready(function () {
                 myCodeMirror.save();
                 const templateText = $("#TemplateText").val();
                 // Add Delivery tree data
-                params.push({name: "TemplateText", value: templateText})
+                params["TemplateText"] = templateText
                 $("#preview").load('/get/template', params);
             }
 

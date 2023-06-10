@@ -26,27 +26,9 @@
  * </script>
  */
 
-(function ($) {
-    $.fn.serializeJSON = function () {
-        var json = {};
-        jQuery.map($(this).serializeArray(), function (n, _) {
-            json[n['name']] = n['value'];
-        });
-        // Include non-checked inputs
-        jQuery.map($(this).find('input[type=checkbox]:not(:checked)'), function (n, _) {
-            json[n.name] = "off";
-        });
-        return json;
-    };
-})(jQuery);
 
-ensureNumber = function (n) {
-    n = parseInt(n, 10);
-    if (isNaN(n) || n <= 0) {
-        n = 0;
-    }
-    return n;
-};
+
+
 
 saveFormToCookie = function (name, form) {
     //var name = $(form).attr('id');
