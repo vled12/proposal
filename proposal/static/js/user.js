@@ -7,7 +7,7 @@ $.ajaxSetup({
 const mme = new Map([['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'], ['pdf', 'application/pdf']])
 
 $(document).ready(function () {
-    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
+    const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
         mode: "jinja2",
         lineNumbers: true,
         tabSize: 2,
@@ -15,35 +15,36 @@ $(document).ready(function () {
     });
 
     // Initial product configuration
-    const productElement = $('#product')
-    const configElement = $("#questionnaire")
-    productElement.on('change', function () {
-        configElement.load("static/mat/questionnaire/" + this.value,
+    const productElement = document.getElementById('product')
+    const configElement = document.getElementById('config')
+    const questionnaireElement = document.getElementById('questionnaire')
+    $(productElement).on('change', function () {
+        $(questionnaireElement).load("static/mat/questionnaire/" + this.value,
             function () {
                 //Disable until fixing several products issue
-                //loadFormFromCookie($('#config'));
+                //loadFormFromCookie($(configElement));
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
 
                 //Dynamically load default delivery depending on product
-                $.getScript("static/mat/text/" + productElement.val() + '/defaultDelivery.js', function () {
+                $.getScript("static/mat/text/" + $(productElement).val() + '/defaultDelivery.js', function () {
                     initDeliveryTree();
                 });
 
-
+                const form = $('#form')
                 //Pop-up windows for detailed configuration
                 $(".dialog").dialog({
                     autoOpen: false,
                     width: 600,
                     modal: true,
-                    position: {my: "left top", at: "left top", of: $('#form')},
+                    position: {my: "left top", at: "left top", of: form},
                     appendTo: "#form"
                 });//.parent().css('z-index', '1000');
 
 
                 // Automatically fill "Title" attribute with configuration tags
                 // Required just for developers
-                $('#form').find("input, select, textarea").each(function () {
+                form.find("input, select, textarea").each(function () {
                     $(this).attr("title", "Name: " + $(this).attr("name"))
                     // For select objects add options list
                     if ($(this).is("select")) {
@@ -60,15 +61,15 @@ $(document).ready(function () {
 
     // Handling the query
     function query(action, type) {
-        const params = $('#config').serializeArray();// Form parameters
-
+        const params = $(configElement).serializeArray();// Form parameters
+        deliveryElement = document.getElementById('delivery')
         //Check if exists
-        if ($('#delivery').length) {
-            const delivery = JSON.stringify($('#delivery').jstree(true).get_json('#', {flat: true}));
+        if ($(deliveryElement).length) {
+            const delivery = JSON.stringify($(deliveryElement).jstree(true).get_json('#', {flat: true}));
             // Add Delivery tree data
             params.push({name: "delivery", value: delivery})
         }
-        saveFormToCookie($('#config'));
+        saveFormToCookie(configElement);
 
         // Delivery tree save is currently disabled to 4096 byte Cookie limit
         //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
@@ -126,7 +127,7 @@ $(document).ready(function () {
                 xhr.send($.param(params, true));
             }
         }
-    };
+    }
 
     $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
         const argv = this.id.split("-")
@@ -140,16 +141,18 @@ $(document).ready(function () {
 
     // Template editor
     // Appearance
-    $("#CheckTemplate").click(function (e) {
+    showTemplateElement = document.getElementById('ShowTemplate')
+    templateElement = document.getElementById('template')
+    showTemplateElement.click(function (e) {
         if ($(this).is(':checked')) {
-            $("#template").show(100)
+            templateElement.show(100)
         } else {
-            $("#template").hide(100)
+            templateElement.hide(100)
         }
     });
     // Default state
-    $("#template").hide(100);
-    $("#CheckTemplate").prop("checked", false);
+    $(templateElement).hide(100);
+    $(showTemplateElement).prop("checked", false);
 
     //Line numeration for certain objects
     $(function () {
@@ -160,8 +163,8 @@ $(document).ready(function () {
     });
 
     //Choose first product at start
-    const firstProduct = productElement.children().first().val()
-    productElement.val(firstProduct).trigger('change');
+    //const firstProduct = productElement.children().first().val()
+    //productElement.val(firstProduct).trigger('change');
 });//
 
 

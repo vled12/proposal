@@ -239,23 +239,23 @@ def upload_file():
     return ""
 
 
-@server.route('/js/<path:filename>')
+@server.route('/static/js/<path:filename>')
 def send_js(filename):
     return send_from_directory(mod_path + '/static/js', filename)
 
 
-@server.route('/js/defaultDelivery.js')
+@server.route('/static/js/defaultDelivery.js')
 @login_required
 def send_defaultDelivery_js():
     return send_from_directory(os.getcwd() + '/static/js', "defaultDelivery.js")
 
 
-@server.route('/css/<path:filename>')
+@server.route('/static/css/<path:filename>')
 def send_css(filename):
     return send_from_directory(mod_path + '/static/css', filename)
 
 
-@server.route('/lib/<path:filename>')
+@server.route('/static/lib/<path:filename>')
 def send_lib(filename):
     return send_from_directory(mod_path + '/static/lib', filename)
 

@@ -58,9 +58,9 @@
         </div>
         <div class="mb-1 form-row">
           <div class="col">
-            <div class="form-check col-form-label"><input class="form-check-input" type="checkbox" id="CheckTemplate" name="CheckTemplate"><label class="form-check-label" for="CheckTemplate">Проверка шаблона</label></div>
+            <div class="form-check col-form-label"><input class="form-check-input" type="checkbox" id="ShowTemplate" name="ShowTemplate"><label class="form-check-label" for="ShowTemplate">Проверка шаблона</label></div>
           </div>
-          <div class="col"><button id="get-template" href="javascript:void(0)" class="btn btn-secondary btn-sm">Проверить (F9)</button></div>
+          <div class="col"><a id="get-template" href="javascript:void(0)" class="btn btn-secondary btn-sm" role="button">Проверить (F9)</a></div>
         </div>
         <form id="config">
           <div class="form-row">
@@ -86,7 +86,7 @@
                 <!--<option value="hpp">АСУ ТП ГЭС</option>
                   <option value="tpp">АСУ ТП ТЭС</option>-->
                 #for item in products
-                <option value="{{ item }}">{{ item }}</option>
+                  <option value="{{ item }}">{{ item }}</option>
                 #endfor
               </select>
             </div>
@@ -97,6 +97,7 @@
     </nav>
     <main role="main" class="col-md-7 col-lg-7 ml-sm-auto col-lg-7 pt-3 px-4">
       <div id="template" class="border">
+        <!--suppress HtmlFormInputWithoutLabel -->
         <textarea name="TemplateText" id="TemplateText" class="form-control form-control-sm code" rows="25" spellcheck="false"></textarea>
       </div>
       <div id="preview" class=document>
@@ -109,12 +110,12 @@
   integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-<script type="text/javascript" src="js/formtocookie.js"></script>
+<script type="text/javascript" src="static/js/formtocookie.js"></script>
 
-<script type="text/javascript" src="js/jstree-cfg.js"></script>
-<script src="js/jquery-linedtextarea.js"></script>
-<script type="text/javascript" src="js/user.js"></script>
-<script type="text/javascript" src="js/open-config.js"></script>
-<script type="text/javascript" src="js/modal-windows.js"></script>
-<script type="text/javascript" src="js/convert-file.js"></script>
+<script type="text/javascript" src="static/js/jstree-cfg.js"></script>
+<script src="static/js/jquery-linedtextarea.js"></script>
+<script type="text/javascript" src="static/js/user.js"></script>
+<script type="text/javascript" src="static/js/open-config.js"></script>
+<script type="text/javascript" src="static/js/modal-windows.js"></script>
+<script type="text/javascript" src="static/js/convert-file.js"></script>
 {% endblock %}
