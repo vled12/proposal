@@ -24,7 +24,7 @@ $(document).ready(function () {
             function () {
 
             //Disable until fixing several products issue
-                loadFormFromCookie($(configElement));
+                loadFormFromCookie($(productElement).val(), $(configElement));
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
 
@@ -71,7 +71,7 @@ $(document).ready(function () {
             // Add Delivery tree data
             params.push({name: "delivery", value: delivery})
         }
-        saveFormToCookie(configElement);
+        saveFormToCookie($(productElement).val(), configElement);
 
         // Delivery tree save is currently disabled to 4096 byte Cookie limit
         //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
@@ -105,9 +105,7 @@ $(document).ready(function () {
 
                         // Match the extension
                         let extension = type
-                        if (type === "cfg") {
-                            extension = "json"
-                        }
+                        if (type === "cfg") extension = "json";
 
                         // Form filename
                         let today = new Date()

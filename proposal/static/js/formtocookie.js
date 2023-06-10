@@ -48,15 +48,15 @@ ensureNumber = function (n) {
     return n;
 };
 
-saveFormToCookie = function (form) {
-    var name = $(form).attr('id');
-    var data = $(form).serializeJSON();
+saveFormToCookie = function (name, form) {
+    //var name = $(form).attr('id');
+    const data = $(form).serializeJSON();
     Cookies.set(name, data, {expires: 365, samesite: "strict"});
 };
 
 
-loadFormFromCookie = function (form) {
-    var name = $(form).attr('id');
+loadFormFromCookie = function (name, form) {
+    //var name = $(form).attr('id');
     const data = Cookies.get(name);
     if (typeof data === 'undefined') {
         return;
