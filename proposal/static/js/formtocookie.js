@@ -32,6 +32,10 @@
         jQuery.map($(this).serializeArray(), function (n, _) {
             json[n['name']] = n['value'];
         });
+        // Include non-checked inputs
+        jQuery.map($(this).find('input[type=checkbox]:not(:checked)'), function (n, _) {
+            json[n.name] = "off";
+        });
         return json;
     };
 })(jQuery);
@@ -48,7 +52,6 @@ saveFormToCookie = function (form) {
     var name = $(form).attr('id');
     var data = $(form).serializeJSON();
     Cookies.set(name, data, {expires: 365, samesite: "strict"});
-    Cookies.set()
 };
 
 
@@ -60,7 +63,7 @@ loadFormFromCookie = function (form) {
     }
 
     JSON.parse(data, function (key, value) {
-        if (typeof (value) !== 'object') {
+        if ((typeof (value) !== 'object') && key != 'product') {
             var el = $(form).find('*[name="' + key + '"]');
             if (el.is('input')) {
                 if (false) {
@@ -68,7 +71,8 @@ loadFormFromCookie = function (form) {
                 } else if (el.attr('type') === 'number') {
                     el.val(ensureNumber(value));
                 } else if (el.attr('type') === 'checkbox') {
-                    if (el.val() === value) $(el).prop('checked', true);
+                    if (value == 'on') $(el).prop('checked', true);
+                    if (value == 'off') $(el).prop('checked', false);
                 } else if (el.attr('type') === 'radio') {
                     $.each(el, function (_, elc) {
                         if (elc.value === value) $(elc).prop('checked', true);

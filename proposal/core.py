@@ -368,6 +368,7 @@ def start():
 
 
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    server.config['SESSION_COOKIE_SAMESITE'] = "Strict"
     server.view_functions['static'] = login_required(server.send_static_file)
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
                , debug=args.debug

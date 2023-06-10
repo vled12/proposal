@@ -19,10 +19,12 @@ $(document).ready(function () {
     const configElement = document.getElementById('config')
     const questionnaireElement = document.getElementById('questionnaire')
     $(productElement).on('change', function () {
+        Cookies.set("product", $(this).val(), {expires: 365, samesite: "strict"});
         $(questionnaireElement).load("static/mat/questionnaire/" + this.value,
             function () {
-                //Disable until fixing several products issue
-                //loadFormFromCookie($(configElement));
+
+            //Disable until fixing several products issue
+                loadFormFromCookie($(configElement));
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
                 //let delivery = Cookies.get('delivery');
 
@@ -143,11 +145,11 @@ $(document).ready(function () {
     // Appearance
     showTemplateElement = document.getElementById('ShowTemplate')
     templateElement = document.getElementById('template')
-    showTemplateElement.click(function (e) {
+    $(showTemplateElement).click(function (e) {
         if ($(this).is(':checked')) {
-            templateElement.show(100)
+            $(templateElement).show(100)
         } else {
-            templateElement.hide(100)
+            $(templateElement).hide(100)
         }
     });
     // Default state
@@ -162,9 +164,12 @@ $(document).ready(function () {
         );
     });
 
-    //Choose first product at start
-    //const firstProduct = productElement.children().first().val()
-    //productElement.val(firstProduct).trigger('change');
+    //Load product from cookies
+    const selectedProduct = Cookies.get('product');
+    if (selectedProduct) {
+        $(productElement).val(selectedProduct);
+        $(productElement).val(selectedProduct).trigger('change')
+    }
 });//
 
 
