@@ -84,7 +84,14 @@ $(document).ready(function () {
         // Handle depends on type
         if (action === "get") {
             if (type === "preview") {
-                $("#preview").load('/get/preview', params);
+                $("#preview").load('/get/preview', params, function(response, status, xhr) {
+                  //Handle server errors to show WERKZEUG debug log
+                  if (xhr.status === 500) {
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText);
+                    tab.document.close();
+                  }
+                });
             }
 
             if (type === "template") {
