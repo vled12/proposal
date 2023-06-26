@@ -1,9 +1,3 @@
-$.ajaxSetup({
-    // Disable caching of AJAX responses
-    cache: false
-});
-
-
 const mme = new Map([['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'], ['pdf', 'application/pdf']])
 
 $(document).ready(function () {
