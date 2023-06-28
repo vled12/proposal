@@ -1,6 +1,6 @@
 const mme = new Map([['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'], ['pdf', 'application/pdf']])
 
-$(document).ready(function () {
+$(function () {
     const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('TemplateText'), {
         mode: "jinja2",
         lineNumbers: true,
@@ -40,8 +40,9 @@ $(document).ready(function () {
 
 
                 // Automatically fill "Title" attribute with configuration tags
-                // Required just for developers
-                form.find("input, select, textarea").each(function () {
+                // Required for development purposes
+                const elements = $("input, select, textarea")
+                form.find(elements).each(function () {
                     $(this).attr("title", "Name: " + $(this).attr("name"))
                     // For select objects add options list
                     if ($(this).is("select")) {
@@ -127,9 +128,11 @@ $(document).ready(function () {
         }
     }
 
-    $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").click(function () {
-        const argv = this.id.split("-")
-        query(argv[0], argv[1])
+    $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").on({
+        click: function () {
+            const argv = this.id.split("-")
+            query(argv[0], argv[1])
+        }
     });
 
     addEventListener('keydown', (e) => {
@@ -139,13 +142,15 @@ $(document).ready(function () {
 
     // Template editor
     // Appearance
-    showTemplateElement = document.getElementById('ShowTemplate')
-    templateElement = document.getElementById('template')
-    $(showTemplateElement).click(function () {
-        if ($(this).is(':checked')) {
-            $(templateElement).show(100)
-        } else {
-            $(templateElement).hide(100)
+    const showTemplateElement = document.getElementById('ShowTemplate')
+    const templateElement = document.getElementById('template')
+    $(showTemplateElement).on({
+        click: function () {
+            if ($(this).is(':checked')) {
+                $(templateElement).show(100)
+            } else {
+                $(templateElement).hide(100)
+            }
         }
     });
     // Default state
