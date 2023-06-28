@@ -17,7 +17,7 @@ $(document).ready(function () {
         $(questionnaireElement).load("static/mat/questionnaire/" + this.value,
             function () {
 
-            //Disable until fixing several products issue
+                //Disable until fixing several products issue
                 //loadFormFromCookie($(productElement).val(), $(configElement));
                 loadForm($(configElement), Cookies.get($(productElement).val()))
                 // Delivery tree restore is currently disabled to 4096 byte Cookie limit
@@ -62,37 +62,29 @@ $(document).ready(function () {
         const params = $(configElement).serializeJSON();
         Cookies.set($(productElement).val(), params, {expires: 365, samesite: "strict"});
 
-        deliveryElement = document.getElementById('delivery')
+        const deliveryElement = document.getElementById('delivery')
         //Check if exists
         if ($(deliveryElement).length) {
-            const delivery = JSON.stringify($(deliveryElement).jstree(true).get_json('#', {flat: true}));
             // Add Delivery tree data
-            params["delivery"] = delivery;
+            params["delivery"] = JSON.stringify($(deliveryElement).jstree(true).get_json('#', {flat: true}));
         }
-
-        //saveFormToCookie($(productElement).val(), configElement);
-
-        // Delivery tree save is currently disabled to 4096 byte Cookie limit
-        //Cookies.set('delivery', $('#delivery').jstree(true).get_json('#', {flat: true}), {expires: 365});
 
         // Handle depends on type
         if (action === "get") {
             if (type === "preview") {
-                $("#preview").load('/get/preview', params, function(response, status, xhr) {
-                  //Handle server errors to show WERKZEUG debug log
-                  if (xhr.status === 500) {
-                    var tab = window.open('about:blank', '_blank');
-                    tab.document.write(xhr.responseText);
-                    tab.document.close();
-                  }
+                $("#preview").load('/get/preview', params, function (response, status, xhr) {
+                    //Handle server errors to show WERKZEUG debug log
+                    if (xhr.status === 500) {
+                        const tab = window.open('about:blank', '_blank');
+                        tab.document.write(xhr.responseText);
+                        tab.document.close();
+                    }
                 });
             }
 
             if (type === "template") {
                 myCodeMirror.save();
-                const templateText = $("#TemplateText").val();
-                // Add Delivery tree data
-                params["TemplateText"] = templateText
+                params["TemplateText"] = $("#TemplateText").val()
                 $("#preview").load('/get/template', params);
             }
 
@@ -149,7 +141,7 @@ $(document).ready(function () {
     // Appearance
     showTemplateElement = document.getElementById('ShowTemplate')
     templateElement = document.getElementById('template')
-    $(showTemplateElement).click(function (e) {
+    $(showTemplateElement).click(function () {
         if ($(this).is(':checked')) {
             $(templateElement).show(100)
         } else {
