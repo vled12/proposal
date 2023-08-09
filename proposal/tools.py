@@ -1,16 +1,16 @@
-import os, subprocess, io
+import os
 import re
-from lxml import html, etree
-import pypandoc
-from shutil import copyfileobj
-from tempfile import TemporaryFile
 
-#Рабочая конфигурация
+import pypandoc
+from lxml import html, etree
+
+# Рабочая конфигурация
 DEV = True
 # Рабочая директория
 mod_path = os.path.dirname(__file__)
 
-def align_images(input):#TODO explain jinja tags near image problem in doc
+
+def align_images(input):  # TODO explain jinja tags near image problem in doc
     prototype = open("static/mat/img.prototype.htm").read()
     for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
         replacement = etree.XML(prototype)
@@ -37,10 +37,10 @@ def put_in_body(args):
     tree = html.parse("wrappers/main.htm",
                       parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
     body = tree.xpath(".//body")[0]
-
+    
     for x in args:
         print(x)
-
+        
         """ Left in seeking for solution with bug when file ends with one-line jinja statement
         fx = TemporaryFile('w+', encoding='utf-8')
         with open(x, encoding='utf-8') as f:
@@ -51,16 +51,16 @@ def put_in_body(args):
         fx.seek(0)
         fx.close()
         """
-
+        
         article = html.parse(x, parser=html.HTMLParser(
-        encoding='utf-8')).getroot()  # xpath("///html/body/article")[0]  # find first article in html
-
+            encoding='utf-8')).getroot()  # xpath("///html/body/article")[0]  # find first article in html
+        
         align_images(article)
         body.append(article)
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
-    text = html.tostring(tree, pretty_print=True, encoding='unicode').replace('&gt;','>').replace('&lt;','<')
-    return text#io.BytesIO(bytes(text, encoding='utf-8'))
+    text = html.tostring(tree, pretty_print=True, encoding='unicode').replace('&gt;', '>').replace('&lt;', '<')
+    return text  # io.BytesIO(bytes(text, encoding='utf-8'))
 
 
 def htm2x(f, type, lang, compact):
@@ -78,11 +78,12 @@ def htm2x(f, type, lang, compact):
     etree.strip_attributes(tree, "class", "style", "colspan", "rowspan")
     with open(f, 'wb') as file:
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
-
+    
     pypandoc.convert_file(source_file="tmp/print.html", to=type, outputfile='tmp/print.docx',
-                         extra_args=["--reference-doc","static/mat/templates/" + lang + ("_compact" if compact else "") + "_msword.docx"])
-    #subprocess.run([location,'-o','tmp/print.'+type,f,'--reference-doc=.\/static\/mat\/templates\/'+lang+'_msword.'+type])
-    #subprocess.run(['d:\/distr\/pandoc-2.7-windows-x86_64\/pandoc.exe', '-o', 'tmp/print.' + type, f, '--reference-doc=.\/static\/mat\/templates\/' + lang + '_msword.' + type])
+                          extra_args=["--reference-doc", "static/mat/templates/" + lang + (
+                              "_compact" if compact else "") + "_msword.docx"])
+    # subprocess.run([location,'-o','tmp/print.'+type,f,'--reference-doc=.\/static\/mat\/templates\/'+lang+'_msword.'+type])
+    # subprocess.run(['d:\/distr\/pandoc-2.7-windows-x86_64\/pandoc.exe', '-o', 'tmp/print.' + type, f, '--reference-doc=.\/static\/mat\/templates\/' + lang + '_msword.' + type])
 
 
 def add_glossary(page, dict):
@@ -96,13 +97,13 @@ def add_glossary(page, dict):
                 dic[key] = value
         glossary = {}
         with open(page, 'r', encoding='utf-8') as inF:
-            #Convert to string
+            # Convert to string
             data = inF.read().replace('\n', '')
-
-            #Get rid of comments and jinja templates
+            
+            # Get rid of comments and jinja templates
             data = re.sub("(<!--.*?-->)|({{%}}.*?%})", "", data, flags=re.DOTALL)
             for key, value in dic.items():
-                if re.search(r'\W'+key, data):
+                if re.search(r'\W' + key, data):
                     if DEV: print('found', key)
                     glossary[key] = value
         for key, value in sorted(glossary.items()):
@@ -110,10 +111,12 @@ def add_glossary(page, dict):
             glossary_table.append(etree.XML(row))
         result.write(page, pretty_print=True, encoding='utf-8')
 
+
 def remove_from_list(x, l):
     for _ in range(l.count(x)):
         l.remove(x)
     return 0
+
 
 def unique_list(seq):
     return list(set(seq))

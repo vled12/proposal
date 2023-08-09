@@ -17,3 +17,7 @@ pyOpenSSL>=23.0.0
 pymorphy2>=0.9.1
 pymorphy2-dicts-ru>=2.4.417127.4579844
 python-docx>=0.8.11
+
+Werkzeug>=2.3.4
+WTForms>=3.0.1
+setuptools~=65.5.0

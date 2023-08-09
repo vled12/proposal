@@ -40,20 +40,6 @@ def convert(line):
     else:
         return line
 
-    # print("Результат")
-    # print(*newLine)
-    # print()
-
-
-# with open("D:\\temp\\text.txt", "r") as f:
-#    for line in f:
-#        print("Исходная строка")
-#        print(line.replace('\r', '').replace('\n', ''))
-#        print("Результат")
-#        print(convert(line))
-#        print()
-
-
 
 def convert_file(infile, outfile):
     document = Document(infile)
@@ -65,8 +51,6 @@ def convert_file(infile, outfile):
         # print(sentences)
         sentences = map(convert, sentences)
         item.text = " ".join(sentences)
-        # print(item.text)
-        # print(sentences)
 
     for table in document.tables:
         for row in table.rows:

@@ -20,7 +20,6 @@ server.create_jinja_environment()
 
 # Flask_SQLAlchemy configuration
 db = SQLAlchemy(server)
-from .db_model import User, UserQuery
 
 # Flask_Login configuration
 lm = LoginManager()

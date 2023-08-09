@@ -1,27 +1,29 @@
-import os
-import json
-import requests
-import types
-import configparser
 import argparse
+import configparser
+import json
 import sys
-import re
-import pypandoc
-from pathlib import Path
+import types
+from re import compile as re_compile
+
+import requests
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, \
-    session, flash, g, abort
+    flash, g, abort
 from flask_login import login_user, logout_user, current_user, login_required
-from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, PasswordField, SubmitField, IntegerField, RadioField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
+from pypandoc import get_pandoc_version
 from werkzeug.utils import secure_filename
 
-from . import server, db, lm, case_change
-from .db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
+# Internal dependencies
+from .tools import *
 
-parser = argparse.ArgumentParser(description='Launch service server.',
+from . import server, db, lm
+from .case_change import convert_file as change_file_case
+from .db_model import User, ROLE_USER, ROLE_ADMIN, ROLE_DEV
+from .login import LoginForm, RegistrationForm, EditUserForm
+
+
+parser = argparse.ArgumentParser(description='Launch service.',
                                  usage='''proposal <port> [<args>]
-    ''')
+                                ''')
 parser.add_argument('port', help='Port to serve')
 parser.add_argument('--nonsecure', '-n', action='store_true', help='Run non-secured, just http')
 parser.add_argument('--debug', '-D', action='store_true', help='Debugging mode')
@@ -35,53 +37,9 @@ module_path = os.path.dirname(__file__)
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'docx'}
 
-
-
-
-
 # Server configuration
 config = configparser.ConfigParser()
 config.read('run.cfg')
-# obsolete
-# os.environ.setdefault('PYPANDOC_PANDOC', config['pandoc']['location'])
-
-# Internal libraries
-from proposal.tools import *
-import proposal.case_change
-
-
-class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email("Пожалуйста введи e-mail адрес")])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('remember_me', default=False)
-    login = SubmitField('Login')
-
-
-class RegistrationForm(FlaskForm):
-    username = StringField('User', validators=[DataRequired()])
-    email = StringField('E-mail', validators=[DataRequired(), Email()])
-    role = RadioField('Role',
-                      choices=[(ROLE_USER, "Пользователь"), (ROLE_ADMIN, "Администратор"), (ROLE_DEV, "Разработчик")],
-                      default=ROLE_USER, validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    register = SubmitField('Register')
-
-    def validate_username(self, username):
-        user = User.query.filter_by(nickname=username.data).first()
-        if user is not None:
-            raise ValidationError('Данное имя пользователя уже используется.')
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError('Данный почтовый адрес уже используется.')
-
-
-class EditUserForm(FlaskForm):
-    id = IntegerField('User ID')  # , validators=[DataRequired()])
-    edit = SubmitField('Delete user')
 
 
 @server.before_request
@@ -114,14 +72,8 @@ def index():
     products = os.listdir("static/mat/questionnaire/")
     if args.debug:
         print("Product list:", products)
-    return render_template('index.htm', products = products)
+    return render_template('index.htm', products=products)
 
-
-# @server.route('/static/mat/questionnaire/<template>.htm')
-# @login_required
-# def questionnaire(template):
-# return render_template('static/mat/questionnaire/'+template+'.htm')
-# return Template(open('static/mat/questionnaire/'+template+'.htm', encoding='utf-8').read()).render()
 
 @server.route("/get/<type>", methods=["GET", "POST"])
 @login_required
@@ -129,25 +81,25 @@ def show_result(type):
     query = {k: v if len(v) > 1 else v[0] for k, v in request.values.to_dict(flat=False).items()}
     if args.debug:
         print(query)
-
+    
     if type == 'cfg':
         with open("tmp/cfg.json", 'w+', encoding='utf-8') as f:
             # f.write(request.get_data(cache=True, as_text=True, parse_form_data=False))
             f.write(json.dumps(query))
         return send_file(os.getcwd() + '/tmp/cfg.json', as_attachment=True)
     
-    query = {k:v for k, v in query.items() if v != "off" }
-  
+    query = {k: v for k, v in query.items() if v != "off"}
+    
     lang = query['lang']
     product = query['product']
     if not query.get('delivery'):
         query['delivery'] = {}
     else:
         query['delivery'] = list2dictID(json.loads(query['delivery']))
-
+    
     # Extract amount value according to text in the beginning
     for id, item in query['delivery'].items():
-        numIndex = re.compile("(\s*\[\d+\]\s*)")
+        numIndex = re_compile(r"(\s*\[\d+]\s*)")
         match = numIndex.match(item["text"])
         if match:
             numText = match.groups()[0]
@@ -158,13 +110,13 @@ def show_result(type):
             item["text"] = item["text"].replace(numText, "")
         else:
             item.update({"amount": 1})
-
+    
     if type == 'template':
         text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
         return render_template_string(text, set=query)
-
+    
     text_path = "static/mat/text/" + product + "/"
-
+    
     if query.get("wiki_link") and query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
         try:
@@ -184,24 +136,24 @@ def show_result(type):
             os.remove(text_path + lang + "_03_wiki.htm")
         except FileNotFoundError:
             pass
-
+    
     # tree = html.parse(wikilink)
     # res = requests.get('http://en.wikipedia.org/wiki/Bratsk_Hydroelectric_Power_Station')
     # tree = html.parse(res.content)
     # print(res.content)
-
+    
     articles = [text_path + x for x in sorted(os.listdir(text_path)) if
                 (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
-
+    
     if DEV:
         with open("tmp/template.html", 'w+', encoding='utf-8') as f:
             f.write(put_in_body(articles))
-
+    
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
         f.write(render_template_string(put_in_body(articles), set=query))
-
+    
     add_glossary('tmp/print.html', 'static/mat/dict.csv')
-
+    
     if type == "preview":
         return send_file(os.getcwd() + '/tmp/print.html')  # render_template('result.htm', set=set)
     if type == "pdf" or type == "docx":
@@ -236,7 +188,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             fullname = os.path.join(server.config['UPLOAD_FOLDER'], filename)
             file.save(fullname)
-            case_change.convert_file(fullname, "tmp/converted.docx")
+            change_file_case(fullname, "tmp/converted.docx")
             return send_file(os.getcwd() + '/tmp/converted.docx', as_attachment=True)
     return ""
 
@@ -282,21 +234,14 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
-
+        
         login_user(user, remember=form.remember_me.data)
         flash('Logged in successfully.')
-        next = request.args.get('next')
-
-        # is_safe_url should check if the url is safe for redirects.
-        # See http://flask.pocoo.org/snippets/62/ for an example.
-        # if not is_safe_url(next):
-        #    return flask.abort(400)
-
-        # return redirect(next or url_for('index'))
+        
         return redirect(url_for('index'))
     elif form.email.data is not None and form.email.data != "":
         flash('Некорректный ввод данных. Повторите снова.')
-
+    
     return render_template('login.htm',
                            title='Login to system',
                            form=form)
@@ -314,9 +259,9 @@ def logout():
 @login_required
 def admin_panel():
     # Forbid access
-    if not current_user.is_authenticated or current_user.role != ROLE_ADMIN:
+    if current_user.role != ROLE_ADMIN:
         return abort(403)
-
+    
     regForm = RegistrationForm()
     editForm = EditUserForm()
     if regForm.validate_on_submit() and regForm.register.data:
@@ -325,14 +270,14 @@ def admin_panel():
         db.session.add(newUser)
         db.session.commit()
         flash('User added successfully.')
-
+    
     if editForm.validate_on_submit() and editForm.edit.data:
         editUser = User.query.filter_by(id=editForm.id.data).first()
         email = editUser.email
         db.session.query(User).filter(User.id == editForm.id.data).delete()
         db.session.commit()
         flash('User {:s} deleted.'.format(email))
-
+    
     return render_template('admin.htm',
                            title='Система администрирования',
                            regform=regForm, editform=editForm, userList=User.query)
@@ -343,6 +288,7 @@ def admin_panel():
 def editor():
     return render_template('editor.htm')
 
+
 def start():
     # Print used modules
     if args.debug:
@@ -350,29 +296,28 @@ def start():
             for name, val in list(globals().items()):
                 if isinstance(val, types.ModuleType):
                     yield val
-
+        
         for module in imports():
             try:
                 print("Using module " + module.__name__ + " version " + module.__version__)
-            except(AttributeError):
+            except AttributeError:
                 print("Using module " + module.__name__ + " with no particular version")
-
+    
     server.jinja_env.globals.update(remove_from_list=remove_from_list, unique_list=unique_list)
-
+    
     if "tmp" not in os.listdir("."):
         os.mkdir("tmp")  # Create temporary folder
-
+    
     try:
-        print("Pandoc installed version:", pypandoc.get_pandoc_version())
-    except(OSError):
+        print("Pandoc installed version:", get_pandoc_version())
+    except OSError:
         print("Installing pandoc to default location")
         pypandoc.download_pandoc(delete_installer=True)
-
-
+    
     server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     server.config['SESSION_COOKIE_SAMESITE'] = "Strict"
     server.view_functions['static'] = login_required(server.send_static_file)
     server.run(host="0.0.0.0", port=os.environ.get('PORT', args.port)
                , debug=args.debug
-               , ssl_context=('adhoc') if not args.nonsecure else None
+               , ssl_context='adhoc' if not args.nonsecure else None
                , threaded=True)
