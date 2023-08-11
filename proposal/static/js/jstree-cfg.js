@@ -107,11 +107,15 @@ initDeliveryTree = function () {
                         "action": function (data) {
                             const inst = $.jstree.reference(data.reference)
                             const obj = inst.get_node(data.reference)
-                            $(".dialog").each(function () {
-                                if ($(this).dialog("option", "title") === obj.text) {
-                                    $(this).dialog("open");
-                                }
-                            });
+                            if (obj.type === "sub") {
+                                $("#dialog_encl").dialog("open");
+                            } else {
+                                $(".dialog").each(function () {
+                                    if ($(this).dialog("option", "title") === obj.text) {
+                                        $(this).dialog("open");
+                                    }
+                                });
+                            }
                         }
                     }
                 };
