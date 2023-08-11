@@ -17,7 +17,7 @@ def align_images(input):  # TODO explain jinja tags near image problem in doc
         try:
             # replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
             replacement.xpath(".//h4")[0].text = image.attrib["alt"]  # TODO: evade hardlink to h4 tag
-        except(KeyError):
+        except KeyError:
             if DEV: print("Image caption (alt) not found")
         # replacement.xpath(".//img")[0].attrib["src"]=image.attrib["src"]
         re_image = replacement.xpath(".//img")[0]
@@ -26,14 +26,14 @@ def align_images(input):  # TODO explain jinja tags near image problem in doc
         image.getparent().replace(image, replacement)
 
 
-def list2dictID(data):
+def list2dictID(data) -> dict:
     result = {}
     for item in data:
         result[item["id"]] = item
     return result
 
 
-def put_in_body(args):
+def put_in_body(args) -> str:
     tree = html.parse("wrappers/main.htm",
                       parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
     body = tree.xpath(".//body")[0]
@@ -64,16 +64,16 @@ def put_in_body(args):
 
 
 def htm2x(f, type, lang, compact):
-    # delete cell spaning cause of pandoc no support
+    # delete cell spanning cause of pandoc no support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
     for table in tree.xpath(".//table"):
         if table.xpath(".//tr"):
-            firstrow = table.xpath(".//tr")[0]
-            for cell in firstrow.getchildren():
+            firstRow = table.xpath(".//tr")[0]
+            for cell in firstRow.getchildren():
                 try:
                     for i in range(1, int(cell.attrib["colspan"])):
-                        firstrow.append(etree.XML("<td></td>"))
-                except(KeyError):
+                        firstRow.append(etree.XML("<td></td>"))
+                except KeyError:
                     pass
     etree.strip_attributes(tree, "class", "style", "colspan", "rowspan")
     with open(f, 'wb') as file:
@@ -82,16 +82,14 @@ def htm2x(f, type, lang, compact):
     pypandoc.convert_file(source_file="tmp/print.html", to=type, outputfile='tmp/print.docx',
                           extra_args=["--reference-doc", "static/mat/templates/" + lang + (
                               "_compact" if compact else "") + "_msword.docx"])
-    # subprocess.run([location,'-o','tmp/print.'+type,f,'--reference-doc=.\/static\/mat\/templates\/'+lang+'_msword.'+type])
-    # subprocess.run(['d:\/distr\/pandoc-2.7-windows-x86_64\/pandoc.exe', '-o', 'tmp/print.' + type, f, '--reference-doc=.\/static\/mat\/templates\/' + lang + '_msword.' + type])
 
 
-def add_glossary(page, dict):
+def add_glossary(page, dct):
     result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
     glossary_table = result.find("//table[@id='glossary']")
     if glossary_table is not None:
         dic = {}
-        with open(dict, 'r', encoding='utf-8') as vocF:
+        with open(dct, 'r', encoding='utf-8') as vocF:
             for line in vocF:
                 (key, value) = line.split(';')
                 dic[key] = value
@@ -112,11 +110,10 @@ def add_glossary(page, dict):
         result.write(page, pretty_print=True, encoding='utf-8')
 
 
-def remove_from_list(x, l):
-    for _ in range(l.count(x)):
-        l.remove(x)
-    return 0
+def remove_from_list(x, lst):
+    for _ in range(lst.count(x)):
+        lst.remove(x)
 
 
-def unique_list(seq):
+def unique_list(seq) -> list:
     return list(set(seq))

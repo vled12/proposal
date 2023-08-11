@@ -13,8 +13,6 @@
 
 textarea,
 pre {
-    -moz-tab-size : 2;
-    -o-tab-size : 2;
     tab-size : 2;
 }
 
@@ -69,11 +67,10 @@ td, th {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
-    padding: 30px;
     width: 90%;
     max-width: 450px;
     position: relative;
-    padding: 0px;
+    padding: 0;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -134,9 +131,10 @@ textarea  {
     line-height: normal !important;
 }*/
 
+/*noinspection CssNoGenericFontName*/
 .CodeMirror{
     font-size: 0.7rem;
-    font-family: Cascadia-Code;
+    font-family: 'Cascadia-Code', monospace;
     height: 100%;
 }
 /* JQueryLinedText plugin */
