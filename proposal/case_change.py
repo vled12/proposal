@@ -1,9 +1,9 @@
-import pymorphy2
+import pymorphy3
 from docx import Document
 import nltk
 
 # Инициализация
-morph = pymorphy2.MorphAnalyzer()
+morph = pymorphy3.MorphAnalyzer()
 oughtList = [item.word for item in morph.parse("должны")[0].lexeme]
 
 
