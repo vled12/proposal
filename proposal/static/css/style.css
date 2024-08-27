@@ -85,6 +85,7 @@ td, th {
     border-radius: 0 0 10px 10px;
 }
 
+.jstree-anchor { height:auto !important; white-space:normal !important; }
 
 /* The Modal (background) */
 .modal {
