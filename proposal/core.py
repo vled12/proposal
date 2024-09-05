@@ -98,27 +98,22 @@ def show_result(type):
         query['delivery'] = list2dictID(json.loads(query['delivery']))
     
     # Extract amount value according to text in the beginning
-    numIndex = re_compile(r"(\s*\[\d+]\s*)")
-    # Extract description
-    descrIndex = re_compile(r".*(<br>.*)")
+    numIndex = re_compile(r"\s*\[(\d+)\]\s*(.*)")
 
     for id, item in query['delivery'].items():
         matchNum = numIndex.match(item["text"])
         if matchNum:
-            numText = matchNum.groups()[0]
-            # Remove chars [ and ] and whitespaces
-            num = int("".join(numText.replace(']', '').replace('[', '').split()))
-            item.update({"amount": num})
+            item.update({"amount": int(matchNum.groups()[0])})
             # Remove numText
-            item["text"] = item["text"].replace(numText, "")
+            item["text"] = matchNum.groups()[1]
         else:
             item.update({"amount": 1})
-        matchDescr = descrIndex.match(item["text"])
-        if matchDescr:
-            descrText = matchDescr.groups()[0].replace("<br>", "")
-            item.update({"description": descrText})
-            # Remove description from the name
-            item["text"] = item["text"].replace(descrText, "")
+        # Also extract description
+        matchDescr = item["text"].split("<br>")
+        if len(matchDescr) > 1:
+            # Add new field
+            item.update({"description": matchDescr[1]})
+            item["text"] = matchDescr[0]
     
     if type == 'template':
         text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
