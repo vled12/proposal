@@ -14,7 +14,7 @@ $(function () {
     const questionnaireElement = document.getElementById('questionnaire')
     $(productElement).on('change', function () {
         Cookies.set("product", $(this).val(), {expires: 365, samesite: "strict"});
-        $(questionnaireElement).load("static/mat/questionnaire/" + this.value,
+        $(questionnaireElement).load("static/questionnaire/" + this.value,
             function () {
 
                 //Disable until fixing several products issue
@@ -24,7 +24,7 @@ $(function () {
                 //let delivery = Cookies.get('delivery');
 
                 //Dynamically load default delivery depending on product
-                $.getScript("static/mat/text/" + $(productElement).val() + '/defaultDelivery.js', function () {
+                $.getScript("static/text/" + $(productElement).val() + '/defaultDelivery.js', function () {
                     initDeliveryTree();
                 });
 

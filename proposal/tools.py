@@ -11,7 +11,7 @@ mod_path = os.path.dirname(__file__)
 
 
 def align_images(input):  # TODO explain jinja tags near image problem in doc
-    prototype = open("static/mat/img.prototype.htm").read()
+    prototype = open("static/img.prototype.htm").read()
     for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
         replacement = etree.XML(prototype)
         try:
@@ -80,7 +80,7 @@ def htm2x(f, type, lang, compact):
         file.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
     
     pypandoc.convert_file(source_file="tmp/print.html", to=type, outputfile='tmp/print.docx',
-                          extra_args=["--reference-doc", "static/mat/templates/" + lang + (
+                          extra_args=["--reference-doc", "static/templates/" + lang + (
                               "_compact" if compact else "") + "_msword.docx"])
 
 

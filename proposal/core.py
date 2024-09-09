@@ -69,7 +69,7 @@ def add_header(r):
 @server.route('/')
 @login_required
 def index():
-    products = os.listdir("static/mat/questionnaire/")
+    products = os.listdir("static/questionnaire/")
     if args.debug:
         print("Product list:", products)
     return render_template('index.htm', products=products)
@@ -119,7 +119,7 @@ def show_result(type):
         text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
         return render_template_string(text, set=query)
     
-    text_path = "static/mat/text/" + product + "/"
+    text_path = "static/text/" + product + "/"
     
     if query.get("wiki_link") and query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
@@ -156,7 +156,7 @@ def show_result(type):
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
         f.write(render_template_string(put_in_body(articles), set=query))
     
-    add_glossary('tmp/print.html', 'static/mat/dict.csv')
+    add_glossary('tmp/print.html', 'static/dict.csv')
     
     if type == "preview":
         return send_file(os.getcwd() + '/tmp/print.html')  # render_template('result.htm', set=set)
