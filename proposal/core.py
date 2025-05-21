@@ -128,7 +128,7 @@ def show_result(type):
                 with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     wiki.write(response.content)
                 tree = html.parse(text_path + lang + "_03_wiki.htm",
-                                  parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
+                                  parser=html.HTMLParser(encoding='utf-8', recover=True))
                 with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     infobox = tree.xpath("//table[contains(@class,'infobox')]")[0]
                     wiki.write(
