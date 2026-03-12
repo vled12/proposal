@@ -123,16 +123,19 @@ def show_result(type):
     
     if query.get("wiki_link") and query['wiki_link'] != '':
         wikilink = query['wiki_link'] + "?action=render"
+        headers = {'User-Agent': 'ProposalBot/0.0 (https://github.com/vled12/proposal/; vleduser@gmail.com)'}
         try:
-            with requests.get(wikilink) as response:
+            with requests.get(wikilink, headers = headers) as response:
                 with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     wiki.write(response.content)
+
                 tree = html.parse(text_path + lang + "_03_wiki.htm",
                                   parser=html.HTMLParser(encoding='utf-8', recover=True))
+
                 with open(text_path + lang + "_03_wiki.htm", 'wb+') as wiki:
                     infobox = tree.xpath("//table[contains(@class,'infobox')]")[0]
                     wiki.write(
-                        html.tostring(infobox, pretty_print=True, encoding='utf-8'))  # delete anything but infobox
+                        html.tostring(infobox, pretty_print=True, encoding='utf-8'))  # delete anything except infobox
         except requests.exceptions.ConnectionError or requests.exceptions.MissingSchema:
             print("wiki info is not available")
     else:
