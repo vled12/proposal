@@ -14,7 +14,8 @@ mod_path = os.path.dirname(__file__)
 
 def align_images(input):  # TODO explain jinja tags near image problem in doc
     prototype = open("static/img.prototype.htm").read()
-    for image in input.xpath(".//img[not(ancestor::*[@class='infobox'])]"):
+    # Skip images from wiki infobox
+    for image in input.xpath("//img[not(ancestor::table[contains(@class, 'infobox')])]"):
         replacement = etree.XML(prototype)
         try:
             # replacement.xpath(".//img")[0].attrib["alt"]=image.attrib["alt"]
