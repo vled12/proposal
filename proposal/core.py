@@ -5,6 +5,7 @@ import sys
 import types
 from re import compile as re_compile
 
+import jinja2
 import requests
 from flask import request, render_template, render_template_string, send_file, send_from_directory, redirect, url_for, \
     flash, g, abort
@@ -154,10 +155,10 @@ def show_result(type):
     
     if DEV:
         with open("tmp/template.html", 'w+', encoding='utf-8') as f:
-            f.write(put_in_body(articles))
+            f.write(put_in_body(articles, lang))
     
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
-        f.write(render_template_string(put_in_body(articles), set=query))
+        f.write(render_template_string(put_in_body(articles, lang), set=query))
     
     add_glossary('tmp/print.html', 'static/dict.csv')
     

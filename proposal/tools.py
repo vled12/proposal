@@ -1,6 +1,8 @@
+import io
 import os
 import re
 
+import lxml.etree
 import pypandoc
 from lxml import html, etree
 
@@ -33,30 +35,30 @@ def list2dictID(data) -> dict:
     return result
 
 
-def put_in_body(args) -> str:
+def put_in_body(args, lang) -> str:
     tree = html.parse("wrappers/main.htm",
                       parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
+    html_tag = tree.getroot()
+    html_tag.set('lang', lang)
+
     body = tree.xpath(".//body")[0]
     
     for x in args:
         print(x)
-        
-        """ Left in seeking for solution with bug when file ends with one-line jinja statement
-        fx = TemporaryFile('w+', encoding='utf-8')
-        with open(x, encoding='utf-8') as f:
-            copyfileobj(f, fx)
-        # add line break in the file
-        fx.seek(0, 2)
-        fx.write('\n')
-        fx.seek(0)
-        fx.close()
-        """
-        
-        article = html.parse(x, parser=html.HTMLParser(
-            encoding='utf-8')).getroot()  # xpath("///html/body/article")[0]  # find first article in html
-        
-        align_images(article)
-        body.append(article)
+        try:
+            # Put content inside article tag
+            fx = io.StringIO()
+            with open(x, 'r', encoding='utf-8') as f:
+                fx.write("<article>\n" + f.read() + "\n</article>\n")
+                fx.seek(0)
+            content = html.parse(fx, parser=html.HTMLParser(encoding='utf-8')).find(".//body/article")
+            content.set("title", x)  # Add file name
+            align_images(content)
+            body.append(content)
+        except Exception as e:
+            print(e)
+            continue
+
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
     text = html.tostring(tree, pretty_print=True, encoding='unicode').replace('&gt;', '>').replace('&lt;', '<')
@@ -64,7 +66,7 @@ def put_in_body(args) -> str:
 
 
 def htm2x(f, type, lang, compact):
-    # delete cell spanning cause of pandoc no support
+    # delete cell spanning cause of lack of pandoc support
     tree = html.parse(f, parser=html.HTMLParser(encoding='utf-8', compact=True))
     for table in tree.xpath(".//table"):
         if table.xpath(".//tr"):
@@ -86,7 +88,7 @@ def htm2x(f, type, lang, compact):
 
 def add_glossary(page, dct):
     result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
-    glossary_table = result.find("//table[@id='glossary']")
+    glossary_table = result.find(".//table[@id='glossary']")
     if glossary_table is not None:
         dic = {}
         with open(dct, 'r', encoding='utf-8') as vocF:
