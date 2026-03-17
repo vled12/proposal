@@ -39,7 +39,7 @@ def list2dictID(data) -> dict:
     return result
 
 
-def put_in_body(args, lang) -> str:
+def put_in_body(args, lang, recover) -> str:
     tree = html.parse("wrappers/main.htm",
                       parser=html.HTMLParser(encoding='utf-8', compact=False, recover=False))
     html_tag = tree.getroot()
@@ -53,15 +53,16 @@ def put_in_body(args, lang) -> str:
             # Put content inside article tag
             fx = io.StringIO()
             with open(x, 'r', encoding='utf-8') as f:
-                fx.write("<article>\n" + f.read() + "\n</article>\n")
+                fx.write("<div>\n" + f.read() + "\n</div>\n")
                 fx.seek(0)
-            content = html.parse(fx, parser=html.HTMLParser(encoding='utf-8')).find(".//body/article")
+            content = html.parse(fx, parser=html.HTMLParser(encoding='utf-8', recover = recover)).find(".//body/div")
             content.set("title", x)  # Add file name
             align_images(content)
             body.append(content)
         except Exception as e:
-            print(e)
-            continue
+            # Perform local handling, e.g., logging the error
+            e.add_note(f"Problem with file: {x}")
+            raise
 
     # with open(result_file, "wb") as f:
     #    f.write(html.tostring(tree, pretty_print=True, encoding='utf-8'))
@@ -87,11 +88,11 @@ def htm2x(f, type, lang, compact):
     
     pypandoc.convert_file(source_file="tmp/print.html", to=type, outputfile='tmp/print.docx',
                           extra_args=["--reference-doc", "static/templates/" + lang + (
-                              "_compact" if compact else "") + "_msword.docx"])
+                              "_compact" if compact else "") + "_msword.docx", "--request-header", "User-Agent:""ProposalBot/0.0 (https://github.com/vled12/proposal/; vleduser@gmail.com)"""])
 
 
-def add_glossary(page, dct):
-    result = html.parse(page, parser=html.HTMLParser(encoding='utf-8'))
+def add_glossary(page, dct, recover):
+    result = html.parse(page, parser=html.HTMLParser(encoding='utf-8', recover = recover))
     glossary_table = result.find(".//table[@id='glossary']")
     if glossary_table is not None:
         dic = {}
@@ -112,7 +113,7 @@ def add_glossary(page, dct):
                     glossary[key] = value
         for key, value in sorted(glossary.items()):
             row = "<tr><td>" + key + "</td><td>" + value + "</td></tr>"
-            glossary_table.append(etree.XML(row))
+            glossary_table.append(html.fromstring(row))
         result.write(page, pretty_print=True, encoding='utf-8')
 
 

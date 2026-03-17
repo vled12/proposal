@@ -28,6 +28,7 @@ parser = argparse.ArgumentParser(description='Launch service.',
 parser.add_argument('port', help='Port to serve')
 parser.add_argument('--nonsecure', '-n', action='store_true', help='Run non-secured, just http')
 parser.add_argument('--debug', '-D', action='store_true', help='Debugging mode')
+parser.add_argument('--recover', '-R', action='store_true', help='Recover broken html (or raise exceptions)')
 
 args = parser.parse_args(sys.argv[1:])
 
@@ -152,15 +153,15 @@ def show_result(type):
     
     articles = [text_path + x for x in sorted(os.listdir(text_path)) if
                 (x[0] != '.') and (x[:2] == lang or x[:3] == 'all')]
-    
+    body = put_in_body(articles, lang, args.recover)
     if DEV:
         with open("tmp/template.html", 'w+', encoding='utf-8') as f:
-            f.write(put_in_body(articles, lang))
+            f.write(body)
     
     with open("tmp/print.html", 'w+', encoding='utf-8') as f:
-        f.write(render_template_string(put_in_body(articles, lang), set=query))
-    
-    add_glossary('tmp/print.html', 'static/dict.csv')
+        f.write(render_template_string(body, set=query))
+
+    add_glossary('tmp/print.html', 'static/dict.csv', args.recover)
     
     if type == "preview":
         return send_file(os.getcwd() + '/tmp/print.html')  # render_template('result.htm', set=set)
