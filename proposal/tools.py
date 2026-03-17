@@ -12,7 +12,7 @@ DEV = True
 mod_path = os.path.dirname(__file__)
 
 
-def align_images(input):  # TODO explain jinja tags near image problem in doc
+def align_images(input):
     prototype = open("static/img.prototype.htm").read()
     # Skip images from wiki infobox
     for image in input.xpath("//img[not(ancestor::table[contains(@class, 'infobox')])]"):
@@ -26,7 +26,10 @@ def align_images(input):  # TODO explain jinja tags near image problem in doc
         re_image = replacement.xpath(".//img")[0]
         for attr in image.attrib:
             re_image.set(attr, image.attrib[attr])
-        image.getparent().replace(image, replacement)
+
+        image.getparent().insert(image.getparent().index(image), replacement)
+        image.drop_tree() # This method removes the element and all its children. Unlike getparent().remove(), the tail text of the removed element is merged with the previous element
+
 
 
 def list2dictID(data) -> dict:
