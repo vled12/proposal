@@ -89,6 +89,11 @@ $(function () {
                 $("#preview").load('/get/template', params);
             }
 
+            if (type === "llm") {                
+                params["LlmPrompt"] = $("#llm_prompt").val()
+                $("#preview").load('/get/llm', params);
+            }
+            
             if (type === "docx" || type === "pdf" || type === "cfg") {
                 const xhr = new XMLHttpRequest();
                 // Send the file request
@@ -128,7 +133,7 @@ $(function () {
         }
     }
 
-    $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template").on({
+    $("#get-preview, #get-docx, #get-pdf, #get-cfg, #get-template, #get-llm").on({
         click: function () {
             const argv = this.id.split("-")
             query(argv[0], argv[1])

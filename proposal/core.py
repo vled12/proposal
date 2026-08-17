@@ -1,6 +1,7 @@
 import argparse
 import configparser
 import json
+import os
 import sys
 import types
 from re import compile as re_compile
@@ -120,7 +121,37 @@ def show_result(type):
     if type == 'template':
         text = query["TemplateText"]  # .replace('\n','<br>\n') #работает не стабильно с line statement
         return render_template_string(text, set=query)
-    
+
+    if type == 'llm':
+        prompt = query["LlmPrompt"]
+
+        from ollama import Client
+        from ollama import ChatResponse
+
+        client = Client(
+            host="https://ollama.com",
+            headers={'Authorization': 'Bearer ' + os.getenv("OLLAMA_API_KEY")}
+        )
+
+        messages = [
+            {
+                'role': 'user',
+                'content': '''отредактируй текст в HTML разметке; Никак не изменяй стили, только текст; не начинай пункты списка с прописной буквы - это неправильно по правилам;''',
+            },
+        ]
+        # add user prompt
+        messages[0]["content"] += prompt+";"
+        # add last rendered text
+        with open("tmp/print.html", 'r+', encoding='utf-8') as f:
+            messages[0]["content"] += f.read()
+
+        response: ChatResponse = client.chat('gpt-oss:120b', messages=messages)
+        print(response['message']['content'])
+        with open("tmp/llm.html", 'w+', encoding='utf-8') as f:
+            f.write(response['message']['content'])
+        return send_file(os.getcwd() + '/tmp/llm.html')
+
+
     text_path = "static/text/" + product + "/"
     
     if query.get("wiki_link") and query['wiki_link'] != '':

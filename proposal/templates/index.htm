@@ -29,6 +29,8 @@
       <!-- Special access -->
       {% if g.user.role > 0 %}
       <li class="nav-item"><a class="nav-link" id="editor" href="{{ url_for('editor') }}" role="button">Редактор</a></li>
+      <textarea name="llm_prompt" id="llm_prompt" class="form-control form-control-sm" rows="1">Сформулируй покороче</textarea>                     
+      <li class="nav-item"><a class="nav-link" id="get-llm" href="javascript:void(0)" role="button">LLM</a></li>
       {% endif %}
     </ul>
   </div>
